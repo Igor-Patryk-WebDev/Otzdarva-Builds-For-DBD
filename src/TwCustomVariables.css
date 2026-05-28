@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pinky: hsl(347, 66%, 49%);
+}
+
+@utility center {
+  align-items: center;
+  justify-content: center;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(/Fonts/Inter/Inter.ttf);
+}
+
+@font-face {
+  font-family: Lexend;
+  src: url(/Fonts/Lexend/Lexend.ttf);
+}
+
+:root {
+  font-family: Lexend, Inter;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: hsl(220, 5%, 10%);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
