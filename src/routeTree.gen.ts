@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SurvivorRouteImport } from './routes/survivor'
+import { Route as KillerRouteImport } from './routes/killer'
+import { Route as BuildCreatorRouteImport } from './routes/buildCreator'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SurvivorRoute = SurvivorRouteImport.update({
+  id: '/survivor',
+  path: '/survivor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KillerRoute = KillerRouteImport.update({
+  id: '/killer',
+  path: '/killer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuildCreatorRoute = BuildCreatorRouteImport.update({
+  id: '/buildCreator',
+  path: '/buildCreator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buildCreator': typeof BuildCreatorRoute
+  '/killer': typeof KillerRoute
+  '/survivor': typeof SurvivorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buildCreator': typeof BuildCreatorRoute
+  '/killer': typeof KillerRoute
+  '/survivor': typeof SurvivorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buildCreator': typeof BuildCreatorRoute
+  '/killer': typeof KillerRoute
+  '/survivor': typeof SurvivorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/buildCreator' | '/killer' | '/survivor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/buildCreator' | '/killer' | '/survivor'
+  id: '__root__' | '/' | '/buildCreator' | '/killer' | '/survivor'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuildCreatorRoute: typeof BuildCreatorRoute
+  KillerRoute: typeof KillerRoute
+  SurvivorRoute: typeof SurvivorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/survivor': {
+      id: '/survivor'
+      path: '/survivor'
+      fullPath: '/survivor'
+      preLoaderRoute: typeof SurvivorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/killer': {
+      id: '/killer'
+      path: '/killer'
+      fullPath: '/killer'
+      preLoaderRoute: typeof KillerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buildCreator': {
+      id: '/buildCreator'
+      path: '/buildCreator'
+      fullPath: '/buildCreator'
+      preLoaderRoute: typeof BuildCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuildCreatorRoute: BuildCreatorRoute,
+  KillerRoute: KillerRoute,
+  SurvivorRoute: SurvivorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
