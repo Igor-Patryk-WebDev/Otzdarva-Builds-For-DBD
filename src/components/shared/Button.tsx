@@ -5,6 +5,6 @@ type ButtonProps = {
   className?: string
 }
 
-export default function Button({ children, className: classNames }: ButtonProps) {
-  return <button className={`cursor-pointer ${classNames}`}>{children}</button>;
+export const Button = ({ children, className: classNames }: ButtonProps) => {
+  return <button className={`${classNames} cursor-pointer bg-otz rounded-md px-4 py-2`}>{children}</button>;
 }

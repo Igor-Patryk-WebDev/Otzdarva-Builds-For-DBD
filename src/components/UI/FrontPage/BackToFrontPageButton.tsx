@@ -1,10 +1,13 @@
-import Button from "@components/shared/Button"
+import { Button } from "@components/shared/Button"
 import { Link } from "@tanstack/react-router"
 
 export const BackToFrontPageButton = () => {
   return (
-    <Button>
-      <Link to='/'>WRÓĆ</Link>
-    </Button>
+    <Link to='/' className='absolute top-4 right-4' viewTransition={{
+      types: ({ fromLocation }) =>
+        fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"]
+    }}>
+      <Button>WRÓĆ</Button>
+    </Link>
   )
 }

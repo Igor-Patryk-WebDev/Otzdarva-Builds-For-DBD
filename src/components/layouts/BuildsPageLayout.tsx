@@ -7,7 +7,7 @@ interface BuildsPageLayoutProps {
 
 export const BuildsPageLayout = ({ children }: BuildsPageLayoutProps) => {
   return (
-    <section>
+    <section className='relative'>
       <BackToFrontPageButton />
       {children}
     </section>

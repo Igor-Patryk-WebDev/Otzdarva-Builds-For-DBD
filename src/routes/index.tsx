@@ -12,7 +12,7 @@ function RootPage() {
   const { formatedDate, isLoading } = useVariables();
 
   return (
-    <main className="flex flex-col center h-screen w-screen p-8">
+    <main className="flex flex-col center h-screen w-screen p-8 [view-transition-name:front-page]">
       <FrontPageHeading />
       <p className='mt-4 mb-8'>Last updated: {isLoading ? "--/--/--" : formatedDate}</p>
       <RoleSelectButtons />
