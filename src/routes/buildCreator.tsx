@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { killerList, killerUniversal, survivorList } from "../data/variables";
-import builds from "../data/builds.json";
+import { useVariables } from "../hooks/useVariables";
 
 export const Route = createFileRoute("/buildCreator")({
   component: RouteComponent,
 });
 
-const killerBuilds = Object.entries(builds.killers);
 function RouteComponent() {
+  const { killersList, killerUniversal, survivorsList, isLoading } = useVariables();
+
+  if (isLoading) return null;
+
   return (
     <div className="flex flex-col">
       <h1 className="text-9xl">Build Creator</h1>
@@ -32,7 +34,7 @@ function RouteComponent() {
           </div>
           <div className="h-64 w-3/4"></div>
         </div>
-        {killerList.map(([name, info]) => (
+        {killersList.map(([name, info]) => (
           <div key={name} className="flex w-full">
             <div className="relative w-1/4 h-64">
               <img
@@ -51,17 +53,16 @@ function RouteComponent() {
                 className="absolute inset-0 w-full h-full object-contain z-20"
               />
             </div>
-            <div className="h-64 w-3/4 ">
-              {killerBuilds.map(([characterName, BuildInfo]) => (
+            {/* <div className="h-64 w-3/4 ">
+              {builds[type].map(([characterName, BuildInfo]) => (
                 <div key={characterName} className="">
-                  {console.log(characterName, BuildInfo)}
-                  <h2>{B}</h2>
+                  <h2>{characterName}</h2>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         ))}
-        {survivorList.map(([name, info]) => (
+        {survivorsList.map(([name, info]) => (
           <div key={name} className="flex w-full">
             <div className="relative w-1/4 h-64">
               <img
