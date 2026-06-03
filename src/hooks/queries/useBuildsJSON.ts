@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
 import type { BuildsData } from '@appTypes/Builds';
 
-export const useBuilds = () => {
+import { useQuery } from '@tanstack/react-query';
+
+export const useBuildsJSON = () => {
   return useQuery<BuildsData>({
     queryKey: ['builds'],
     queryFn: async () => {

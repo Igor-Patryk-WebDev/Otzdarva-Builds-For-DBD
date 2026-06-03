@@ -1,18 +1,24 @@
+export interface Alt {
+  name: string;
+}
+
 export interface Perk {
   name: string;
-  hasAlt: string[] | null;
+  alts: Alt[];
 }
 
 export interface Build {
-  perks: Record<string, Perk>;
-  buildNotes: string[];
+  name: string;
+  perks: Perk[];
+  notes: string[];
 }
 
-export type CharacterBuilds = Record<string, Build>;
-
-export type RoleBuilds = Record<string, CharacterBuilds>;
+export interface BuildsProfile {
+  name: string;
+  builds: Build[];
+}
 
 export interface BuildsData {
-  survivors: RoleBuilds;
-  killers: RoleBuilds;
+  killers: BuildsProfile[];
+  survivors: BuildsProfile[];
 }

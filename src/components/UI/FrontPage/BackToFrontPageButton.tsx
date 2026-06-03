@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router"
 
 export const BackToFrontPageButton = () => {
   return (
-    <Link to='/' className='absolute top-4 right-4' viewTransition={{
+    <Link to='/' className='absolute top-0 right-4' viewTransition={{
       types: ({ fromLocation }) =>
         fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"]
     }}>
