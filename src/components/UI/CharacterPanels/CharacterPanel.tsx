@@ -10,22 +10,28 @@ interface CharacterPanelProps {
 }
 
 export const CharacterPanel = ({ profile }: CharacterPanelProps) => {
-  const builds = profile.builds
   const name = profile.name
   const portrait = profile.portraitUrl
+  const builds = profile.builds
 
   const { build } = useGenericBuild(builds);
 
   return (
     <div className='grid grid-cols-2 bg-amber-950'>
-      <CharacterPortraitBlock name={name} imgUrl={portrait} />
-      <div className='grid grid-cols-2'>
-        <div>
-          <p>{build.name}</p>
-          <BuildPerksBlock perks={build.perks} />
+      <CharacterPortraitBlock name={name} portraitUrl={portrait} />
+      {build &&
+        <div className='grid grid-cols-2'>
+          <div>
+            <p>{build.name}</p>
+            <BuildPerksBlock perks={build.perks} />
+          </div>
+          {
+            build.notes.length != 0
+              ? <BuildNotesBlock notes={build.notes} />
+              : <p>Notes not included, sorry!</p>
+          }
         </div>
-        <BuildNotesBlock notes={build.notes} />
-      </div>
+      }
     </div>
   )
 }

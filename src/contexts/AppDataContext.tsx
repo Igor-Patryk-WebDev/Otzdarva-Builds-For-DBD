@@ -5,7 +5,7 @@ import type { ScrapeData } from "@appTypes/Scrape";
 import { useCustomProfiles } from "@hooks/profiles/useCustomProfiles";
 import { useBuildsJSON } from "@hooks/queries/useBuildsJSON"
 import { useScrapeJSON } from "@hooks/queries/useScrapeJSON";
-import { createContext, useContext } from "react"
+import { createContext, useContext, type ReactNode } from "react"
 
 interface AppDataContextType {
   builds: BuildsData,
@@ -13,7 +13,11 @@ interface AppDataContextType {
   profiles: ProfilesData
 }
 
-const AppDataContext = createContext<AppDataContextType | undefined>(undefined)
+interface AppDataProviderProps {
+  children: ReactNode
+}
+
+const AppDataContext = createContext<AppDataContextType>(undefined!)
 
 export const useBuilds = () => {
   const { builds } = useContext(AppDataContext);
@@ -30,16 +34,18 @@ export const useProfiles = () => {
   return profiles
 }
 
-export const AppDataProvider = ({ children }) => {
+export const AppDataProvider = ({ children }: AppDataProviderProps) => {
   const { data: builds, isLoading: buildsLoading } = useBuildsJSON();
   const { data: scrape, isLoading: scrapeLoading } = useScrapeJSON();
-  const { data: profiles, isLoading: profilesLoading } = useCustomProfiles();
 
-  const isLoading = buildsLoading || scrapeLoading || profilesLoading
+  const isLoading = buildsLoading || scrapeLoading
+  if (isLoading || !builds || !scrape) return null
+
+  const profiles = useCustomProfiles({ builds, scrape });
 
   return (
     <AppDataContext value={{ builds, scrape, profiles }}>
-      {!isLoading && children}
+      {children}
     </AppDataContext>
   )
 }

@@ -1,6 +1,8 @@
 import type { ProfileBuild } from "@appTypes/Profiles"
 
-export const useGenericBuild = (builds: ProfileBuild[]) => {
-  const genericBuild: ProfileBuild = builds["Generic Build"] ?? builds[0]
+export const useGenericBuild = (builds: ProfileBuild[] | null) => {
+  if (!builds || builds.length === 0) return { build: null };
+
+  const genericBuild: ProfileBuild = builds.find((b) => b.name === "Generic Build") ?? builds[0]
   return { build: { ...genericBuild } }
 }

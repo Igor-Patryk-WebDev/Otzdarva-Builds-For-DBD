@@ -1,35 +1,38 @@
+import type { BuildsData } from "@appTypes/Builds";
 import type { DbdRole } from "@appTypes/DbdRole";
 import type { ProfilesData } from "@appTypes/Profiles";
+import type { ScrapeData } from "@appTypes/Scrape";
 
-import { useBuildsJSON } from "@hooks/queries/useBuildsJSON";
-import { useScrapeJSON } from "@hooks/queries/useScrapeJSON";
+interface UseCustomProfiles {
+  builds: BuildsData,
+  scrape: ScrapeData
+}
 
-export const useCustomProfiles = () => {
-  const { data: builds, isLoading: buildsLoading } = useBuildsJSON();
-  const { data: scrape, isLoading: scrapeLoading } = useScrapeJSON();
-
-  const profilesLoading = buildsLoading || scrapeLoading
+export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
 
   const handleCustomProfile = (role: DbdRole) => {
-    if (!builds || !scrape) return undefined
-
     const lowercaseRole = role.toLowerCase() as Lowercase<DbdRole>;
+
+    const findPerk = (target: string) => {
+      return scrape[lowercaseRole].perks.find((p) => p.name === target)?.iconUrl
+    }
+
     return (
-      builds[lowercaseRole].map((profile) => ({
+      scrape[lowercaseRole].roleProfiles.map((profile) => ({
         name: profile.name,
-        portraitUrl: scrape[lowercaseRole].roleProfiles.find((p) => p.name === profile.name)?.portraitUrl,
-        builds: profile.builds.map((build) => ({
+        portraitUrl: profile.portraitUrl,
+        builds: builds[lowercaseRole].find((p) => p.name === profile.name)?.builds.map((build) => ({
           name: build.name,
           perks: build.perks.map((perk) => ({
             name: perk.name,
-            iconUrl: scrape[lowercaseRole].perks.find((p) => p.name === perk.name)?.iconUrl,
+            iconUrl: findPerk(perk.name) ?? null,
             alts: perk.alts.map((alt) => ({
               name: alt.name,
-              iconUrl: scrape[lowercaseRole].perks.find((p) => p.name === alt.name)?.iconUrl,
+              iconUrl: findPerk(alt.name) ?? null,
             }))
           })),
           notes: build.notes
-        }))
+        })) ?? null
       }))
     )
   }
@@ -39,5 +42,5 @@ export const useCustomProfiles = () => {
     survivors: handleCustomProfile("Survivors")
   }
 
-  return { data: profiles, isLoading: profilesLoading }
+  return profiles
 }

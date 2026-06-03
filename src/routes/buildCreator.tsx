@@ -1,22 +1,21 @@
+import { useProfiles } from "@contexts/AppDataContext";
 import { createFileRoute } from "@tanstack/react-router";
-import { useBuildProfiles } from "@hooks/useBuildProfiles";
 
 export const Route = createFileRoute("/buildCreator")({
   component: RouteComponent,
 });
-// const { data: buildData, isLoading } = useBuilds();
 
 function RouteComponent() {
-  const { profiles: killersProfiles } = useBuildProfiles({ role: "Killers" });
-  const { profiles: survivorsProfiles } = useBuildProfiles({
-    role: "Survivors",
-  });
+  const profiles = useProfiles();
+
+  const killerProfiles = profiles.killers
+  const survivorProfiles = profiles.survivors
 
   return (
     <div className="px-4">
       <h1 className="text-9xl">Build Creator</h1>
       <div className="grid grid-cols-1 gap-4">
-        {killersProfiles.map((character) => {
+        {killerProfiles.map((character) => {
           console.log(character);
           return (
             <div key={character.name} className="flex w-full">
@@ -40,7 +39,7 @@ function RouteComponent() {
                 />
               </div>
               <div className="flex gap-4 h-90 bg-neutral-800 w-screen">
-                {character.builds.map((build) => {
+                {character.builds && character.builds.map((build) => {
                   console.log(build);
                   return (
                     <div
@@ -82,7 +81,7 @@ function RouteComponent() {
             </div>
           );
         })}
-        {survivorsProfiles.map((character) => (
+        {survivorProfiles.map((character) => (
           <div key={character.name} className="flex w-full">
             <div className="relative h-64 aspect-square">
               <img
@@ -102,7 +101,7 @@ function RouteComponent() {
               />
             </div>
             <div className="flex h-64 bg-neutral-800 w-screen">
-              {character.builds.map((build) => {
+              {character.builds && character.builds.map((build) => {
                 console.log(build);
                 return (
                   <div
