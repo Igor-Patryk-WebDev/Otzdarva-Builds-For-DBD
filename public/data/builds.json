@@ -47,6 +47,51 @@
             "Use this as a starting point!",
             ""
           ]
+        },
+        {
+          "name": "Cfel vuild",
+          "perks": [
+            {
+              "name": "Sloppy Butcher",
+              "alts": [
+                {
+                  "name": "Scourge Hook: Gift of Pain"
+                },
+                {
+                  "name": "Brutal Strength"
+                }
+              ]
+            },
+            {
+              "name": "No Holds Barred",
+              "alts": []
+            },
+            {
+              "name": "Hex: Plaything",
+              "alts": [
+                {
+                  "name": "Tinkerer"
+                },
+                {
+                  "name": "A Nurse's Calling"
+                }
+              ]
+            },
+            {
+              "name": "Hex: No One Escapes Death",
+              "alts": [
+                {
+                  "name": "Enduring"
+                }
+              ]
+            }
+          ],
+          "notes": [
+            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+            "Use this as a starting point!",
+            ""
+          ]
         }
       ]
     },
