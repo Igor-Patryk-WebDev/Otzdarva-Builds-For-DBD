@@ -1,8 +1,9 @@
+import { type ReactNode } from "react";
+
 import {
   BackToFrontPageButton,
   FrontPageHeading,
 } from "@components/UI/FrontPage";
-import { type ReactNode } from "react";
 
 interface BuildsPageLayoutProps {
   children: ReactNode;

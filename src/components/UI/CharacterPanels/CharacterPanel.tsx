@@ -1,24 +1,30 @@
-import type { Build } from '@appTypes/Builds';
+import type { ProfileData } from '@appTypes/Profiles';
+
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
 import { BuildPerksBlock } from './BuildPerksBlock';
 import { BuildNotesBlock } from './BuildNotesBlock';
+import { useGenericBuild } from '@hooks/builds/useGenericBuild';
 
 interface CharacterPanelProps {
-  characterName: string,
-  portraitUrl: string,
-  displayBuild: Build
+  profile: ProfileData
 }
 
-export const CharacterPanel = ({ characterName, portraitUrl, displayBuild }: CharacterPanelProps) => {
+export const CharacterPanel = ({ profile }: CharacterPanelProps) => {
+  const builds = profile.builds
+  const name = profile.name
+  const portrait = profile.portraitUrl
+
+  const { build } = useGenericBuild(builds);
+
   return (
     <div className='grid grid-cols-2 bg-amber-950'>
-      <CharacterPortraitBlock name={characterName} imgUrl={portraitUrl} />
+      <CharacterPortraitBlock name={name} imgUrl={portrait} />
       <div className='grid grid-cols-2'>
         <div>
-          <p>{displayBuild.name}</p>
-          <BuildPerksBlock perks={displayBuild.perks} />
+          <p>{build.name}</p>
+          <BuildPerksBlock perks={build.perks} />
         </div>
-        <BuildNotesBlock notes={displayBuild.notes} />
+        <BuildNotesBlock notes={build.notes} />
       </div>
     </div>
   )

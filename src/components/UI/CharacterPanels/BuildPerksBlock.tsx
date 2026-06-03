@@ -1,19 +1,18 @@
-import type { Perk } from "@appTypes/Builds"
-// import { usePerkIcons } from "@hooks/scrape/usePerkIcons";
+import type { ProfilePerk } from "@appTypes/Profiles"
 
 interface BuildPerksBlockProps {
-  perks: Perk[]
+  perks: ProfilePerk[]
 }
 
 export const BuildPerksBlock = ({ perks }: BuildPerksBlockProps) => {
-  // const { iconUrls } = usePerkIcons(perks);
-
-  // if (isLoading) return <p>Loading...</p>
 
   return (
     <div>
       {perks.map((perk) => (
-        <p>{perk.name}</p>
+        <div key={perk.name}>
+          <img src={perk.iconUrl} alt={perk.name + " perk icon"} />
+          <p>{perk.name}</p>
+        </div>
       ))}
     </div>
   )
