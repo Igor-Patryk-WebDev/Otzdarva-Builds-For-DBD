@@ -57,19 +57,24 @@ function RouteComponent() {
                           />
                         </div>
                       ))}
-                      {build.notes.map((note, k) => {
-                        return (
-                          <div>
-                            <p
-                              key={
-                                character.name + build.name + "note" + String(k)
-                              }
-                            >
-                              {note}
-                            </p>
-                          </div>
-                        );
-                      })}
+                      <div>
+                        {build.notes.map((note, k) => {
+                          if (note) {
+                            return (
+                              <li
+                                key={
+                                  character.name +
+                                  build.name +
+                                  "note" +
+                                  String(k)
+                                }
+                              >
+                                <p>{note}</p>
+                              </li>
+                            );
+                          }
+                        })}
+                      </div>
                     </div>
                   );
                 })}
