@@ -1,6 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCharactersFromBuilds } from "@hooks/builds/useCharactersFromBuilds";
-import { useScrape } from "@contexts/AppDataContext";
 import { useBuildProfiles } from "@hooks/useBuildProfiles";
 
 export const Route = createFileRoute("/buildCreator")({
@@ -15,9 +13,9 @@ function RouteComponent() {
   });
 
   return (
-    <div className="flex flex-col px-4">
+    <div className="px-4">
       <h1 className="text-9xl">Build Creator</h1>
-      <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1 gap-4">
         {killersProfiles.map((character) => {
           console.log(character);
           return (
@@ -41,13 +39,13 @@ function RouteComponent() {
                   className="absolute inset-0 w-full h-full z-20"
                 />
               </div>
-              <div className="flex gap-4 h-64 bg-neutral-800">
+              <div className="flex gap-4 h-90 bg-neutral-800 w-screen">
                 {character.builds.map((build) => {
                   console.log(build);
                   return (
                     <div
                       key={character.name + build.name}
-                      className="flex flex-col"
+                      className="flex flex-col max-w-1/3 center border-2 border-neutral-400"
                     >
                       <h3 className="text-4xl">{build.name}</h3>
                       {build.perks.map((perk) => (
@@ -59,7 +57,19 @@ function RouteComponent() {
                           />
                         </div>
                       ))}
-                      <p>{build.notes}</p>
+                      {build.notes.map((note, k) => {
+                        return (
+                          <div>
+                            <p
+                              key={
+                                character.name + build.name + "note" + String(k)
+                              }
+                            >
+                              {note}
+                            </p>
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 })}
@@ -86,11 +96,14 @@ function RouteComponent() {
                 className="absolute inset-0 w-full h-full object-cover z-20"
               />
             </div>
-            <div className="flex h-64 bg-neutral-800">
+            <div className="flex h-64 bg-neutral-800 w-screen">
               {character.builds.map((build) => {
                 console.log(build);
                 return (
-                  <div key={build.name} className="flex flex-col">
+                  <div
+                    key={character.name + build.name}
+                    className="flex flex-col"
+                  >
                     <h3 className="text-4xl">{build.name}</h3>
                     {build.perks.map((perk) => (
                       <div className="flex">
