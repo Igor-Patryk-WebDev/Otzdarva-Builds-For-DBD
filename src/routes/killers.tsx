@@ -1,7 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router';
-
 import { BuildsPageLayout } from '@components/layouts/BuildsPageLayout';
-import { CharacterPanels } from '@components/UI/CharacterPanels';
+import { ProfilesWrapper } from '@components/pages/ProfilesPage/ProfilesWrapper';
+
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/killers')({
   component: KillersPage,
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/killers')({
 function KillersPage() {
   return (
     <BuildsPageLayout>
-      <CharacterPanels role='Killers' />
+      <ProfilesWrapper role='Killers' />
     </BuildsPageLayout>
   )
 }

@@ -1,7 +1,9 @@
+import type { DbdRole } from "@appTypes/DbdRole";
+
 import { Link } from "@tanstack/react-router";
 
 interface RoleSelectButtonProps {
-  variant: "Killers" | "Survivors";
+  variant: DbdRole
 }
 
 export const RoleSelectButton = ({ variant }: RoleSelectButtonProps) => {

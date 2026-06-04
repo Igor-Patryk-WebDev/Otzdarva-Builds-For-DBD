@@ -1,5 +1,5 @@
 import { Button } from "@components/shared/Button";
-import { Nav } from "@components/UI/AdminPanel/Nav";
+import { AdminNavigation } from "@components/pages/AdminPage/AdminNavigation";
 import { useProfiles } from "@contexts/AppDataContext";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -14,8 +14,8 @@ function RouteComponent() {
   const survivorProfiles = profiles.survivors;
 
   return (
-    <div className="px-4 overflow-y-clip">
-      <Nav />
+    <section className="px-4 overflow-y-clip">
+      <AdminNavigation />
       <div className="grid grid-cols-1 gap-4">
         {killerProfiles.map((character) => {
           return (
@@ -141,6 +141,6 @@ function RouteComponent() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

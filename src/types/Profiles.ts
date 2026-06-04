@@ -15,7 +15,7 @@ export interface ProfileBuild extends Omit<Build, "perks"> {
 }
 
 export interface ProfileData extends RoleProfile {
-  builds: ProfileBuild[] | null;
+  builds: ProfileBuild[] | undefined;
 }
 
 export interface ProfilesData {

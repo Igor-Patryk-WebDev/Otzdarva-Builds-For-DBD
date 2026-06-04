@@ -1,4 +1,4 @@
-export const FrontPageHeading = () => {
+export const WebsiteBanner = () => {
   return (
     <header>
       <div className="flex center gap-2">

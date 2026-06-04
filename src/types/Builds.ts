@@ -15,7 +15,7 @@ export interface Build {
 
 export interface BuildsProfile {
   name: string;
-  builds: Build[];
+  builds: Build[] | undefined;
 }
 
 export interface BuildsData {

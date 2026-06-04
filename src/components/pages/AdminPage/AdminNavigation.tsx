@@ -1,9 +1,9 @@
 import { Button } from "@components/shared/Button";
 import { Link } from "@tanstack/react-router";
 
-type NavProps = {};
+type AdminNavigationProps = {};
 
-export const Nav = ({}: NavProps) => {
+export const AdminNavigation = ({ }: AdminNavigationProps) => {
   return (
     <div className="flex gap-8 my-4">
       <Button color="grey">

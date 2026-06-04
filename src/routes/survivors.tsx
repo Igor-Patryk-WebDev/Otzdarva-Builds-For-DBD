@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { BuildsPageLayout } from '@components/layouts/BuildsPageLayout';
-import { CharacterPanels } from '@components/UI/CharacterPanels';
+import { ProfilesWrapper } from '@components/pages/ProfilesPage/ProfilesWrapper';
 
 export const Route = createFileRoute('/survivors')({
   component: SurvivorsPage,
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/survivors')({
 function SurvivorsPage() {
   return (
     <BuildsPageLayout>
-      <CharacterPanels role='Survivors' />
+      <ProfilesWrapper role='Survivors' />
     </BuildsPageLayout>
   )
 }
