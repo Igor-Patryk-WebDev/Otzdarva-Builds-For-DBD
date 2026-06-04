@@ -1,11 +1,10 @@
-import type { ProfilePerk } from "@appTypes/Profiles"
+import type { ProfilePerk } from "@appTypes/Profiles";
 
 interface BuildPerksBlockProps {
-  perks: ProfilePerk[]
+  perks: ProfilePerk[];
 }
 
 export const BuildPerksBlock = ({ perks }: BuildPerksBlockProps) => {
-
   return (
     <div>
       {perks.map((perk) => (
@@ -15,5 +14,5 @@ export const BuildPerksBlock = ({ perks }: BuildPerksBlockProps) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
