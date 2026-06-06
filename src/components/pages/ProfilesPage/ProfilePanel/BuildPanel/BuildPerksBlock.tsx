@@ -4,7 +4,7 @@ interface BuildPerksBlockProps {
   perks: ProfilePerk[];
 }
 
-const PerkBlock = ({ perk }) => {
+const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
   return (
     <div className='grid grid-cols-[minmax(0,120px)]'>
       <div className='relative' key={perk.name}>

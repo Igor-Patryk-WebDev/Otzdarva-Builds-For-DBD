@@ -22,7 +22,7 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
         name: profile.name,
         role: lowercaseRole,
         portraitUrl: profile.portraitUrl,
-        builds: builds[lowercaseRole].find((p) => p.name === profile.name)?.builds.map((build) => ({
+        builds: builds[lowercaseRole]?.find((p) => p.name === profile.name)?.builds?.map((build) => ({
           name: build.name,
           perks: build.perks.map((perk) => ({
             name: perk.name,
@@ -33,7 +33,7 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
             }))
           })),
           notes: build.notes
-        })) ?? null
+        })) ?? undefined
       }))
     )
   }

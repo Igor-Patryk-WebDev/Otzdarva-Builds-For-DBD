@@ -10,7 +10,7 @@ export const Route = createFileRoute('/survivors')({
 function SurvivorsPage() {
   return (
     <BuildsPageLayout>
-      <ProfilesWrapper role='Survivors' />
+      {(searchQuery) => <ProfilesWrapper role='Survivors' searchQuery={searchQuery} />}
     </BuildsPageLayout>
   )
 }
