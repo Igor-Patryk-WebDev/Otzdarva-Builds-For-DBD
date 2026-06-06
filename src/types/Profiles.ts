@@ -1,4 +1,5 @@
 import type { Alt, Build, Perk } from "./Builds";
+import type { DbdRole } from "./DbdRole";
 import type { RoleProfile } from "./Scrape";
 
 export interface ProfileAlt extends Alt {
@@ -16,6 +17,7 @@ export interface ProfileBuild extends Omit<Build, "perks"> {
 
 export interface ProfileData extends RoleProfile {
   builds: ProfileBuild[] | undefined;
+  role: Lowercase<DbdRole>
 }
 
 export interface ProfilesData {

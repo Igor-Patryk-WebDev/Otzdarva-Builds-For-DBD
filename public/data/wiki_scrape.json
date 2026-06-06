@@ -552,6 +552,24 @@
         "iconUrl": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookPainResonance.png",
         "description": "At%20the%20start%20of%20the%20Trial,%20up%20to%204%20Hooks%20are%20changed%20into%20Scourge%20Hooks.%20You%20see%20their%20Auras%20in%20white.%0A%3Cp%3EYou%20start%20with%204%20Tokens.%20The%20first%20time%20each%20Survivor%20is%20hooked%20on%20a%20Scourge%20Hook,%201%20Token%20is%20consumed%20and%20the%20Generator%20with%20the%20most%20progress%20instantly%20explodes,%20losing%20%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr2%22%20style=%22color:%20#199b1e;%22%3E15%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr3%22%20style=%22color:%20#2f9cd6;%22%3E20%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr4%22%20style=%22color:%20#ac3ee3;%22%3E25%20%25%3C/span%3E%3C/b%3E%20progression%20and%20beginning%20to%20regress.%3C/p%3E",
         "obtainment": "Artist"
+      },
+      {
+        "name": "Sloppy Butcher",
+        "iconUrl": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookPainResonance.png",
+        "description": "At%20the%20start%20of%20the%20Trial,%20up%20to%204%20Hooks%20are%20changed%20into%20Scourge%20Hooks.%20You%20see%20their%20Auras%20in%20white.%0A%3Cp%3EYou%20start%20with%204%20Tokens.%20The%20first%20time%20each%20Survivor%20is%20hooked%20on%20a%20Scourge%20Hook,%201%20Token%20is%20consumed%20and%20the%20Generator%20with%20the%20most%20progress%20instantly%20explodes,%20losing%20%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr2%22%20style=%22color:%20#199b1e;%22%3E15%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr3%22%20style=%22color:%20#2f9cd6;%22%3E20%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr4%22%20style=%22color:%20#ac3ee3;%22%3E25%20%25%3C/span%3E%3C/b%3E%20progression%20and%20beginning%20to%20regress.%3C/p%3E",
+        "obtainment": "Artist"
+      },
+      {
+        "name": "No Holds Barred",
+        "iconUrl": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookPainResonance.png",
+        "description": "At%20the%20start%20of%20the%20Trial,%20up%20to%204%20Hooks%20are%20changed%20into%20Scourge%20Hooks.%20You%20see%20their%20Auras%20in%20white.%0A%3Cp%3EYou%20start%20with%204%20Tokens.%20The%20first%20time%20each%20Survivor%20is%20hooked%20on%20a%20Scourge%20Hook,%201%20Token%20is%20consumed%20and%20the%20Generator%20with%20the%20most%20progress%20instantly%20explodes,%20losing%20%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr2%22%20style=%22color:%20#199b1e;%22%3E15%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr3%22%20style=%22color:%20#2f9cd6;%22%3E20%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr4%22%20style=%22color:%20#ac3ee3;%22%3E25%20%25%3C/span%3E%3C/b%3E%20progression%20and%20beginning%20to%20regress.%3C/p%3E",
+        "obtainment": "Artist"
+      },
+      {
+        "name": "Turn Back the Clock",
+        "iconUrl": "https://deadbydaylight.wiki.gg/images/IconPerks_scourgeHookPainResonance.png",
+        "description": "At%20the%20start%20of%20the%20Trial,%20up%20to%204%20Hooks%20are%20changed%20into%20Scourge%20Hooks.%20You%20see%20their%20Auras%20in%20white.%0A%3Cp%3EYou%20start%20with%204%20Tokens.%20The%20first%20time%20each%20Survivor%20is%20hooked%20on%20a%20Scourge%20Hook,%201%20Token%20is%20consumed%20and%20the%20Generator%20with%20the%20most%20progress%20instantly%20explodes,%20losing%20%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr2%22%20style=%22color:%20#199b1e;%22%3E15%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr3%22%20style=%22color:%20#2f9cd6;%22%3E20%3C/span%3E%3C/b%3E/%3Cb%3E%3Cspan%20class=%22luaClr%20clr%20clr4%22%20style=%22color:%20#ac3ee3;%22%3E25%20%25%3C/span%3E%3C/b%3E%20progression%20and%20beginning%20to%20regress.%3C/p%3E",
+        "obtainment": "Artist"
       }
     ],
     "characters": [

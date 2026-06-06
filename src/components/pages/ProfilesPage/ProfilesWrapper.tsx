@@ -15,7 +15,7 @@ export const ProfilesWrapper = ({ role }: ProfilesWrapperProps) => {
 
   return (
     roleProfiles.map((profile) => (
-      <ProfilePanel profile={profile} />
+    <ProfilePanel key={profile.name} profile={profile} />
     ))
   )
 }

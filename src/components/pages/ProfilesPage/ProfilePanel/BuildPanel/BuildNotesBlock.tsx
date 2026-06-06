@@ -4,14 +4,16 @@ interface BuildNotesBlockProps {
 
 export const BuildNotesBlock = ({ notes }: BuildNotesBlockProps) => {
   return (
-    <div>
-      {
-        notes.length != 0
-          ? notes.map((note) => (
-            <p>{note}</p>
-          ))
-          : <p>Notes not included, sorry!</p>
-      }
+    <div className='overflow-clip'>
+      <ol className='flex flex-col gap-1 list-decimal text-sm text-otz py-2'>
+        {
+          notes.length != 0
+            ? notes.map((note) => (
+              <li className='ml-6'><p className='text-neutral-300'>{note}</p></li>
+            ))
+            : <p className='text-neutral-300'>Notes not included, sorry!</p>
+        }
+      </ol>
     </div>
   )
 }

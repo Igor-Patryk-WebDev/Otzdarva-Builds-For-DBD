@@ -20,6 +20,7 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
     return (
       scrape[lowercaseRole].roleProfiles.map((profile) => ({
         name: profile.name,
+        role: lowercaseRole,
         portraitUrl: profile.portraitUrl,
         builds: builds[lowercaseRole].find((p) => p.name === profile.name)?.builds.map((build) => ({
           name: build.name,
