@@ -6,7 +6,7 @@ export const useScrapeJSON = () => {
   return useQuery<ScrapeData>({
     queryKey: ["wikiScrape"],
     queryFn: async () => {
-      const res = await fetch("/data/wiki_scrape.json");
+      const res = await fetch("/data/scrape.json");
       return res.json();
     },
   });
