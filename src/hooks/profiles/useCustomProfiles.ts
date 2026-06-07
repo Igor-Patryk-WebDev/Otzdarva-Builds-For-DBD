@@ -18,7 +18,7 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
     }
 
     return (
-      scrape[lowercaseRole].roleProfiles.map((profile) => ({
+      scrape[lowercaseRole].profiles.map((profile) => ({
         name: profile.name,
         role: lowercaseRole,
         portraitUrl: profile.portraitUrl,

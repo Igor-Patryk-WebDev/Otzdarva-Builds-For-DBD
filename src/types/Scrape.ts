@@ -18,7 +18,7 @@ export interface RoleProfile {
 export interface RoleData {
   perks: Perk[],
   characters: Character[],
-  roleProfiles: RoleProfile[]
+  profiles: RoleProfile[]
 }
 
 export interface OtherData {
