@@ -9,7 +9,7 @@ export const ChangeRolePageButton = () => {
       types: ({ fromLocation }) =>
         fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"]
     }}>
-      <Button color="otz">Change role</Button>
+      <Button color="otz">SWAP</Button>
     </Link>
   )
 }

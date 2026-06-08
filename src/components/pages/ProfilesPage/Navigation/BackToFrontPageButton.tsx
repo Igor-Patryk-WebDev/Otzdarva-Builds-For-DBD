@@ -7,7 +7,7 @@ export const BackToFrontPageButton = () => {
       types: ({ fromLocation }) =>
         fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"]
     }}>
-      <Button color="otz">WRÓĆ</Button>
+      <Button color="otz">GO BACK</Button>
     </Link>
   )
 }

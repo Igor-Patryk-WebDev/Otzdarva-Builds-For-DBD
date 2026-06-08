@@ -12,7 +12,7 @@ export const BuildPanel = ({ build }: BuildPanelProps) => {
   const notes = build.notes
 
   return (
-    <div className='px-6'>
+    <div className='px-6 grid grid-rows-[auto_auto_1fr]'>
       <h3 className='text-2xl font-bold my-2 text-center'>{name}</h3>
       <BuildPerksBlock perks={perks} />
       <BuildNotesBlock notes={notes} />
