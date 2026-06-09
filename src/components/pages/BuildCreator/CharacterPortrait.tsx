@@ -12,23 +12,17 @@ export function CharacterPortrait({ character }: Props) {
         <img
           src="/images/CharPortrait_bg.webp"
           alt="bg"
-          className={`absolute inset-0 w-full h-full z-0 ${
-            character.role === "survivors" ? "object-contain" : ""
-          }`}
+          className="absolute inset-0 w-full h-full z-0"
         />
         <img
           src="/images/CharPortrait_roleBG.webp"
           alt="role bg"
-          className={`absolute inset-0 w-full h-full z-10 ${
-            character.role === "survivors" ? "object-contain" : ""
-          }`}
+          className="absolute inset-0 w-full h-full z-10"
         />
         <img
           src={character.portraitUrl ?? "/images/Unknown_Character.webp"}
           alt={character.name}
-          className={`absolute inset-0 w-full h-full z-20 ${
-            character.role === "survivors" ? "object-cover" : ""
-          }`}
+          className="absolute inset-0 w-full h-full z-20"
         />
         <PortalButton character={character}>Add Build</PortalButton>
       </div>
