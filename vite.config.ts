@@ -6,10 +6,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [
-    tanstackRouter({
-      target: "react",
-      autoCodeSplitting: true,
-    }),
+    tanstackRouter({ target: "react", autoCodeSplitting: true }),
     react(),
     tailwindcss(),
   ],
@@ -19,7 +16,15 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "./src/hooks"),
       "@contexts": path.resolve(__dirname, "./src/contexts"),
       "@components": path.resolve(__dirname, "./src/components"),
-      "@appTypes": path.resolve(__dirname, "./src/types")
+      "@appTypes": path.resolve(__dirname, "./src/types"),
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
     },
   },
 });

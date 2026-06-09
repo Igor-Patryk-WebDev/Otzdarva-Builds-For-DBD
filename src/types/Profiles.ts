@@ -17,7 +17,7 @@ export interface ProfileBuild extends Omit<Build, "perks"> {
 
 export interface ProfileData extends RoleProfile {
   builds: ProfileBuild[] | undefined;
-  role: Lowercase<DbdRole>
+  role: Lowercase<DbdRole>;
 }
 
 export interface ProfilesData {
