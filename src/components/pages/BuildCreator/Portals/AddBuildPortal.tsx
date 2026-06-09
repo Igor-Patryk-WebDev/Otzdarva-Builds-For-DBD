@@ -121,6 +121,7 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                         alt={perk.name}
                         className="w-full h-full object-cover rounded-lg cursor-pointer hover:ring-1 hover:ring-otz hover:bg-neutral-700 transition"
                       />
+                      <p className="text-center">{perk.name}</p>
                     </div>
                   ))}
                 </div>
