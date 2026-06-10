@@ -4,7 +4,8 @@ type ButtonProps = {
   children: ReactNode | string;
   className?: string;
   color: "otz" | "grey";
-  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export const Button = ({
@@ -12,6 +13,7 @@ export const Button = ({
   className: classNames,
   color,
   onClick,
+  type,
 }: ButtonProps) => {
   const styles = {
     otz: "bg-otz hover:bg-otzHover transition-colors",
@@ -20,6 +22,7 @@ export const Button = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${classNames} cursor-pointer ${styles[color]} rounded-md px-4 py-2`}
     >

@@ -7,7 +7,7 @@ interface Props {
 
 export function CharacterBuilds({ character }: Props) {
   return (
-    <div className="flex gap-4 h-fit bg-neutral-800 flex-1 min-w-0 p-4">
+    <div className="flex flex-wrap gap-4 h-fit bg-neutral-800 flex-1 min-w-0 p-4">
       {character.builds &&
         character.builds.map((build) => {
           return (

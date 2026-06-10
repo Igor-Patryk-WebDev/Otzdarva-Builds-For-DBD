@@ -1,446 +1,716 @@
 {
-  "killers": [
-    {
-      "name": "Universal Builds",
-      "builds": [
+    "killers": [
         {
-          "name": "Beginner Build",
-          "perks": [
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
+            "name": "Universal Builds",
+            "builds": [
                 {
-                  "name": "Scourge Hook: Gift of Pain"
+                    "name": "Beginner Build",
+                    "perks": [
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Scourge Hook: Gift of Pain"
+                                },
+                                {
+                                    "name": "Brutal Strength"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "",
+                            "alts": []
+                        },
+                        {
+                            "name": "Hex: Plaything",
+                            "alts": [
+                                {
+                                    "name": "Tinkerer"
+                                },
+                                {
+                                    "name": "A Nurse's Calling"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Hex: No One Escapes Death",
+                            "alts": [
+                                {
+                                    "name": "Enduring"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+                        "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+                        "Use this as a starting point!",
+                        "testtesttest"
+                    ]
                 },
                 {
-                  "name": "Brutal Strength"
-                }
-              ]
-            },
-            {
-              "name": "No Holds Barred",
-              "alts": []
-            },
-            {
-              "name": "Hex: Plaything",
-              "alts": [
-                {
-                  "name": "Tinkerer"
+                    "name": "Beginner Build",
+                    "perks": [
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Scourge Hook: Gift of Pain"
+                                },
+                                {
+                                    "name": "Brutal Strength"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "No Holds Barred",
+                            "alts": []
+                        },
+                        {
+                            "name": "Hex: Plaything",
+                            "alts": [
+                                {
+                                    "name": "Tinkerer"
+                                },
+                                {
+                                    "name": "A Nurse's Calling"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Hex: No One Escapes Death",
+                            "alts": [
+                                {
+                                    "name": "Enduring"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+                        "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+                        "Use this as a starting point!",
+                        "testtesttest"
+                    ]
                 },
                 {
-                  "name": "A Nurse's Calling"
-                }
-              ]
-            },
-            {
-              "name": "Hex: No One Escapes Death",
-              "alts": [
+                    "name": "Beginner Build",
+                    "perks": [
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Scourge Hook: Gift of Pain"
+                                },
+                                {
+                                    "name": "Brutal Strength"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "No Holds Barred",
+                            "alts": []
+                        },
+                        {
+                            "name": "Hex: Plaything",
+                            "alts": [
+                                {
+                                    "name": "Tinkerer"
+                                },
+                                {
+                                    "name": "A Nurse's Calling"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Hex: No One Escapes Death",
+                            "alts": [
+                                {
+                                    "name": "Enduring"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+                        "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+                        "Use this as a starting point!",
+                        "testtesttest"
+                    ]
+                },
                 {
-                  "name": "Enduring"
+                    "name": "Beginner Build",
+                    "perks": [
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Scourge Hook: Gift of Pain"
+                                },
+                                {
+                                    "name": "Brutal Strength"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "No Holds Barred",
+                            "alts": []
+                        },
+                        {
+                            "name": "Hex: Plaything",
+                            "alts": [
+                                {
+                                    "name": "Tinkerer"
+                                },
+                                {
+                                    "name": "A Nurse's Calling"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Hex: No One Escapes Death",
+                            "alts": [
+                                {
+                                    "name": "Enduring"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+                        "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+                        "Use this as a starting point!",
+                        "testtesttest"
+                    ]
+                },
+                {
+                    "name": "CWL BILD",
+                    "perks": [
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Scourge Hook: Gift of Pain"
+                                },
+                                {
+                                    "name": "Brutal Strength"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "No Holds Barred",
+                            "alts": []
+                        },
+                        {
+                            "name": "Hex: Plaything",
+                            "alts": [
+                                {
+                                    "name": "Tinkerer"
+                                },
+                                {
+                                    "name": "A Nurse's Calling"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Hex: No One Escapes Death",
+                            "alts": [
+                                {
+                                    "name": "Enduring"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
+                        "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
+                        "Use this as a starting point!"
+                    ]
                 }
-              ]
-            }
-          ],
-          "notes": [
-            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
-            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
-            "Use this as a starting point!",
-            "testtesttest"
-          ]
+            ]
         },
         {
-          "name": "Beginner Build",
-          "perks": [
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
+            "name": "The Trapper",
+            "builds": [
                 {
-                  "name": "Scourge Hook: Gift of Pain"
-                },
-                {
-                  "name": "Brutal Strength"
+                    "name": "Generic Build",
+                    "perks": [
+                        {
+                            "name": "Corrupt Intervention",
+                            "alts": []
+                        },
+                        {
+                            "name": "Scourge Hook: Pain Resonance",
+                            "alts": []
+                        },
+                        {
+                            "name": "Dead Man's Switch",
+                            "alts": [
+                                {
+                                    "name": "Hex: Ruin"
+                                },
+                                {
+                                    "name": "Grim Embrace"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": [
+                                {
+                                    "name": "Surge"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Reliable and well-rounded build; a good starting point until you find the ideal build for your playstyle."
+                    ]
                 }
-              ]
-            },
-            {
-              "name": "No Holds Barred",
-              "alts": []
-            },
-            {
-              "name": "Hex: Plaything",
-              "alts": [
-                {
-                  "name": "Tinkerer"
-                },
-                {
-                  "name": "A Nurse's Calling"
-                }
-              ]
-            },
-            {
-              "name": "Hex: No One Escapes Death",
-              "alts": [
-                {
-                  "name": "Enduring"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
-            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
-            "Use this as a starting point!",
-            "testtesttest"
-          ]
+            ]
         },
         {
-          "name": "Beginner Build",
-          "perks": [
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
+            "name": "The Wraith",
+            "builds": [
                 {
-                  "name": "Scourge Hook: Gift of Pain"
-                },
-                {
-                  "name": "Brutal Strength"
+                    "name": "Generic Build",
+                    "perks": [
+                        {
+                            "name": "Barbecue & Chilli",
+                            "alts": []
+                        },
+                        {
+                            "name": "Scourge Hook: Pain Resonance",
+                            "alts": [
+                                {
+                                    "name": "Surge"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Turn Back the Clock",
+                            "alts": []
+                        },
+                        {
+                            "name": "Sloppy Butcher",
+                            "alts": [
+                                {
+                                    "name": "Bamboozle"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Reliable and well-rounded build; a good starting point until you find the ideal build for your playstyle.",
+                        "Pain Res & TBTC help you slow down gens without much time wasted. Perks like Surge are good alternatives too.",
+                        "Sloppy Butcher helps keep survivors injured, but can be swapped to Bamboozle if you struggle with windows."
+                    ]
                 }
-              ]
-            },
-            {
-              "name": "No Holds Barred",
-              "alts": []
-            },
-            {
-              "name": "Hex: Plaything",
-              "alts": [
-                {
-                  "name": "Tinkerer"
-                },
-                {
-                  "name": "A Nurse's Calling"
-                }
-              ]
-            },
-            {
-              "name": "Hex: No One Escapes Death",
-              "alts": [
-                {
-                  "name": "Enduring"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
-            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
-            "Use this as a starting point!",
-            "testtesttest"
-          ]
+            ]
         },
         {
-          "name": "Beginner Build",
-          "perks": [
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
+            "name": "The Hillbilly",
+            "builds": [
                 {
-                  "name": "Scourge Hook: Gift of Pain"
+                    "name": "ewsdas",
+                    "perks": [
+                        {
+                            "name": "Bamboozle",
+                            "alts": []
+                        },
+                        {
+                            "name": "Batteries Included",
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dsa",
+                        "dsa",
+                        "dsa",
+                        "dasdsadas"
+                    ]
                 },
                 {
-                  "name": "Brutal Strength"
-                }
-              ]
-            },
-            {
-              "name": "No Holds Barred",
-              "alts": []
-            },
-            {
-              "name": "Hex: Plaything",
-              "alts": [
-                {
-                  "name": "Tinkerer"
+                    "name": "tetetetetete",
+                    "perks": [
+                        {
+                            "name": "Bamboozle",
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
                 },
                 {
-                  "name": "A Nurse's Calling"
-                }
-              ]
-            },
-            {
-              "name": "Hex: No One Escapes Death",
-              "alts": [
+                    "name": "",
+                    "perks": [
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        }
+                    ],
+                    "notes": []
+                },
                 {
-                  "name": "Enduring"
+                    "name": "TEEEEST",
+                    "perks": [
+                        {
+                            "name": "Barbecue & Chilli",
+                            "alts": []
+                        },
+                        {
+                            "name": "Alien Instinct",
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        },
+                        {
+                            "name": "A Nurse's Calling",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dla",
+                        "dsad",
+                        "dsadas",
+                        "dsadasdasd"
+                    ]
+                },
+                {
+                    "name": "WindowRefreshTEst",
+                    "perks": [
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        },
+                        {
+                            "name": null,
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dsa",
+                        "dsa",
+                        "dsa",
+                        "dla"
+                    ]
+                },
+                {
+                    "name": "dla",
+                    "perks": [
+                        {
+                            "name": "Bamboozle",
+                            "alts": []
+                        },
+                        {
+                            "name": "Alien Instinct",
+                            "alts": []
+                        },
+                        {
+                            "name": "A Nurse's Calling",
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dasdsa",
+                        "dasdsa",
+                        "dasdasd",
+                        "asdasdas"
+                    ]
+                },
+                {
+                    "name": "dasdas",
+                    "perks": [
+                        {
+                            "name": "A Nurse's Calling",
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        },
+                        {
+                            "name": "All-Shaking Thunder",
+                            "alts": []
+                        },
+                        {
+                            "name": "Barbecue & Chilli",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dsadsa",
+                        "asd",
+                        "dsad",
+                        "dąs"
+                    ]
+                },
+                {
+                    "name": "dla",
+                    "perks": [
+                        {
+                            "name": "Barbecue & Chilli",
+                            "alts": []
+                        },
+                        {
+                            "name": "A Nurse's Calling",
+                            "alts": []
+                        },
+                        {
+                            "name": "Awakened Awareness",
+                            "alts": []
+                        },
+                        {
+                            "name": "Batteries Included",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dsa",
+                        "dsa",
+                        "dsa",
+                        "dsa"
+                    ]
+                },
+                {
+                    "name": "dsadsa",
+                    "perks": [
+                        {
+                            "name": "Barbecue & Chilli",
+                            "alts": []
+                        },
+                        {
+                            "name": "Batteries Included",
+                            "alts": []
+                        },
+                        {
+                            "name": "Bamboozle",
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dasdasd",
+                        "dsadsada",
+                        "sdasdasd",
+                        "dasdasd"
+                    ]
+                },
+                {
+                    "name": "osad",
+                    "perks": [
+                        {
+                            "name": "Batteries Included",
+                            "alts": []
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": []
+                        },
+                        {
+                            "name": "Bamboozle",
+                            "alts": []
+                        },
+                        {
+                            "name": "Brutal Strength",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "dsa",
+                        "dla",
+                        "d",
+                        "d"
+                    ]
                 }
-              ]
-            }
-          ],
-          "notes": [
-            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
-            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
-            "Use this as a starting point!",
-            "testtesttest"
-          ]
+            ]
+        }
+    ],
+    "survivors": [
+        {
+            "name": "Solo Survivor",
+            "builds": [
+                {
+                    "name": "Beginner Starter Build",
+                    "perks": [
+                        {
+                            "name": "Kindred",
+                            "alts": []
+                        },
+                        {
+                            "name": "We'll Make It",
+                            "alts": []
+                        },
+                        {
+                            "name": "Déjà Vu",
+                            "alts": []
+                        },
+                        {
+                            "name": "Dark Sense",
+                            "alts": [
+                                {
+                                    "name": "No One Left Behind"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Only uses basic perks available to all Survivors in the bloodweb.",
+                        "Kindred & WMI give useful info and healing speed when unhooking.",
+                        "Déjà Vu & Dark Sense ensures you keep an eye on gens and the Killer.",
+                        "Feel free to customize it to your needs."
+                    ]
+                }
+            ]
         },
         {
-          "name": "CWL BILD",
-          "perks": [
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
+            "name": "Advanced Builds",
+            "builds": [
                 {
-                  "name": "Scourge Hook: Gift of Pain"
-                },
-                {
-                  "name": "Brutal Strength"
+                    "name": "Solo Escape Build",
+                    "perks": [
+                        {
+                            "name": "Down to the Last",
+                            "alts": []
+                        },
+                        {
+                            "name": "Left Behind",
+                            "alts": [
+                                {
+                                    "name": "Clairvoyance"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Inner Strength",
+                            "alts": [
+                                {
+                                    "name": "Plot Twist"
+                                },
+                                {
+                                    "name": "Pharmacy"
+                                },
+                                {
+                                    "name": "Self-Care"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Kindred",
+                            "alts": [
+                                {
+                                    "name": "Windows of Opportunity"
+                                },
+                                {
+                                    "name": "Alert"
+                                },
+                                {
+                                    "name": "Unbreakable"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Prioritizes survival when you're the last one alive.",
+                        "Find the hatch quickly with Left Behind...",
+                        "... or let the Killer find the hatch and open gates faster with Down to the Last.",
+                        "Last two perks provide a bit of info and self-heal options."
+                    ]
                 }
-              ]
-            },
-            {
-              "name": "No Holds Barred",
-              "alts": []
-            },
-            {
-              "name": "Hex: Plaything",
-              "alts": [
-                {
-                  "name": "Tinkerer"
-                },
-                {
-                  "name": "A Nurse's Calling"
-                }
-              ]
-            },
-            {
-              "name": "Hex: No One Escapes Death",
-              "alts": [
-                {
-                  "name": "Enduring"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
-            "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
-            "Use this as a starting point!"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "The Trapper",
-      "builds": [
+            ]
+        },
         {
-          "name": "Generic Build",
-          "perks": [
-            {
-              "name": "Corrupt Intervention",
-              "alts": []
-            },
-            {
-              "name": "Scourge Hook: Pain Resonance",
-              "alts": []
-            },
-            {
-              "name": "Dead Man's Switch",
-              "alts": [
+            "name": "Team Player",
+            "builds": [
                 {
-                  "name": "Hex: Ruin"
-                },
-                {
-                  "name": "Grim Embrace"
+                    "name": "All Purpose Team Build",
+                    "perks": [
+                        {
+                            "name": "Resurgence",
+                            "alts": []
+                        },
+                        {
+                            "name": "Will to Live",
+                            "alts": [
+                                {
+                                    "name": "Off the Record"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Lithe",
+                            "alts": []
+                        },
+                        {
+                            "name": "Conviction",
+                            "alts": [
+                                {
+                                    "name": "Unbreakable"
+                                }
+                            ]
+                        }
+                    ],
+                    "notes": [
+                        "Versatile build allows you to bounce back from any situation.",
+                        "Tunneled? Use Lithe on a vault after escaping with Decisive Strike.",
+                        "Not tunneled? Heal in seconds with Resurgence.",
+                        "Conviction\/Unbreakable helps if you die protecting a team mate or the Killer gets greedy."
+                    ]
                 }
-              ]
-            },
-            {
-              "name": "Agitation",
-              "alts": [
-                {
-                  "name": "Surge"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Reliable and well-rounded build; a good starting point until you find the ideal build for your playstyle."
-          ]
+            ]
         }
-      ]
-    },
-    {
-      "name": "The Wraith",
-      "builds": [
-        {
-          "name": "Generic Build",
-          "perks": [
-            {
-              "name": "Barbecue & Chilli",
-              "alts": []
-            },
-            {
-              "name": "Scourge Hook: Pain Resonance",
-              "alts": [
-                {
-                  "name": "Surge"
-                }
-              ]
-            },
-            {
-              "name": "Turn Back the Clock",
-              "alts": []
-            },
-            {
-              "name": "Sloppy Butcher",
-              "alts": [
-                {
-                  "name": "Bamboozle"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Reliable and well-rounded build; a good starting point until you find the ideal build for your playstyle.",
-            "Pain Res & TBTC help you slow down gens without much time wasted. Perks like Surge are good alternatives too.",
-            "Sloppy Butcher helps keep survivors injured, but can be swapped to Bamboozle if you struggle with windows."
-          ]
-        }
-      ]
-    }
-  ],
-  "survivors": [
-    {
-      "name": "Solo Survivor",
-      "builds": [
-        {
-          "name": "Beginner Starter Build",
-          "perks": [
-            {
-              "name": "Kindred",
-              "alts": []
-            },
-            {
-              "name": "We'll Make It",
-              "alts": []
-            },
-            {
-              "name": "Déjà Vu",
-              "alts": []
-            },
-            {
-              "name": "Dark Sense",
-              "alts": [
-                {
-                  "name": "No One Left Behind"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Only uses basic perks available to all Survivors in the bloodweb.",
-            "Kindred & WMI give useful info and healing speed when unhooking.",
-            "Déjà Vu & Dark Sense ensures you keep an eye on gens and the Killer.",
-            "Feel free to customize it to your needs."
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Advanced Builds",
-      "builds": [
-        {
-          "name": "Solo Escape Build",
-          "perks": [
-            {
-              "name": "Down to the Last",
-              "alts": []
-            },
-            {
-              "name": "Left Behind",
-              "alts": [
-                {
-                  "name": "Clairvoyance"
-                }
-              ]
-            },
-            {
-              "name": "Inner Strength",
-              "alts": [
-                {
-                  "name": "Plot Twist"
-                },
-                {
-                  "name": "Pharmacy"
-                },
-                {
-                  "name": "Self-Care"
-                }
-              ]
-            },
-            {
-              "name": "Kindred",
-              "alts": [
-                {
-                  "name": "Windows of Opportunity"
-                },
-                {
-                  "name": "Alert"
-                },
-                {
-                  "name": "Unbreakable"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Prioritizes survival when you're the last one alive.",
-            "Find the hatch quickly with Left Behind...",
-            "... or let the Killer find the hatch and open gates faster with Down to the Last.",
-            "Last two perks provide a bit of info and self-heal options."
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Team Player",
-      "builds": [
-        {
-          "name": "All Purpose Team Build",
-          "perks": [
-            {
-              "name": "Resurgence",
-              "alts": []
-            },
-            {
-              "name": "Will to Live",
-              "alts": [
-                {
-                  "name": "Off the Record"
-                }
-              ]
-            },
-            {
-              "name": "Lithe",
-              "alts": []
-            },
-            {
-              "name": "Conviction",
-              "alts": [
-                {
-                  "name": "Unbreakable"
-                }
-              ]
-            }
-          ],
-          "notes": [
-            "Versatile build allows you to bounce back from any situation.",
-            "Tunneled? Use Lithe on a vault after escaping with Decisive Strike.",
-            "Not tunneled? Heal in seconds with Resurgence.",
-            "Conviction\/Unbreakable helps if you die protecting a team mate or the Killer gets greedy."
-          ]
-        }
-      ]
-    }
-  ]
+    ]
 }

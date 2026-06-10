@@ -17,12 +17,12 @@ export function CharacterPortrait({ character }: Props) {
         <img
           src="/images/CharPortrait_roleBG.webp"
           alt="role bg"
-          className="absolute inset-0 w-full h-full z-10"
+          className="absolute inset-0 w-full h-full z-1"
         />
         <img
           src={character.portraitUrl ?? "/images/Unknown_Character.webp"}
           alt={character.name}
-          className="absolute inset-0 w-full h-full z-20"
+          className="absolute inset-0 w-full h-full z-2"
         />
         <PortalButton character={character}>Add Build</PortalButton>
       </div>

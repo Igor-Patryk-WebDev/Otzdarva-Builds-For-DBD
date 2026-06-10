@@ -1,14 +1,79 @@
 import type { ProfileData } from "@appTypes/Profiles";
+import type { Perk } from "@appTypes/Scrape";
 import { Button } from "@components/shared/Button";
 import { useScrape } from "@contexts/AppDataContext";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 type PortalProps = {
   onClose: () => void;
   character: ProfileData;
 };
 
+const EMPTY_SLOTS = [null, null, null, null];
+
 export default function AddBuildPortal({ onClose, character }: PortalProps) {
   const scrape = useScrape();
+  const [perkQuery, setPerkQuery] = useState("");
+  const filtered = scrape.killers.perks.filter((perk) =>
+    perk.name.toLowerCase().includes(perkQuery.toLowerCase()),
+  );
+  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+
+  const [slots, setSlots] = useState<Perk[] | null>(EMPTY_SLOTS);
+
+  const [buildName, setBuildName] = useState("");
+
+  const [notes, setNotes] = useState(["", "", "", ""]);
+
+  const handleSelect = (index: number) => {
+    selectedSlot === index ? setSelectedSlot(null) : setSelectedSlot(index);
+  };
+
+  const handlePerkSelect = (perk: Perk) => {
+    if (selectedSlot === null) return;
+
+    setSlots((prev) => {
+      const updated = [...prev];
+      updated[selectedSlot] = perk;
+      return updated;
+    });
+
+    setSelectedSlot(null);
+  };
+
+  const handlePerkDeletion = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation(); // onClick nie schodzi glebiej na rodzica tylko zostaje w tym mini buttonie
+    setSlots((prev) => {
+      const updated = [...prev];
+      updated[index] = null;
+      return updated;
+    });
+  };
+
+  const handleSave = async () => {
+    const payload = {
+      characterName: character.name,
+      buildName,
+      perks: slots.map((perk) => perk?.name ?? undefined),
+      notes: notes.filter((n) => n.trim() !== ""),
+    };
+
+    const res = await fetch("/api/save_build.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    console.log("saving build");
+    const data = await res.json();
+    if (data.success) {
+      await queryClient.invalidateQueries({ queryKey: ["builds"] });
+      onClose();
+    }
+  };
+
+  const queryClient = useQueryClient();
+  console.log("AddBuildPortal render");
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="relative bg-neutral-900 w-[calc(100%-4rem)] h-[calc(100%-4rem)] p-6 rounded-xl flex flex-col gap-4 border border-white/10">
@@ -40,6 +105,7 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
               <input
                 type="text"
                 placeholder="Enter build name..."
+                onChange={(e) => setBuildName(e.target.value)}
                 className="bg-neutral-800 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz resize-none"
               />
             </div>
@@ -50,13 +116,40 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                 Perks
               </label>
               <div className="flex gap-3 bg-neutral-800 rounded-lg p-4 border border-white/10">
-                {[0, 1, 2, 3].map((i) => (
-                  <div key={i} className="flex-1 aspect-square">
-                    <img
-                      src="/images/no_perk.png"
-                      alt="perk slot"
-                      className="w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
-                    />
+                {slots.map((perk, i) => (
+                  <div
+                    key={i}
+                    onClick={() => handleSelect(i)}
+                    className={`flex-1 aspect-square relative
+                      ${
+                        selectedSlot === i
+                          ? "border-otz bg-neutral-600 transition-colors rounded-lg"
+                          : "border-neutral-600 hover:border-neutral-400"
+                      }
+                      `}
+                  >
+                    {perk ? (
+                      <>
+                        <img
+                          src={perk.iconUrl}
+                          alt={perk.name}
+                          className="w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
+                        />
+                        <Button
+                          onClick={(e) => handlePerkDeletion(i, e)}
+                          color="otz"
+                          className="absolute top-0 right-0 w-5 h-5 flex items-center justify-center text-xs rounded aspect-square shrink-0 "
+                        >
+                          X
+                        </Button>
+                      </>
+                    ) : (
+                      <img
+                        src="/images/no_perk.png"
+                        alt="empty slot"
+                        className="relative w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -68,11 +161,18 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                 Notes
               </label>
               <div className="flex flex-col gap-2 bg-neutral-800 rounded-lg p-4 border border-white/10">
-                {[1, 2, 3, 4].map((i) => (
+                {[0, 1, 2, 3].map((i) => (
                   <textarea
                     key={i}
-                    placeholder={`Note ${i}...`}
+                    placeholder={`Note ${i + 1}`}
                     rows={2}
+                    onChange={(e) =>
+                      setNotes((prev) => {
+                        const updated = [...prev];
+                        updated[i] = e.target.value;
+                        return updated;
+                      })
+                    }
                     className="w-full bg-neutral-700 border border-white/10 rounded-md px-3 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz resize-none text-sm"
                   />
                 ))}
@@ -104,7 +204,9 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                   </svg>
                   <input
                     type="text"
-                    placeholder="Search perks..."
+                    value={perkQuery}
+                    onChange={(e) => setPerkQuery(e.target.value)}
+                    placeholder="Search perks"
                     className="w-full bg-neutral-700 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm"
                   />
                 </div>
@@ -114,8 +216,12 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="grid grid-cols-5 gap-2">
                   {/* Placeholder perk slots — replace with mapped perk data */}
-                  {scrape.killers.perks.map((perk) => (
-                    <div key={perk.name} className="aspect-square">
+                  {filtered.map((perk) => (
+                    <div
+                      key={perk.name}
+                      onClick={() => handlePerkSelect(perk)}
+                      className="aspect-square"
+                    >
                       <img
                         src={perk.iconUrl}
                         alt={perk.name}
@@ -141,7 +247,12 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
         </div>
 
         {/* Add Build Button */}
-        <Button color="otz" className="max-w-64">
+        <Button
+          type="button"
+          color="otz"
+          className="max-w-64"
+          onClick={handleSave}
+        >
           Add Build
         </Button>
       </div>
