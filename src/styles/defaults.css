@@ -12,6 +12,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  scrollbar-width: none;
 }
 
 img {
@@ -77,4 +79,9 @@ html:active-view-transition-type(slide-right) {
   to {
     transform: translateX(0);
   }
+}
+
+.link {
+  color: hsl(347, 66%, 49%);
+  text-decoration: underline;
 }

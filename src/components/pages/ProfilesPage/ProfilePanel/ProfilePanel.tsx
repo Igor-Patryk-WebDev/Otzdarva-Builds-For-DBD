@@ -1,8 +1,12 @@
 import type { ProfileData } from '@appTypes/Profiles';
 
+import { useOpenPortal, usePortalContent, usePortalState } from '@contexts/PortalContext';
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
+import { BuildsNotExistPanel } from './BuildsNotExistPanel';
 import { useGenericBuild } from '@hooks/builds/useGenericBuild';
+import { ProfileHeader } from './ProfileHeader';
 import { BuildPanel } from './BuildPanel';
+import { BuildsList } from './BuildsList';
 
 interface ProfilePanelProps {
   profile: ProfileData
@@ -14,30 +18,26 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   const builds = profile.builds
   const role = profile.role
 
+  const portalState = usePortalState();
+  const openPortal = useOpenPortal();
+  const { setPortalContent } = usePortalContent();
+
   const { build } = useGenericBuild(builds);
 
+  const buildsCount = builds?.length ?? 0
+
   return (
-    <div className='relative grid grid-cols-subgrid col-span-2 even:col-start-4 bg-neutral-900 border border-neutral-800 rounded-lg shadow-2xl shadow-neutral-950'>
-      <div className='absolute bottom-[calc(100%+10px)] w-full grid grid-cols-[1fr_auto_1fr] gap-4 items-center'>
-        <div className='h-px bg-linear-to-l from-otz to-transparent'></div>
-        <h3 className='text-2xl font-bold text-center z-2'>{name}</h3>
-        <div className='h-px bg-linear-to-r from-otz to-transparent'></div>
-      </div>
+    <div className='relative grid grid-cols-subgrid col-span-2 even:col-start-4'>
+      <ProfileHeader name={name} buildsCount={buildsCount} onClick={() => {
+        !portalState && setPortalContent(<BuildsList builds={builds} />);
+        !portalState && openPortal();
+      }}>
+      </ProfileHeader>
       <CharacterPortraitBlock name={name} portraitUrl={portrait} role={role} />
-      {
-        build
-          ? <BuildPanel build={build} />
-          : (
-            <div className='overflow-clip relative justify-items-center content-center rounded-md text-2xl font-bold before:content-[] before:bg-[url("/images/spiderweb.png")] before:bg-bottom-right before:bg-cover before:absolute before:inset-0 before:w-full before:h-full before:brightness-50'>
-              <div className='w-max text-center -rotate-5'>
-                <h3>It seems so empty here...</h3>
-                <h3>Poor you :(</h3>
-              </div>
-            </div>
-          )
+      {build
+        ? <BuildPanel build={build} />
+        : <BuildsNotExistPanel />
       }
     </div>
   )
 }
-
-// bg-[url("/images/spiderweb.png")] bg-bottom-right bg-cover 

@@ -27,6 +27,8 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
           perks: build.perks.map((perk) => ({
             name: perk.name,
             iconUrl: findPerk(perk.name) ?? undefined,
+            description: scrape[lowercaseRole]?.perks.find((p) => p.name === perk.name)?.description,
+            obtainment: scrape[lowercaseRole]?.perks.find((p) => p.name === perk.name)?.obtainment,
             alts: perk.alts.map((alt) => ({
               name: alt.name,
               iconUrl: findPerk(alt.name) ?? undefined,

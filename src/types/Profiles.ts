@@ -9,6 +9,8 @@ export interface ProfileAlt extends Alt {
 export interface ProfilePerk extends Omit<Perk, "alts"> {
   iconUrl: string | undefined;
   alts: ProfileAlt[];
+  description: string | undefined;
+  obtainment: string | undefined;
 }
 
 export interface ProfileBuild extends Omit<Build, "perks"> {
