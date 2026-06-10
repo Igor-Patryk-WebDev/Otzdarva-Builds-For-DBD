@@ -21,23 +21,30 @@ img {
   max-width: 100%;
 }
 
+textarea {
+  resize: none;
+  border-radius: 6px;
+  border-color: hsl(347, 66%, 49%);
+  border-width: 1px;
+}
+
 html:active-view-transition-type(slide-left) {
   &::view-transition-old(front-page) {
-    animation: .3s ease-in-out both slide-out-right;
+    animation: 0.3s ease-in-out both slide-out-right;
   }
 
   &::view-transition-new(front-page) {
-    animation: .3s ease-in-out both slide-in-right;
+    animation: 0.3s ease-in-out both slide-in-right;
   }
 }
 
 html:active-view-transition-type(slide-right) {
   &::view-transition-old(front-page) {
-    animation: .3s ease-in-out both slide-out-left;
+    animation: 0.3s ease-in-out both slide-out-left;
   }
 
   &::view-transition-new(front-page) {
-    animation: .3s ease-in-out both slide-in-left;
+    animation: 0.3s ease-in-out both slide-in-left;
   }
 }
 
