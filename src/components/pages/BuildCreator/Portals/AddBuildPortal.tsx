@@ -64,7 +64,6 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    console.log("saving build");
     const data = await res.json();
     if (data.success) {
       await queryClient.invalidateQueries({ queryKey: ["builds"] });
@@ -73,7 +72,6 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
   };
 
   const queryClient = useQueryClient();
-  console.log("AddBuildPortal render");
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="relative bg-neutral-900 w-[calc(100%-4rem)] h-[calc(100%-4rem)] p-6 rounded-xl flex flex-col gap-4 border border-white/10">
