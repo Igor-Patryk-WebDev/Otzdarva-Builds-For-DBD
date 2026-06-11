@@ -29,7 +29,10 @@ foreach ($data['killers'] as &$killer) {
         foreach ($killer['builds'] as &$build) {
             if ($build['name'] === $body['oldBuildName']) {
                 $build['name'] = $body['buildName'];
-                $build['perks'] = array_map(fn($p) => ['name' => $p, 'alts' => []], $body['perks']);
+                $build['perks'] = array_map(fn($perk) => [
+                    'name' => $perk['name'],
+                    'alts' => array_map(fn($alt) => ['name' => $alt['name']], $perk['alts'] ?? []),
+                ], $body['perks']);
                 $build['notes'] = $body['notes'];
                 $found = true;
                 break;

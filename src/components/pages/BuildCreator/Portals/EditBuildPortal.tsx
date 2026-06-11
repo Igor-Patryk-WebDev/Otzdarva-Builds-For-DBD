@@ -22,11 +22,26 @@ export default function EditBuildPortal({
 
   const [perkQuery, setPerkQuery] = useState("");
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+  const [altPanelSlot, setAltPanelSlot] = useState<number | null>(null);
   const [buildName, setBuildName] = useState(build.name);
 
   const [slots, setSlots] = useState<(Perk | null)[]>(() =>
     build.perks.map(
       (p) => scrape.killers.perks.find((sp) => sp.name === p.name) ?? null,
+    ),
+  );
+
+  const [alts, setAlts] = useState<Perk[][]>(() =>
+    build.perks.map((p) =>
+      p.alts.map(
+        (alt) =>
+          scrape.killers.perks.find((sp) => sp.name === alt.name) ?? {
+            name: alt.name,
+            iconUrl: "/images/no_perk.png",
+            description: "",
+            obtainment: "",
+          },
+      ),
     ),
   );
 
@@ -41,10 +56,24 @@ export default function EditBuildPortal({
   );
 
   const handleSelect = (index: number) => {
-    selectedSlot === index ? setSelectedSlot(null) : setSelectedSlot(index);
+    if (slots[index]) {
+      setAltPanelSlot(altPanelSlot === index ? null : index);
+      setSelectedSlot(null);
+    } else {
+      setSelectedSlot(selectedSlot === index ? null : index);
+      setAltPanelSlot(null);
+    }
   };
 
   const handlePerkSelect = (perk: Perk) => {
+    if (altPanelSlot !== null) {
+      setAlts((prev) => {
+        const updated = [...prev];
+        updated[altPanelSlot] = [...updated[altPanelSlot], perk];
+        return updated;
+      });
+      return;
+    }
     if (selectedSlot === null) return;
     setSlots((prev) => {
       const updated = [...prev];
@@ -61,6 +90,20 @@ export default function EditBuildPortal({
       updated[index] = null;
       return updated;
     });
+    setAlts((prev) => {
+      const updated = [...prev];
+      updated[index] = [];
+      return updated;
+    });
+    if (altPanelSlot === index) setAltPanelSlot(null);
+  };
+
+  const handleAltDeletion = (slotIndex: number, altIndex: number) => {
+    setAlts((prev) => {
+      const updated = [...prev];
+      updated[slotIndex] = updated[slotIndex].filter((_, i) => i !== altIndex);
+      return updated;
+    });
   };
 
   const handleSave = async () => {
@@ -68,7 +111,10 @@ export default function EditBuildPortal({
       characterName: character.name,
       oldBuildName: build.name,
       buildName,
-      perks: slots.map((perk) => perk?.name ?? undefined),
+      perks: slots.map((perk, i) => ({
+        name: perk?.name ?? "",
+        alts: alts[i].map((alt) => ({ name: alt.name })),
+      })),
       notes: notes.filter((n) => n.trim() !== ""),
     };
 
@@ -90,9 +136,9 @@ export default function EditBuildPortal({
               b.name === build.name
                 ? {
                     name: buildName,
-                    perks: slots.map((perk) => ({
+                    perks: slots.map((perk, i) => ({
                       name: perk?.name ?? "",
-                      alts: [],
+                      alts: alts[i].map((alt) => ({ name: alt.name })),
                     })),
                     notes: notes.filter((n) => n.trim() !== ""),
                   }
@@ -118,6 +164,7 @@ export default function EditBuildPortal({
         </Button>
 
         <div className="flex flex-1 gap-4 overflow-hidden">
+          {/* ── LEFT ── */}
           <div className="flex flex-col gap-4 w-1/2 overflow-y-auto pr-2">
             <div className="flex items-center justify-center bg-neutral-800 rounded-lg p-4 border border-white/10">
               <h2 className="font-bold text-3xl text-white text-center">
@@ -148,9 +195,11 @@ export default function EditBuildPortal({
                     key={i}
                     onClick={() => handleSelect(i)}
                     className={`flex-1 aspect-square relative ${
-                      selectedSlot === i
-                        ? "border-otz bg-neutral-600 transition-colors rounded-lg"
-                        : "border-neutral-600 hover:border-neutral-400"
+                      altPanelSlot === i
+                        ? "ring-2 ring-blue-500 rounded-lg"
+                        : selectedSlot === i
+                          ? "border-otz bg-neutral-600 transition-colors rounded-lg"
+                          : "border-neutral-600 hover:border-neutral-400"
                     }`}
                   >
                     {perk ? (
@@ -160,6 +209,11 @@ export default function EditBuildPortal({
                           alt={perk.name}
                           className="w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
                         />
+                        {alts[i].length > 0 && (
+                          <span className="absolute bottom-0 left-0 bg-blue-500 text-white text-xs rounded-br-lg rounded-tl-lg px-1">
+                            {alts[i].length}
+                          </span>
+                        )}
                         <Button
                           onClick={(e) => handlePerkDeletion(i, e)}
                           color="otz"
@@ -178,6 +232,39 @@ export default function EditBuildPortal({
                   </div>
                 ))}
               </div>
+
+              {/* Alts Panel */}
+              {altPanelSlot !== null && slots[altPanelSlot] && (
+                <div className="flex flex-col gap-2 bg-neutral-800 rounded-lg p-4 border border-blue-500/50">
+                  <p className="text-xs text-blue-400 uppercase tracking-widest">
+                    Alts for{" "}
+                    <span className="text-white">
+                      {slots[altPanelSlot]?.name}
+                    </span>{" "}
+                    — pick from browser
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {alts[altPanelSlot].length === 0 && (
+                      <p className="text-neutral-500 text-sm">No alts yet</p>
+                    )}
+                    {alts[altPanelSlot].map((alt, j) => (
+                      <div key={alt.name + j} className="relative">
+                        <img
+                          src={alt.iconUrl}
+                          alt={alt.name}
+                          className="h-12 w-12 object-cover rounded-lg"
+                        />
+                        <button
+                          onClick={() => handleAltDeletion(altPanelSlot, j)}
+                          className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">
@@ -205,10 +292,15 @@ export default function EditBuildPortal({
             </div>
           </div>
 
+          {/* ── RIGHT ── */}
           <div className="flex flex-col w-1/2 gap-4 overflow-hidden">
             <div className="flex flex-col flex-1 bg-neutral-800 rounded-lg border border-white/10 overflow-hidden">
               <div className="flex flex-col gap-2 p-4 border-b border-white/10">
-                <h2 className="font-bold text-lg text-white">Perk Browser</h2>
+                <h2 className="font-bold text-lg text-white">
+                  {altPanelSlot !== null
+                    ? `Adding alts for ${slots[altPanelSlot]?.name}`
+                    : "Perk Browser"}
+                </h2>
                 <div className="relative">
                   <svg
                     className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4"
