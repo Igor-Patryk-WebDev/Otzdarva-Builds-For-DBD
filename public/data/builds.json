@@ -212,53 +212,6 @@
                         "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
                         "Use this as a starting point!"
                     ]
-                },
-                {
-                    "name": "testALT",
-                    "perks": [
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": [
-                                {
-                                    "name": "Coulrophobia"
-                                },
-                                {
-                                    "name": "Coup de Grâce"
-                                },
-                                {
-                                    "name": "Cruel Limits"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": [
-                                {
-                                    "name": "Corrupt Intervention"
-                                },
-                                {
-                                    "name": "Coulrophobia"
-                                },
-                                {
-                                    "name": "Coup de Grâce"
-                                }
-                            ]
-                        },
-                        {
-                            "name": "Alien Instinct",
-                            "alts": []
-                        },
-                        {
-                            "name": "Awakened Awareness",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "alt",
-                        "alternatywka",
-                        "altka",
-                        "eszkere"
-                    ]
                 }
             ]
         },

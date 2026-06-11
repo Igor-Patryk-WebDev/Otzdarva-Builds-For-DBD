@@ -54,7 +54,7 @@ const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
         <h3 className='text-2xl font-bold border-b-2 py-2'>{perk.name}</h3>
         <p className='text-md font-extralight italic py-2'>{perk.obtainment}</p>
       </div>
-      <div className='bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-sm' dangerouslySetInnerHTML={{ __html: perk.description }} />
+      <div className='bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-sm' dangerouslySetInnerHTML={{ __html: perk.description ?? "" }} />
     </div>
   )
 }

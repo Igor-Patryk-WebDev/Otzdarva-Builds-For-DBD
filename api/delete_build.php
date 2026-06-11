@@ -6,6 +6,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+session_start();
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    http_response_code(401);
+    exit(json_encode(['error' => 'Unauthorized']));
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
@@ -21,19 +27,25 @@ if (!$body || !isset($body['characterName'], $body['buildName'])) {
 }
 
 $filePath = __DIR__ . '/../public/data/builds.json';
+if (!file_exists($filePath)) {
+    $filePath = __DIR__ . '/../data/builds.json';
+}
 $data = json_decode(file_get_contents($filePath), true);
 
 $found = false;
-foreach ($data['killers'] as &$killer) {
-    if ($killer['name'] === $body['characterName']) {
-        foreach ($killer['builds'] as $index => $build) {
-            if ($build['name'] === $body['buildName']) {
-                array_splice($killer['builds'], $index, 1);
-                $found = true;
-                break;
+foreach (['killers', 'survivors'] as $role) {
+    if (isset($data[$role])) {
+        foreach ($data[$role] as &$char) {
+            if ($char['name'] === $body['characterName']) {
+                foreach ($char['builds'] as $index => $build) {
+                    if ($build['name'] === $body['buildName']) {
+                        array_splice($char['builds'], $index, 1);
+                        $found = true;
+                        break 2;
+                    }
+                }
             }
         }
-        break;
     }
 }
 

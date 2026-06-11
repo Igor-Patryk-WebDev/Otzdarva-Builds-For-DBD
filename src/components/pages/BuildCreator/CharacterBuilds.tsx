@@ -1,5 +1,4 @@
 import type { ProfileData } from "@appTypes/Profiles";
-import { Button } from "@components/shared/Button";
 import EditBuildPortalButton from "./Portals/EditBuildPortalButton";
 import DeleteBuildPortalButton from "./Portals/DeleteBuildPortalButton";
 

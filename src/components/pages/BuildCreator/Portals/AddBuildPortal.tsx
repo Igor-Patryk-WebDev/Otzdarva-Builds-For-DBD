@@ -24,6 +24,7 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
   const [alts, setAlts] = useState<Perk[][]>([[], [], [], []]);
   const [buildName, setBuildName] = useState("");
   const [notes, setNotes] = useState(["", "", "", ""]);
+  const [error, setError] = useState<string | null>(null);
 
   const filtered = scrape.killers.perks.filter((perk) =>
     perk.name.toLowerCase().includes(perkQuery.toLowerCase()),
@@ -39,8 +40,33 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
     }
   };
 
+  const isAlreadyUsed = (
+    perk: Perk,
+    currentSlot: number | null,
+    isAlt: boolean,
+  ) => {
+    if (isAlt && currentSlot !== null) {
+      if (slots[currentSlot]?.name === perk.name) return true;
+      if (alts[currentSlot].some((a) => a.name === perk.name)) return true;
+      return false;
+    }
+
+    const usedInMainSlots = slots.some(
+      (s, i) => s?.name === perk.name && i !== currentSlot,
+    );
+    if (usedInMainSlots) return true;
+
+    const usedInAlts = alts.some((altGroup) =>
+      altGroup.some((a) => a.name === perk.name),
+    );
+    if (usedInAlts) return true;
+
+    return false;
+  };
+
   const handlePerkSelect = (perk: Perk) => {
     if (altPanelSlot !== null) {
+      if (isAlreadyUsed(perk, altPanelSlot, true)) return;
       setAlts((prev) => {
         const updated = [...prev];
         updated[altPanelSlot] = [...updated[altPanelSlot], perk];
@@ -49,6 +75,7 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
       return;
     }
     if (selectedSlot === null) return;
+    if (isAlreadyUsed(perk, selectedSlot, false)) return;
     setSlots((prev) => {
       const updated = [...prev];
       updated[selectedSlot] = perk;
@@ -81,6 +108,29 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
   };
 
   const handleSave = async () => {
+    if (!buildName.trim()) {
+      setError("Build name cannot be empty");
+      return;
+    }
+
+    // Check if a build with this name already exists for this character
+    const buildsData = queryClient.getQueryData<BuildsData>(["builds"]);
+    if (buildsData) {
+      const allProfiles = [...(buildsData.killers ?? []), ...(buildsData.survivors ?? [])];
+      const charProfile = allProfiles.find((p) => p.name === character.name);
+      if (charProfile && charProfile.builds) {
+        const nameExists = charProfile.builds.some(
+          (b) => b.name.trim().toLowerCase() === buildName.trim().toLowerCase()
+        );
+        if (nameExists) {
+          setError(`A build named "${buildName.trim()}" already exists for ${character.name}.`);
+          return;
+        }
+      }
+    }
+
+    setError(null);
+
     const payload = {
       characterName: character.name,
       buildName,
@@ -100,7 +150,8 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
     if (data.success) {
       queryClient.setQueryData<BuildsData>(["builds"], (old) => {
         if (!old) return old;
-        const killers = old.killers.map((k) => {
+        const roleKey = character.role;
+        const updatedList = old[roleKey].map((k) => {
           if (k.name !== character.name) return k;
           return {
             ...k,
@@ -117,9 +168,11 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
             ],
           };
         });
-        return { ...old, killers };
+        return { ...old, [roleKey]: updatedList };
       });
       onClose();
+    } else if (data.error) {
+      setError(data.error);
     }
   };
 
@@ -294,20 +347,27 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
               </div>
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="grid grid-cols-5 gap-2">
-                  {filtered.map((perk) => (
-                    <div
-                      key={perk.name}
-                      onClick={() => handlePerkSelect(perk)}
-                      className="aspect-square"
-                    >
-                      <img
-                        src={perk.iconUrl}
-                        alt={perk.name}
-                        className="w-full h-full object-cover rounded-lg cursor-pointer hover:ring-1 hover:ring-otz hover:bg-neutral-700 transition"
-                      />
-                      <p className="text-center">{perk.name}</p>
-                    </div>
-                  ))}
+                  {filtered.map((perk) => {
+                    const used = isAlreadyUsed(
+                      perk,
+                      altPanelSlot ?? selectedSlot,
+                      altPanelSlot !== null,
+                    );
+                    return (
+                      <div
+                        key={perk.name}
+                        onClick={() => handlePerkSelect(perk)}
+                        className={`aspect-square ${used ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
+                      >
+                        <img
+                          src={perk.iconUrl}
+                          alt={perk.name}
+                          className="w-full h-full object-cover rounded-lg hover:ring-1 hover:ring-otz hover:bg-neutral-700 transition"
+                        />
+                        <p className="text-center">{perk.name}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -323,6 +383,9 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
           </div>
         </div>
 
+        {error && (
+          <p className="text-red-500 text-sm font-semibold max-w-64">{error}</p>
+        )}
         <Button
           type="button"
           color="otz"

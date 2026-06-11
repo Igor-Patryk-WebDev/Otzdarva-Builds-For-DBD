@@ -7,16 +7,29 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit(json_encode(['error' => 'Method not allowed']));
 }
 
-$env = parse_ini_file(__DIR__ . '/../.env');
+$envPath = __DIR__ . '/../.env';
+if (!file_exists($envPath)) $envPath = __DIR__ . '/../.ENV';
+$env = parse_ini_file($envPath);
+
+if (!$env) {
+    http_response_code(500);
+    exit(json_encode(['error' => 'Server config error']));
+}
+
 $data = json_decode(file_get_contents('php://input'), true);
 $username = $data['username'] ?? '';
 $password = $data['password'] ?? '';
 
-$pdo = new PDO(
-    'mysql:host=' . $env['DB_HOST'] . ';dbname=' . $env['DB_NAME'] . ';charset=utf8mb4',
-    $env['DB_USER'],
-    $env['DB_PASS']
-);
+try {
+    $pdo = new PDO(
+        'mysql:host=' . $env['DB_HOST'] . ';dbname=' . $env['DB_NAME'] . ';charset=utf8mb4',
+        $env['DB_USER'],
+        $env['DB_PASS']
+    );
+} catch (PDOException $e) {
+    http_response_code(500);
+    exit(json_encode(['error' => 'Database connection failed']));
+}
 
 $stmt = $pdo->prepare('SELECT * FROM `user-data` WHERE username = ? LIMIT 1');
 $stmt->execute([$username]);

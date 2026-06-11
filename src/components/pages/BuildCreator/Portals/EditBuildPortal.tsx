@@ -24,6 +24,7 @@ export default function EditBuildPortal({
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [altPanelSlot, setAltPanelSlot] = useState<number | null>(null);
   const [buildName, setBuildName] = useState(build.name);
+  const [error, setError] = useState<string | null>(null);
 
   const [slots, setSlots] = useState<(Perk | null)[]>(() =>
     build.perks.map(
@@ -107,6 +108,31 @@ export default function EditBuildPortal({
   };
 
   const handleSave = async () => {
+    if (!buildName.trim()) {
+      setError("Build name cannot be empty");
+      return;
+    }
+
+    // Check if a build with this name already exists for this character (excluding the current build name itself)
+    if (buildName.trim().toLowerCase() !== build.name.trim().toLowerCase()) {
+      const buildsData = queryClient.getQueryData<BuildsData>(["builds"]);
+      if (buildsData) {
+        const allProfiles = [...(buildsData.killers ?? []), ...(buildsData.survivors ?? [])];
+        const charProfile = allProfiles.find((p) => p.name === character.name);
+        if (charProfile && charProfile.builds) {
+          const nameExists = charProfile.builds.some(
+            (b) => b.name.trim().toLowerCase() === buildName.trim().toLowerCase()
+          );
+          if (nameExists) {
+            setError(`A build named "${buildName.trim()}" already exists for ${character.name}.`);
+            return;
+          }
+        }
+      }
+    }
+
+    setError(null);
+
     const payload = {
       characterName: character.name,
       oldBuildName: build.name,
@@ -128,7 +154,8 @@ export default function EditBuildPortal({
     if (data.success) {
       queryClient.setQueryData<BuildsData>(["builds"], (old) => {
         if (!old) return old;
-        const killers = old.killers.map((k) => {
+        const roleKey = character.role;
+        const updatedList = old[roleKey].map((k) => {
           if (k.name !== character.name) return k;
           return {
             ...k,
@@ -146,9 +173,11 @@ export default function EditBuildPortal({
             ),
           };
         });
-        return { ...old, killers };
+        return { ...old, [roleKey]: updatedList };
       });
       onClose();
+    } else if (data.error) {
+      setError(data.error);
     }
   };
 
@@ -356,6 +385,9 @@ export default function EditBuildPortal({
           </div>
         </div>
 
+        {error && (
+          <p className="text-red-500 text-sm font-semibold max-w-64">{error}</p>
+        )}
         <Button
           type="button"
           color="otz"

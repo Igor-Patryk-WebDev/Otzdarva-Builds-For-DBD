@@ -6,6 +6,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+session_start();
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    http_response_code(401);
+    exit(json_encode(['error' => 'Unauthorized']));
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed']);
@@ -21,24 +27,51 @@ if (!$body || !isset($body['characterName'], $body['oldBuildName'], $body['build
 }
 
 $filePath = __DIR__ . '/../public/data/builds.json';
+if (!file_exists($filePath)) {
+    $filePath = __DIR__ . '/../data/builds.json';
+}
 $data = json_decode(file_get_contents($filePath), true);
 
-$found = false;
-foreach ($data['killers'] as &$killer) {
-    if ($killer['name'] === $body['characterName']) {
-        foreach ($killer['builds'] as &$build) {
-            if ($build['name'] === $body['oldBuildName']) {
-                $build['name'] = $body['buildName'];
-                $build['perks'] = array_map(fn($perk) => [
-                    'name' => $perk['name'],
-                    'alts' => array_map(fn($alt) => ['name' => $alt['name']], $perk['alts'] ?? []),
-                ], $body['perks']);
-                $build['notes'] = $body['notes'];
-                $found = true;
-                break;
+// Check for duplicate name for this character (excluding the current build being updated)
+$buildNameClean = strtolower(trim($body['buildName']));
+$oldBuildNameClean = strtolower(trim($body['oldBuildName']));
+
+if ($buildNameClean !== $oldBuildNameClean) {
+    foreach (['killers', 'survivors'] as $role) {
+        if (isset($data[$role])) {
+            foreach ($data[$role] as $char) {
+                if ($char['name'] === $body['characterName'] && isset($char['builds'])) {
+                    foreach ($char['builds'] as $b) {
+                        if (strtolower(trim($b['name'])) === $buildNameClean) {
+                            http_response_code(400);
+                            exit(json_encode(['error' => "A build named '{$body['buildName']}' already exists for {$body['characterName']}."]));
+                        }
+                    }
+                }
             }
         }
-        break;
+    }
+}
+
+$found = false;
+foreach (['killers', 'survivors'] as $role) {
+    if (isset($data[$role])) {
+        foreach ($data[$role] as &$char) {
+            if ($char['name'] === $body['characterName']) {
+                foreach ($char['builds'] as &$build) {
+                    if ($build['name'] === $body['oldBuildName']) {
+                        $build['name'] = $body['buildName'];
+                        $build['perks'] = array_map(fn($perk) => [
+                            'name' => $perk['name'],
+                            'alts' => array_map(fn($alt) => ['name' => $alt['name']], $perk['alts'] ?? []),
+                        ], $body['perks']);
+                        $build['notes'] = $body['notes'];
+                        $found = true;
+                        break 2;
+                    }
+                }
+            }
+        }
     }
 }
 

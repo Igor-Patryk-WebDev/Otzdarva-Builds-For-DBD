@@ -5,10 +5,10 @@ import { useProfiles } from "@contexts/AppDataContext";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/buildCreator")({
-  // beforeLoad: async () => {
-  //   const res = await fetch("/api/session.php");
-  //   if (!res.ok) throw redirect({ to: "/login" });
-  // },
+  beforeLoad: async () => {
+    const res = await fetch("/api/session.php");
+    if (!res.ok) throw redirect({ to: "/login" });
+  },
   component: RouteComponent,
 });
 
