@@ -16,8 +16,8 @@ export const ProfilesWrapper = ({ role, searchQuery = '' }: ProfilesWrapperProps
 
   const filteredProfiles = searchQuery.trim()
     ? roleProfiles.filter((profile) =>
-        profile.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
-      )
+      profile.name.toLowerCase().includes(searchQuery.toLowerCase().trim())
+    )
     : roleProfiles;
 
   return (

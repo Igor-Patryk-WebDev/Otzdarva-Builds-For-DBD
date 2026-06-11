@@ -1,22 +1,83 @@
-import type { ProfilePerk } from "@appTypes/Profiles";
+import type { ProfileAlt, ProfilePerk } from "@appTypes/Profiles";
+import { useState, type ComponentPropsWithoutRef } from "react";
 
 interface BuildPerksBlockProps {
   perks: ProfilePerk[];
 }
 
+const Perk = ({ perk }: { perk: Omit<ProfilePerk, "alts"> }) => {
+  const [pinned, setPinned] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [detailsHovered, setDetailsHovered] = useState(false);
+
+  const visible = pinned && (hovered || detailsHovered);
+
+  return (
+    <div className={`relative group/perk hover:[anchor-name:--perk] max-h-24.5 aspect-square ${!visible && "cursor-pointer"}`}
+      onClick={() => setPinned(true)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => { setHovered(false); if (!detailsHovered) setPinned(false); }}
+    >
+      <img className='bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%]' src={perk.iconUrl} alt={perk.name + " perk icon"} />
+      <PerkDetails
+        perk={perk}
+        visible={visible}
+        onMouseEnter={() => setDetailsHovered(true)}
+        onMouseLeave={() => { setDetailsHovered(false); setPinned(false); }}
+      />
+    </div>
+  )
+}
+
+type PerkDetailsProps = ComponentPropsWithoutRef<"div"> & {
+  perk: Omit<ProfilePerk, "alts">
+  visible: boolean
+}
+
+const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
+  return (
+    <div
+      className={`fixed shadow-2xl shadow-black z-10000 w-150 bg-black ${visible ? "block" : "hidden"}`}
+      style={{
+        positionAnchor: '--perk',
+        left: 'anchor(right)',
+        top: 'anchor(top)',
+        positionTryFallbacks: '--top-right, --bottom-right, --top-left, --bottom-left'
+      }}
+      {...rest}
+    >
+      <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killer-filter before:-z-1'>
+        <h3 className='text-2xl font-bold border-b-2 py-2'>{perk.name}</h3>
+        <p className='text-md font-extralight italic py-2'>{perk.obtainment}</p>
+      </div>
+      <div className='bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-sm' dangerouslySetInnerHTML={{ __html: perk.description }} />
+    </div>
+  )
+}
+
+const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
+  return (
+    <div className='absolute hidden group-hover/showAlts:block top-full shadow-md shadow-black pb-4 rounded-bl-lg rounded-br-lg z-4 bg-neutral-900 border border-t-0 border-neutral-800'>
+      {alts.map((alt) => {
+        return (
+          <Perk perk={alt} />
+        )
+      })}
+    </div>
+  )
+}
+
 const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
   return (
-    <div className='grid grid-cols-[minmax(0,120px)]'>
-      <div className='group/perk hover:[anchor-name:--perk]'>
-        <img className='cursor-pointer bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%]' src={perk.iconUrl} alt={perk.name + " perk icon"} />
-        <div className='fixed shadow-2xl shadow-black z-10000 min-w-100 max-w-150 hidden group-hover/perk:block bg-black' style={{ positionAnchor: '--perk', left: 'anchor(left)', top: 'anchor(bottom)' }}>
-          <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killer-filter before:-z-1'>
-            <h3 className='text-2xl font-bold border-b-2 py-2'>{perk.name}</h3>
-            <p className='text-md font-extralight italic py-2'>{perk.obtainment}</p>
-          </div>
-          <div className='bg-neutral-900 border-2 border-t-0 border-neutral-800 p-4 text-sm' dangerouslySetInnerHTML={{ __html: perk.description }} />
-        </div>
-      </div>
+    <div className='relative grid grid-cols-[minmax(0,98px)] group/showAlts'>
+      <Perk perk={perk} />
+      {
+        perk.alts.length > 0 &&
+        <>
+          <p className="absolute text-sm text-center rounded-sm rotate-3 pointer-events-none top-0 right-0 bg-otz aspect-square w-5 group-hover/showAlts:hidden">{`+${perk.alts.length}`}</p>
+          <AltsBlock alts={perk.alts} />
+        </>
+      }
     </div>
   )
 }

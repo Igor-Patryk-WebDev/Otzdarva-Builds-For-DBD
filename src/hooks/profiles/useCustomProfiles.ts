@@ -32,6 +32,8 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
             alts: perk.alts.map((alt) => ({
               name: alt.name,
               iconUrl: findPerk(alt.name) ?? undefined,
+              description: scrape[lowercaseRole]?.perks.find((p) => p.name === alt.name)?.description,
+              obtainment: scrape[lowercaseRole]?.perks.find((p) => p.name === alt.name)?.obtainment,
             }))
           })),
           notes: build.notes

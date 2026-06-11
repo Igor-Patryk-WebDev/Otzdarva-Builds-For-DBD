@@ -4,6 +4,8 @@ import type { RoleProfile } from "./Scrape";
 
 export interface ProfileAlt extends Alt {
   iconUrl: string | undefined;
+  description: string | undefined;
+  obtainment: string | undefined;
 }
 
 export interface ProfilePerk extends Omit<Perk, "alts"> {

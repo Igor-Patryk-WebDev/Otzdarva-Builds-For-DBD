@@ -1,0 +1,27 @@
+@position-try --top-right {
+  top: anchor(top);
+  bottom: unset;
+  left: anchor(right);
+  right: unset;
+}
+
+@position-try --bottom-right {
+  top: unset;
+  bottom: anchor(bottom);
+  left: anchor(right);
+  right: unset;
+}
+
+@position-try --top-left {
+  top: anchor(top);
+  bottom: unset;
+  left: unset;
+  right: anchor(left);
+}
+
+@position-try --bottom-left {
+  top: unset;
+  bottom: anchor(bottom);
+  left: unset;
+  right: anchor(left);
+}

@@ -27,7 +27,7 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   const buildsCount = builds?.length ?? 0
 
   return (
-    <div className='relative grid grid-cols-subgrid col-span-2 even:col-start-4'>
+    <div className='relative grid grid-cols-subgrid col-span-2 2xl:even:col-start-4'>
       <ProfileHeader name={name} buildsCount={buildsCount} onClick={() => {
         !portalState && setPortalContent(<BuildsList builds={builds} />);
         !portalState && openPortal();
