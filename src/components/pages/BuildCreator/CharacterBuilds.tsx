@@ -1,5 +1,6 @@
 import type { ProfileData } from "@appTypes/Profiles";
 import { Button } from "@components/shared/Button";
+import EditBuildPortalButton from "./Portals/EditBuildPortalButton";
 
 interface Props {
   character: ProfileData;
@@ -18,7 +19,7 @@ export function CharacterBuilds({ character }: Props) {
               <div className="flex">
                 <Button color="otz">Delete</Button>
                 <h3 className="text-4xl flex-1 mx-4">{build.name}</h3>
-                <Button color="otz">Edit</Button>
+                <EditBuildPortalButton build={build} character={character} />
               </div>
               <div className="flex gap-2">
                 {build.perks.map((perk) => (

@@ -8,37 +8,19 @@
                     "perks": [
                         {
                             "name": "Sloppy Butcher",
-                            "alts": [
-                                {
-                                    "name": "Scourge Hook: Gift of Pain"
-                                },
-                                {
-                                    "name": "Brutal Strength"
-                                }
-                            ]
+                            "alts": []
                         },
                         {
-                            "name": "",
+                            "name": "Agitation",
                             "alts": []
                         },
                         {
                             "name": "Hex: Plaything",
-                            "alts": [
-                                {
-                                    "name": "Tinkerer"
-                                },
-                                {
-                                    "name": "A Nurse's Calling"
-                                }
-                            ]
+                            "alts": []
                         },
                         {
                             "name": "Hex: No One Escapes Death",
-                            "alts": [
-                                {
-                                    "name": "Enduring"
-                                }
-                            ]
+                            "alts": []
                         }
                     ],
                     "notes": [
@@ -312,86 +294,14 @@
             "name": "The Hillbilly",
             "builds": [
                 {
-                    "name": "ewsdas",
+                    "name": "Test Build",
                     "perks": [
                         {
-                            "name": "Bamboozle",
+                            "name": "A Nurse's Calling",
                             "alts": []
                         },
                         {
-                            "name": "Batteries Included",
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dsa",
-                        "dsa",
-                        "dsa",
-                        "dasdsadas"
-                    ]
-                },
-                {
-                    "name": "tetetetetete",
-                    "perks": [
-                        {
-                            "name": "Bamboozle",
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "1",
-                        "2",
-                        "3",
-                        "4"
-                    ]
-                },
-                {
-                    "name": "",
-                    "perks": [
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        }
-                    ],
-                    "notes": []
-                },
-                {
-                    "name": "TEEEEST",
-                    "perks": [
-                        {
-                            "name": "Barbecue & Chilli",
+                            "name": "Agitation",
                             "alts": []
                         },
                         {
@@ -399,181 +309,15 @@
                             "alts": []
                         },
                         {
-                            "name": "Agitation",
-                            "alts": []
-                        },
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dla",
-                        "dsad",
-                        "dsadas",
-                        "dsadasdasd"
-                    ]
-                },
-                {
-                    "name": "WindowRefreshTEst",
-                    "perks": [
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        },
-                        {
-                            "name": null,
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dsa",
-                        "dsa",
-                        "dsa",
-                        "dla"
-                    ]
-                },
-                {
-                    "name": "dla",
-                    "perks": [
-                        {
                             "name": "Bamboozle",
                             "alts": []
-                        },
-                        {
-                            "name": "Alien Instinct",
-                            "alts": []
-                        },
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
                         }
                     ],
                     "notes": [
-                        "dasdsa",
-                        "dasdsa",
-                        "dasdasd",
-                        "asdasdas"
-                    ]
-                },
-                {
-                    "name": "dasdas",
-                    "perks": [
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
-                        },
-                        {
-                            "name": "All-Shaking Thunder",
-                            "alts": []
-                        },
-                        {
-                            "name": "Barbecue & Chilli",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dsadsa",
-                        "asd",
-                        "dsad",
-                        "dąs"
-                    ]
-                },
-                {
-                    "name": "dla",
-                    "perks": [
-                        {
-                            "name": "Barbecue & Chilli",
-                            "alts": []
-                        },
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": []
-                        },
-                        {
-                            "name": "Awakened Awareness",
-                            "alts": []
-                        },
-                        {
-                            "name": "Batteries Included",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dsa",
-                        "dsa",
-                        "dsa",
-                        "dsa"
-                    ]
-                },
-                {
-                    "name": "dsadsa",
-                    "perks": [
-                        {
-                            "name": "Barbecue & Chilli",
-                            "alts": []
-                        },
-                        {
-                            "name": "Batteries Included",
-                            "alts": []
-                        },
-                        {
-                            "name": "Bamboozle",
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dasdasd",
-                        "dsadsada",
-                        "sdasdasd",
-                        "dasdasd"
-                    ]
-                },
-                {
-                    "name": "osad",
-                    "perks": [
-                        {
-                            "name": "Batteries Included",
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
-                        },
-                        {
-                            "name": "Bamboozle",
-                            "alts": []
-                        },
-                        {
-                            "name": "Brutal Strength",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "dsa",
-                        "dla",
-                        "d",
-                        "d"
+                        "NOTE1",
+                        "NOTE2",
+                        "NOTE3",
+                        "NOTE4"
                     ]
                 }
             ]
