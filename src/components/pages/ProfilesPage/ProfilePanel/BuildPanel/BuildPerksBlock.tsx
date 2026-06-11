@@ -13,12 +13,16 @@ const Perk = ({ perk }: { perk: Omit<ProfilePerk, "alts"> }) => {
   const visible = pinned && (hovered || detailsHovered);
 
   return (
-    <div className={`relative group/perk hover:[anchor-name:--perk] max-h-24.5 aspect-square ${!visible && "cursor-pointer"}`}
+    <div className={`relative group/perk max-h-24.5 aspect-square ${!visible && "cursor-pointer"}`}
+      style={{
+        anchorName: "--perk",
+        anchorScope: "--perk"
+      }}
       onClick={() => setPinned(true)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); if (!detailsHovered) setPinned(false); }}
     >
-      <img className='bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%]' src={perk.iconUrl} alt={perk.name + " perk icon"} />
+      <img className={`bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%] hover:drop-shadow hover:drop-shadow-otz ${visible && "drop-shadow drop-shadow-otz"}`} src={perk.iconUrl} alt={perk.name + " perk icon"} />
       <PerkDetails
         perk={perk}
         visible={visible}
