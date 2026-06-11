@@ -1,6 +1,7 @@
 import type { ProfileData } from "@appTypes/Profiles";
 import { Button } from "@components/shared/Button";
 import EditBuildPortalButton from "./Portals/EditBuildPortalButton";
+import DeleteBuildPortalButton from "./Portals/DeleteBuildPortalButton";
 
 interface Props {
   character: ProfileData;
@@ -17,7 +18,7 @@ export function CharacterBuilds({ character }: Props) {
               className="flex flex-col max-w-1/3 center p-4"
             >
               <div className="flex">
-                <Button color="otz">Delete</Button>
+                <DeleteBuildPortalButton character={character} build={build} />
                 <h3 className="text-4xl flex-1 mx-4">{build.name}</h3>
                 <EditBuildPortalButton build={build} character={character} />
               </div>

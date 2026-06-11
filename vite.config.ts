@@ -20,6 +20,9 @@ export default defineConfig({
     },
   },
   server: {
+    watch: {
+      ignored: ["**/.env", "**/.env**"],
+    },
     proxy: {
       "/api": {
         target: "http://localhost:8000",

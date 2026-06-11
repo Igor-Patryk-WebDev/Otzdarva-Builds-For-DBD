@@ -188,18 +188,11 @@
                     ]
                 },
                 {
-                    "name": "CWL BILD",
+                    "name": "RealBuild",
                     "perks": [
                         {
                             "name": "Sloppy Butcher",
-                            "alts": [
-                                {
-                                    "name": "Scourge Hook: Gift of Pain"
-                                },
-                                {
-                                    "name": "Brutal Strength"
-                                }
-                            ]
+                            "alts": []
                         },
                         {
                             "name": "No Holds Barred",
@@ -207,28 +200,64 @@
                         },
                         {
                             "name": "Hex: Plaything",
-                            "alts": [
-                                {
-                                    "name": "Tinkerer"
-                                },
-                                {
-                                    "name": "A Nurse's Calling"
-                                }
-                            ]
+                            "alts": []
                         },
                         {
                             "name": "Hex: No One Escapes Death",
-                            "alts": [
-                                {
-                                    "name": "Enduring"
-                                }
-                            ]
+                            "alts": []
                         }
                     ],
                     "notes": [
                         "Best used on \"M1\" Killers (who mostly down with their basic attack and move at the usual 4.6m\/s speed), like Trapper or Wraith.",
                         "Uses only common perks available to all Killers (with some alternatives from the 5 free ones).",
                         "Use this as a starting point!"
+                    ]
+                },
+                {
+                    "name": "testALT",
+                    "perks": [
+                        {
+                            "name": "A Nurse's Calling",
+                            "alts": [
+                                {
+                                    "name": "Coulrophobia"
+                                },
+                                {
+                                    "name": "Coup de Grâce"
+                                },
+                                {
+                                    "name": "Cruel Limits"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Agitation",
+                            "alts": [
+                                {
+                                    "name": "Corrupt Intervention"
+                                },
+                                {
+                                    "name": "Coulrophobia"
+                                },
+                                {
+                                    "name": "Coup de Grâce"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Alien Instinct",
+                            "alts": []
+                        },
+                        {
+                            "name": "Awakened Awareness",
+                            "alts": []
+                        }
+                    ],
+                    "notes": [
+                        "alt",
+                        "alternatywka",
+                        "altka",
+                        "eszkere"
                     ]
                 }
             ]
@@ -323,35 +352,7 @@
         },
         {
             "name": "The Hillbilly",
-            "builds": [
-                {
-                    "name": "Test Build",
-                    "perks": [
-                        {
-                            "name": "A Nurse's Calling",
-                            "alts": []
-                        },
-                        {
-                            "name": "Agitation",
-                            "alts": []
-                        },
-                        {
-                            "name": "Alien Instinct",
-                            "alts": []
-                        },
-                        {
-                            "name": "Bamboozle",
-                            "alts": []
-                        }
-                    ],
-                    "notes": [
-                        "NOTE1",
-                        "NOTE2",
-                        "NOTE3",
-                        "NOTE4"
-                    ]
-                }
-            ]
+            "builds": []
         }
     ],
     "survivors": [

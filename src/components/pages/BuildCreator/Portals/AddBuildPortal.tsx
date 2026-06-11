@@ -4,6 +4,7 @@ import { Button } from "@components/shared/Button";
 import { useScrape } from "@contexts/AppDataContext";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import type { BuildsData } from "@appTypes/Builds";
 
 type PortalProps = {
   onClose: () => void;
@@ -14,39 +15,67 @@ const EMPTY_SLOTS = [null, null, null, null];
 
 export default function AddBuildPortal({ onClose, character }: PortalProps) {
   const scrape = useScrape();
+  const queryClient = useQueryClient();
+
   const [perkQuery, setPerkQuery] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+  const [altPanelSlot, setAltPanelSlot] = useState<number | null>(null);
+  const [slots, setSlots] = useState<(Perk | null)[]>(EMPTY_SLOTS);
+  const [alts, setAlts] = useState<Perk[][]>([[], [], [], []]);
+  const [buildName, setBuildName] = useState("");
+  const [notes, setNotes] = useState(["", "", "", ""]);
+
   const filtered = scrape.killers.perks.filter((perk) =>
     perk.name.toLowerCase().includes(perkQuery.toLowerCase()),
   );
-  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
-
-  const [slots, setSlots] = useState<Perk[] | null>(EMPTY_SLOTS);
-
-  const [buildName, setBuildName] = useState("");
-
-  const [notes, setNotes] = useState(["", "", "", ""]);
 
   const handleSelect = (index: number) => {
-    selectedSlot === index ? setSelectedSlot(null) : setSelectedSlot(index);
+    if (slots[index]) {
+      setAltPanelSlot(altPanelSlot === index ? null : index);
+      setSelectedSlot(null);
+    } else {
+      setSelectedSlot(selectedSlot === index ? null : index);
+      setAltPanelSlot(null);
+    }
   };
 
   const handlePerkSelect = (perk: Perk) => {
+    if (altPanelSlot !== null) {
+      setAlts((prev) => {
+        const updated = [...prev];
+        updated[altPanelSlot] = [...updated[altPanelSlot], perk];
+        return updated;
+      });
+      return;
+    }
     if (selectedSlot === null) return;
-
     setSlots((prev) => {
       const updated = [...prev];
       updated[selectedSlot] = perk;
       return updated;
     });
-
     setSelectedSlot(null);
   };
 
   const handlePerkDeletion = (index: number, e: React.MouseEvent) => {
-    e.stopPropagation(); // onClick nie schodzi glebiej na rodzica tylko zostaje w tym mini buttonie
+    e.stopPropagation();
     setSlots((prev) => {
       const updated = [...prev];
       updated[index] = null;
+      return updated;
+    });
+    setAlts((prev) => {
+      const updated = [...prev];
+      updated[index] = [];
+      return updated;
+    });
+    if (altPanelSlot === index) setAltPanelSlot(null);
+  };
+
+  const handleAltDeletion = (slotIndex: number, altIndex: number) => {
+    setAlts((prev) => {
+      const updated = [...prev];
+      updated[slotIndex] = updated[slotIndex].filter((_, i) => i !== altIndex);
       return updated;
     });
   };
@@ -55,7 +84,10 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
     const payload = {
       characterName: character.name,
       buildName,
-      perks: slots.map((perk) => perk?.name ?? undefined),
+      perks: slots.map((perk, i) => ({
+        name: perk?.name ?? "",
+        alts: alts[i].map((alt) => ({ name: alt.name })),
+      })),
       notes: notes.filter((n) => n.trim() !== ""),
     };
 
@@ -66,16 +98,34 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
     });
     const data = await res.json();
     if (data.success) {
-      await queryClient.invalidateQueries({ queryKey: ["builds"] });
+      queryClient.setQueryData<BuildsData>(["builds"], (old) => {
+        if (!old) return old;
+        const killers = old.killers.map((k) => {
+          if (k.name !== character.name) return k;
+          return {
+            ...k,
+            builds: [
+              ...(k.builds ?? []),
+              {
+                name: buildName,
+                perks: slots.map((perk, i) => ({
+                  name: perk?.name ?? "",
+                  alts: alts[i].map((alt) => ({ name: alt.name })),
+                })),
+                notes: notes.filter((n) => n.trim() !== ""),
+              },
+            ],
+          };
+        });
+        return { ...old, killers };
+      });
       onClose();
     }
   };
 
-  const queryClient = useQueryClient();
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="relative bg-neutral-900 w-[calc(100%-4rem)] h-[calc(100%-4rem)] p-6 rounded-xl flex flex-col gap-4 border border-white/10">
-        {/* Close button */}
         <Button
           onClick={onClose}
           color="otz"
@@ -84,18 +134,14 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
           X
         </Button>
 
-        {/* Main 50/50 split */}
         <div className="flex flex-1 gap-4 overflow-hidden">
-          {/* ── LEFT: Edit Panel ── */}
           <div className="flex flex-col gap-4 w-1/2 overflow-y-auto pr-2">
-            {/* Character Name */}
             <div className="flex items-center justify-center bg-neutral-800 rounded-lg p-4 border border-white/10">
               <h2 className="font-bold text-3xl text-white text-center">
                 {character.name}
               </h2>
             </div>
 
-            {/* Build Name Input */}
             <div className="flex flex-col gap-1">
               <label className="text-xs text-neutral-400 uppercase tracking-widest pl-1">
                 Build Name
@@ -108,7 +154,6 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
               />
             </div>
 
-            {/* Perks */}
             <div className="flex flex-col gap-1">
               <label className="text-xs text-neutral-400 uppercase tracking-widest pl-1">
                 Perks
@@ -118,13 +163,13 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                   <div
                     key={i}
                     onClick={() => handleSelect(i)}
-                    className={`flex-1 aspect-square relative
-                      ${
-                        selectedSlot === i
+                    className={`flex-1 aspect-square relative ${
+                      altPanelSlot === i
+                        ? "ring-2 ring-blue-500 rounded-lg"
+                        : selectedSlot === i
                           ? "border-otz bg-neutral-600 transition-colors rounded-lg"
                           : "border-neutral-600 hover:border-neutral-400"
-                      }
-                      `}
+                    }`}
                   >
                     {perk ? (
                       <>
@@ -133,10 +178,15 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                           alt={perk.name}
                           className="w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
                         />
+                        {alts[i].length > 0 && (
+                          <span className="absolute bottom-0 left-0 bg-blue-500 text-white text-xs rounded-br-lg rounded-tl-lg px-1">
+                            {alts[i].length}
+                          </span>
+                        )}
                         <Button
                           onClick={(e) => handlePerkDeletion(i, e)}
                           color="otz"
-                          className="absolute top-0 right-0 w-5 h-5 flex items-center justify-center text-xs rounded aspect-square shrink-0 "
+                          className="absolute top-0 right-0 w-5 h-5 flex items-center justify-center text-xs rounded aspect-square shrink-0"
                         >
                           X
                         </Button>
@@ -151,9 +201,41 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                   </div>
                 ))}
               </div>
+
+              {/* Alts Panel */}
+              {altPanelSlot !== null && slots[altPanelSlot] && (
+                <div className="flex flex-col gap-2 bg-neutral-800 rounded-lg p-4 border border-blue-500/50">
+                  <p className="text-xs text-blue-400 uppercase tracking-widest">
+                    Alts for{" "}
+                    <span className="text-white">
+                      {slots[altPanelSlot]?.name}
+                    </span>{" "}
+                    — pick from browser
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {alts[altPanelSlot].length === 0 && (
+                      <p className="text-neutral-500 text-sm">No alts yet</p>
+                    )}
+                    {alts[altPanelSlot].map((alt, j) => (
+                      <div key={alt.name + j} className="relative">
+                        <img
+                          src={alt.iconUrl}
+                          alt={alt.name}
+                          className="h-12 w-12 object-cover rounded-lg"
+                        />
+                        <button
+                          onClick={() => handleAltDeletion(altPanelSlot, j)}
+                          className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Notes */}
             <div className="flex flex-col gap-2">
               <label className="text-xs text-neutral-400 uppercase tracking-widest pl-1">
                 Notes
@@ -178,13 +260,14 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
             </div>
           </div>
 
-          {/* ── RIGHT: Perk Browser + Preview ── */}
           <div className="flex flex-col w-1/2 gap-4 overflow-hidden">
-            {/* TOP: Perk Browser */}
             <div className="flex flex-col flex-1 bg-neutral-800 rounded-lg border border-white/10 overflow-hidden">
-              {/* Header + Search */}
               <div className="flex flex-col gap-2 p-4 border-b border-white/10">
-                <h2 className="font-bold text-lg text-white">Perk Browser</h2>
+                <h2 className="font-bold text-lg text-white">
+                  {altPanelSlot !== null
+                    ? `Adding alts for ${slots[altPanelSlot]?.name}`
+                    : "Perk Browser"}
+                </h2>
                 <div className="relative">
                   <svg
                     className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4"
@@ -209,11 +292,8 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
                   />
                 </div>
               </div>
-
-              {/* Perk Grid */}
               <div className="flex-1 overflow-y-auto p-4">
                 <div className="grid grid-cols-5 gap-2">
-                  {/* Placeholder perk slots — replace with mapped perk data */}
                   {filtered.map((perk) => (
                     <div
                       key={perk.name}
@@ -232,7 +312,6 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
               </div>
             </div>
 
-            {/* BOTTOM: Live Preview */}
             <div className="flex flex-col flex-1 bg-neutral-800 rounded-lg border border-white/10 overflow-hidden">
               <div className="flex items-center justify-center p-4 border-b border-white/10">
                 <h2 className="font-bold text-lg text-white">Live Preview</h2>
@@ -244,7 +323,6 @@ export default function AddBuildPortal({ onClose, character }: PortalProps) {
           </div>
         </div>
 
-        {/* Add Build Button */}
         <Button
           type="button"
           color="otz"
