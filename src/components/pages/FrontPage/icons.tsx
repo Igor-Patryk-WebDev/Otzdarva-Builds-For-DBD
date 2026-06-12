@@ -31,7 +31,7 @@ export const SVG = ({ classname, icon }: Props) => {
   const IconData = Icons[icon];
 
   return (
-    <Link to={IconData.redirect}>
+    <Link to={IconData.redirect} target="_blank">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
