@@ -8,6 +8,9 @@ import "./styles/index.css";
 import { routeTree } from "./routeTree.gen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppDataProvider } from "@contexts/AppDataContext";
+import { BuildsPortalProvider } from "@contexts/BuildsPortalContext";
+import { BuildsPortalWrapper } from "@components/pages/ProfilesPage/BuildsPortalWrapper";
+import { EditorPortalProvider } from "@contexts/EditorPortalContext";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -28,10 +31,16 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <AppDataProvider>
-        <StrictMode>
-          <RouterProvider router={router} />
-        </StrictMode>
+        <BuildsPortalProvider>
+          <EditorPortalProvider>
+            <StrictMode>
+              <RouterProvider router={router} />
+              <BuildsPortalWrapper />
+            </StrictMode>
+          </EditorPortalProvider>
+        </BuildsPortalProvider>
       </AppDataProvider>
     </QueryClientProvider>,
   );
 }
+

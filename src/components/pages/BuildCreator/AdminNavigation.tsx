@@ -1,9 +1,13 @@
+import type { DbdRole } from "@appTypes/DbdRole";
 import { Button } from "@components/shared/Button";
 import { Link } from "@tanstack/react-router";
+import type { Dispatch, SetStateAction } from "react";
 
-type AdminNavigationProps = {};
+type AdminNavigationProps = {
+  setRole: Dispatch<SetStateAction<DbdRole>>
+};
 
-export const AdminNavigation = ({}: AdminNavigationProps) => {
+export const AdminNavigation = ({ setRole }: AdminNavigationProps) => {
   return (
     <div className="flex gap-8 my-4">
       <Button color="grey">
@@ -11,15 +15,15 @@ export const AdminNavigation = ({}: AdminNavigationProps) => {
           Main Page
         </Link>
       </Button>
-      <Button color="otz">
-        <Link to="/survivors" target="_blank">
-          Survivors
-        </Link>
+      <Button color="otz" onClick={() => {
+        setRole("Killers")
+      }} >
+        Killers
       </Button>
-      <Button color="otz">
-        <Link to="/killers" target="_blank">
-          Killers
-        </Link>
+      <Button color="otz" onClick={() => {
+        setRole("Survivors")
+      }} >
+        Survivors
       </Button>
       <Button
         color="otz"

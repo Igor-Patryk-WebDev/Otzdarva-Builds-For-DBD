@@ -3,46 +3,44 @@ import type { DbdRole } from "@appTypes/DbdRole";
 import { Link } from "@tanstack/react-router";
 
 interface RoleSelectButtonProps {
-  variant: DbdRole;
+  role: DbdRole;
 }
 
-export const RoleSelectButton = ({ variant }: RoleSelectButtonProps) => {
+export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
+  const lowercaseRole = role.toLowerCase() as Lowercase<DbdRole>
+
   const images = {
-    Killers: "/images/killer-icon.png",
-    Survivors: "/images/survivor-icon.png",
+    killers: "/images/killer-icon.png",
+    survivors: "/images/survivor-icon.png",
   };
+
   const styles = {
-    Killers: {
-      gradient: "killer",
-      link: "border-killer",
-      img: "",
-      text: "text-center",
-      flex: "flex-0",
+    killers: {
+      link: "border-killers",
+      gradient: "from-killers",
     },
-    Survivors: {
-      gradient: "survivor",
-      link: "border-survivor",
-      img: "ml-auto",
-      text: "text-center",
-      flex: "flex-1",
+    survivors: {
+      link: "border-survivors",
+      gradient: "from-survivors",
     },
   };
+
   return (
     <Link
-      to={`/${variant.toLowerCase()}` as "/killers" | "/survivors"}
-      className={`${styles[variant]["link"]} border-2 bg-linear-to-t from-${styles[variant].gradient} to-neutral-900 rounded-md block px-4 py-4 h-64 w-full overflow-clip relative`}
+      to={`/${lowercaseRole}`}
+      className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block px-4 py-4 h-64 overflow-clip relative w-1/2 hover:w-2/3 transition-all`}
       viewTransition={{
-        types: () => (variant === "Killers" ? ["slide-right"] : ["slide-left"]),
+        types: () => (role === "Killers" ? ["slide-right"] : ["slide-left"]),
       }}
     >
       <img
-        src={images[variant]}
-        alt={variant}
-        className={`${styles[variant]["img"]} absolute top-16 right-1/2 translate-x-1/2 h-64`}
+        src={images[lowercaseRole]}
+        alt={`${role} role icon`}
+        className="absolute top-16 right-1/2 translate-x-1/2 h-64"
       />
-      <h3 className={`${styles[variant]["text"]} font-bold text-2xl`}>
-        {variant.toUpperCase()}
+      <h3 className="text-center uppercase font-bold text-2xl">
+        {lowercaseRole}
       </h3>
-    </Link>
+    </Link >
   );
 };

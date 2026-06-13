@@ -42,7 +42,7 @@ function LoginPage() {
       <div className="shadow-2xl shadow-black w-full max-w-lg bg-black border border-neutral-800 rounded-lg overflow-hidden">
         {/* DBD Perk Header Style */}
         <div className="relative overflow-clip px-6 py-4 border-b border-neutral-800">
-          <div className="absolute inset-0 bg-[url(/images/CharPortrait_roleBG.webp)] bg-size-[150%] bg-center killer-filter z-0" />
+          <div className="absolute inset-0 bg-[url(/images/CharPortrait_roleBG.webp)] bg-size-[150%] bg-center killers-filter z-0" />
           <h3 className="text-3xl font-bold text-white border-b border-white/20 pb-2">
             Login
           </h3>

@@ -1,6 +1,6 @@
 @theme {
   --color-otz: hsl(347, 66%, 49%);
   --color-otzHover: hsl(347, 66%, 39%);
-  --color-killer: hsl(355, 57%, 30%);
-  --color-survivor: hsl(205, 18%, 34%);
+  --color-killers: hsl(355, 57%, 30%);
+  --color-survivors: hsl(205, 18%, 34%);
 }

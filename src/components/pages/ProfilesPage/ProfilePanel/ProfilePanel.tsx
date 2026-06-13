@@ -1,6 +1,6 @@
 import type { ProfileData } from '@appTypes/Profiles';
 
-import { useOpenPortal, usePortalContent, usePortalState } from '@contexts/PortalContext';
+import { useOpenBuildsPortal, useBuildsPortalContent, useBuildsPortalState } from '@contexts/BuildsPortalContext';
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
 import { BuildsNotExistPanel } from './BuildsNotExistPanel';
 import { useGenericBuild } from '@hooks/builds/useGenericBuild';
@@ -18,9 +18,9 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   const builds = profile.builds
   const role = profile.role
 
-  const portalState = usePortalState();
-  const openPortal = useOpenPortal();
-  const { setPortalContent } = usePortalContent();
+  const portalState = useBuildsPortalState();
+  const openPortal = useOpenBuildsPortal();
+  const { setBuildsPortalContent } = useBuildsPortalContent();
 
   const { build } = useGenericBuild(builds);
 
@@ -29,7 +29,13 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   return (
     <div className='relative grid grid-cols-subgrid col-span-2 2xl:even:col-start-4'>
       <ProfileHeader name={name} buildsCount={buildsCount} onClick={() => {
-        !portalState && setPortalContent(<BuildsList builds={builds} />);
+        !portalState && setBuildsPortalContent(
+          <BuildsList name={name}>
+            {builds && builds.map((b) => (
+              <BuildPanel key={b.name} build={b} />
+            ))}
+          </BuildsList>
+        );
         !portalState && openPortal();
       }}>
       </ProfileHeader>
@@ -40,4 +46,4 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
       }
     </div>
   )
-}
+}

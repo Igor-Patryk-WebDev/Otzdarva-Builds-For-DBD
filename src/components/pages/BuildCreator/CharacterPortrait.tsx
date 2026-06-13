@@ -1,4 +1,3 @@
-import PortalButton from "@components/pages/BuildCreator/Portals/AddBuildPortalButton";
 import type { ProfileData } from "@appTypes/Profiles";
 
 interface Props {
@@ -6,6 +5,14 @@ interface Props {
 }
 
 export function CharacterPortrait({ character }: Props) {
+  const styles = {
+    killers: {
+      filter: "killers-filter"
+    },
+    survivors: {
+      filter: "survivors-filter"
+    }
+  }
   return (
     <div className="flex flex-col">
       <div className="relative h-64 aspect-square">
@@ -17,14 +24,13 @@ export function CharacterPortrait({ character }: Props) {
         <img
           src="/images/CharPortrait_roleBG.webp"
           alt="role bg"
-          className="absolute inset-0 w-full h-full z-1"
+          className={`absolute inset-0 w-full h-full ${styles[character.role].filter} z-1`}
         />
         <img
           src={character.portraitUrl ?? "/images/Unknown_Character.webp"}
           alt={character.name}
           className="absolute inset-0 w-full h-full z-2"
         />
-        <PortalButton character={character}>Add Build</PortalButton>
       </div>
     </div>
   );

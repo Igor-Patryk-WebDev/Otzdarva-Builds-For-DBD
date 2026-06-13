@@ -1,6 +1,6 @@
 export const WebsiteBanner = () => {
   return (
-    <header>
+    <header className="mt-8 mb-4">
       <div className="flex center gap-2">
         <img src="/images/favicon.png" alt="OtzLogo" className="h-10" />
         <h2 className="text-3xl font-bold leading-none"><span className="text-otz">Otzdarva</span> builds for</h2>

@@ -6,7 +6,7 @@ interface SearchBarProps {
 
 export const SearchBar = ({ value, onChange, placeholder = 'Search for character...' }: SearchBarProps) => {
   return (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-8">
       <div className="relative group">
         {/* Search icon */}
         <svg

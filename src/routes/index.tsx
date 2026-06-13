@@ -11,11 +11,13 @@ export const Route = createFileRoute("/")({
 
 function RootPage() {
   return (
-    <section className="flex flex-col center h-screen w-screen p-8 [view-transition-name:front-page]">
-      <WebsiteBanner />
-      <LastUpdated />
-      <RoleSelectWrapper />
-      <SocialWrapper />
+    <section className="flex justify-center h-screen p-8 [view-transition-name:front-page]">
+      <div className="flex max-w-full flex-col center">
+        <WebsiteBanner />
+        <LastUpdated />
+        <RoleSelectWrapper />
+        <SocialWrapper />
+      </div>
     </section>
   );
 }

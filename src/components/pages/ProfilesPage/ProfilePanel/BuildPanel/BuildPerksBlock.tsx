@@ -50,7 +50,7 @@ const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
       }}
       {...rest}
     >
-      <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killer-filter before:-z-1'>
+      <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killers-filter before:-z-1'>
         <h3 className='text-2xl font-bold border-b-2 py-2'>{perk.name}</h3>
         <p className='text-md font-extralight italic py-2'>{perk.obtainment}</p>
       </div>
