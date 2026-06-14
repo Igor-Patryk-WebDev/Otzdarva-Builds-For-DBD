@@ -100,12 +100,13 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
     <div className="flex-1 flex flex-col gap-1">
       <button
         onClick={handleSlotClick}
-        className={`aspect-square relative w-full ${isAltPanel
+        className={`aspect-square relative w-full ${
+          isAltPanel
             ? "ring-2 ring-blue-500 rounded-lg"
             : isSelected
               ? "ring-2 ring-otz bg-neutral-600 transition-colors rounded-lg"
               : "border-neutral-600 hover:border-neutral-400"
-          }`}
+        }`}
       >
         {perk ? (
           <>
@@ -115,13 +116,13 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
               className="w-full h-full object-cover rounded-lg cursor-pointer hover:bg-neutral-700 hover:ring-1 hover:ring-otz transition"
             />
             {alts[index].length > 0 && (
-              <span className="absolute bottom-0 left-0 bg-blue-500 text-white text-xs rounded-br-lg rounded-tl-lg px-1">
+              <span className="absolute bottom-0 left-0 bg-blue-500 text-white text-xs rounded-bl-lg px-1">
                 {alts[index].length}
               </span>
             )}
             <Button
               onClick={handleDelete}
-              className="absolute top-0 right-0 w-5 h-5 bg-otz flex items-center justify-center text-xs rounded aspect-square shrink-0"
+              className="absolute top-0 right-0 w-5 h-5 bg-otz flex items-center justify-center text-xs rounded-tr-lg aspect-square shrink-0"
             >
               ×
             </Button>
@@ -172,8 +173,8 @@ const AltsPanel = () => {
     <div className="flex flex-col gap-2 bg-neutral-800 rounded-lg p-4 border border-blue-500/50">
       <p className="text-xs text-blue-400 uppercase tracking-widest">
         Alts for{" "}
-        <span className="text-white">{perkSlots[altPanelSlot]?.name}</span>{" "}
-        — pick from browser
+        <span className="text-white">{perkSlots[altPanelSlot]?.name}</span> —
+        pick from browser
       </p>
       <div className="flex flex-wrap gap-2">
         {alts[altPanelSlot].length === 0 && (
@@ -235,7 +236,9 @@ const NotesBlock = () => {
           >
             -
           </button>
-          <span className="text-xs text-neutral-400 min-w-4 text-center">{notesCount}</span>
+          <span className="text-xs text-neutral-400 min-w-4 text-center">
+            {notesCount}
+          </span>
           <button
             onClick={handleAddNote}
             disabled={notesCount >= 8}
@@ -279,10 +282,8 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
   const { altPanelSlot, setAlts, alts } = useEditorAlts();
 
   const filtered = perks.filter((perk) =>
-    perk.name.toLowerCase().includes(perkQuery.toLowerCase())
+    perk.name.toLowerCase().includes(perkQuery.toLowerCase()),
   );
-
-
 
   // Names already used as alts for the currently active alt panel slot
   const usedAltNamesForSlot =
@@ -300,7 +301,7 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
     }
     // In main mode: block if already used in any slot (other than the currently selected one)
     return perkSlots.some(
-      (p, i) => p?.name === perk.name && i !== selectedSlot
+      (p, i) => p?.name === perk.name && i !== selectedSlot,
     );
   };
 
@@ -338,7 +339,9 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
             : "Perk Browser"}
         </h2>
         {!canSelect && (
-          <p className="text-xs text-neutral-500">Select a perk slot to start adding perks.</p>
+          <p className="text-xs text-neutral-500">
+            Select a perk slot to start adding perks.
+          </p>
         )}
         <div className="relative">
           <svg
@@ -379,8 +382,8 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
                   blocked
                     ? "opacity-30 cursor-not-allowed"
                     : canSelect
-                    ? "hover:scale-105"
-                    : "opacity-50 cursor-not-allowed"
+                      ? "hover:scale-105"
+                      : "opacity-50 cursor-not-allowed"
                 }`}
               >
                 <img
@@ -441,7 +444,7 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
               name: slot.name,
               alts: alts[i].map((a) => ({ name: a.name })),
             }
-          : null
+          : null,
       )
       .filter(Boolean);
 
@@ -551,7 +554,7 @@ export const Editor = ({ character, build }: EditorProps) => {
             description: scraped?.description ?? "",
             obtainment: scraped?.obtainment ?? "",
           };
-        })
+        }),
       )
     : [[], [], [], []];
 
@@ -564,3 +567,7 @@ export const Editor = ({ character, build }: EditorProps) => {
     </EditorProvider>
   );
 };
+
+//KISS - keep it simple stupid, kwintesencja reacta, kunszt sztuki ogłupiania komponentów
+//dla utrzymania czytelnosci kodu itp itd ---------- 600 linijek kodu pozdro dla tych co
+//kiedys przejmą ten zajebisty projekt (translate it if u need)

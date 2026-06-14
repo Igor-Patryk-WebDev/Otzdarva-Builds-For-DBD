@@ -1,15 +1,18 @@
-import { Button } from "@components/shared/Button"
-import { Link, useRouterState } from "@tanstack/react-router"
+import { Button } from "@components/shared/Button";
+import { Link, useRouterState } from "@tanstack/react-router";
 
 export const ChangeRolePageButton = () => {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const isOnKillersPage = pathname.startsWith("/killers")
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isOnKillersPage = pathname.startsWith("/killers");
   return (
-    <Link to={isOnKillersPage ? "/survivors" : "/killers"} viewTransition={{
-      types: ({ fromLocation }) =>
-        fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"]
-    }}>
-      <Button color="otz">SWAP</Button>
+    <Link
+      to={isOnKillersPage ? "/survivors" : "/killers"}
+      viewTransition={{
+        types: ({ fromLocation }) =>
+          fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"],
+      }}
+    >
+      <Button className="bg-otz px-6 py-1 rounded-lg">SWAP</Button>
     </Link>
-  )
-}
+  );
+};
