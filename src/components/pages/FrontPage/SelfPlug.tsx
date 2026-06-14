@@ -14,13 +14,13 @@ export const SelfPlug = () => {
           <Link to="/" target="_blank" className={style.hover}>
             GitHub
           </Link>
-          <Link
-            to="mailto:33patryk.jarosz@gmail.com"
+          <a
+            href="mailto:33patryk.jarosz@gmail.com"
             target="_blank"
             className={style.hover}
           >
             Contact
-          </Link>
+          </a>
         </div>
       </p>
     </div>
