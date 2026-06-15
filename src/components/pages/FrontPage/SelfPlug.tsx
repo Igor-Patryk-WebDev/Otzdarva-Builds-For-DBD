@@ -9,9 +9,13 @@ export const SelfPlug = () => {
   return (
     <div className="flex flex-col absolute bottom-8">
       <p className={style.color}>
-        Website provided by Patryk and Igor
+        Created by Patryk & Igor
         <div className="flex gap-4 center">
-          <Link to="/" target="_blank" className={style.hover}>
+          <Link
+            to="https://github.com/Igor-Patryk-WebDev"
+            target="_blank"
+            className={style.hover}
+          >
             GitHub
           </Link>
           <a
