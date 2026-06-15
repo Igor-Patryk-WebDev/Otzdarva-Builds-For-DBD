@@ -3,14 +3,20 @@ import { WebsiteBanner } from "@components/pages/FrontPage";
 import { LastUpdated } from "@components/pages/FrontPage";
 import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
 import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
+import { useHotkey } from "@tanstack/react-hotkeys";
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: RootPage,
 });
 
 function RootPage() {
+  const navigate = useNavigate();
+
+  useHotkey("Q", () => navigate({ to: "/killers", viewTransition: { types: ["slide-right"] }, }));
+  useHotkey("E", () => navigate({ to: "/survivors", viewTransition: { types: ["slide-left"] } }));
+
   return (
     <section className="h-full flex items-center justify-center p-8 [view-transition-name:front-page]">
       <div className="flex max-w-full flex-col center">
