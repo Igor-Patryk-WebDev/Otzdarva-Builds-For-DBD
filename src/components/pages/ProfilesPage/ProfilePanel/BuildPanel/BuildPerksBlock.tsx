@@ -13,30 +13,41 @@ const Perk = ({ perk }: { perk: Omit<ProfilePerk, "alts"> }) => {
   const visible = pinned && (hovered || detailsHovered);
 
   return (
-    <div className={`relative group/perk max-h-24.5 aspect-square ${!visible && "cursor-pointer"}`}
+    <div
+      className={`relative group/perk max-h-24.5 aspect-square ${!visible && "cursor-pointer"}`}
       style={{
         anchorName: "--perk",
-        anchorScope: "--perk"
+        anchorScope: "--perk",
       }}
       onClick={() => setPinned(true)}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); if (!detailsHovered) setPinned(false); }}
+      onMouseLeave={() => {
+        setHovered(false);
+        if (!detailsHovered) setPinned(false);
+      }}
     >
-      <img className={`bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%] drop-shadow drop-shadow-transparent hover:drop-shadow-otz transition-all ${visible && "drop-shadow drop-shadow-otz"}`} src={perk.iconUrl} alt={perk.name + " perk icon"} />
+      <img
+        className={`bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%] hover:drop-shadow hover:drop-shadow-otz ${visible && "drop-shadow drop-shadow-otz"}`}
+        src={perk.iconUrl}
+        alt={perk.name + " perk icon"}
+      />
       <PerkDetails
         perk={perk}
         visible={visible}
         onMouseEnter={() => setDetailsHovered(true)}
-        onMouseLeave={() => { setDetailsHovered(false); setPinned(false); }}
+        onMouseLeave={() => {
+          setDetailsHovered(false);
+          setPinned(false);
+        }}
       />
     </div>
-  )
-}
+  );
+};
 
 type PerkDetailsProps = ComponentPropsWithoutRef<"div"> & {
-  perk: Omit<ProfilePerk, "alts">
-  visible: boolean
-}
+  perk: Omit<ProfilePerk, "alts">;
+  visible: boolean;
+};
 
 const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
   return (
@@ -51,8 +62,8 @@ const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
       <div className='bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-xs sm:text-sm' dangerouslySetInnerHTML={{ __html: perk.description ?? "" }} />
       <p className="absolute block sm:hidden my-1 top-full right-1/2 translate-x-1/2 text-center">Click away to close</p>
     </div>
-  )
-}
+  );
+};
 
 const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
   return (
@@ -67,15 +78,14 @@ const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
   return (
-    <div className='relative grid grid-cols-[minmax(0,98px)] group/showAlts'>
+    <div className="relative grid grid-cols-[minmax(0,98px)] group/showAlts">
       <Perk perk={perk} />
-      {
-        perk.alts.length > 0 &&
+      {perk.alts.length > 0 && (
         <>
           <div className="absolute bg-[url(/images/perk-background-red.png)] flex items-center justify-center bg-contain text-sm rounded-sm rotate-3 pointer-events-none top-0 right-0 translate-x-1/4 aspect-square w-8 group-hover/showAlts:opacity-0 transition-all">
             <p className="w-full text-center">
@@ -84,10 +94,10 @@ const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
           </div>
           <AltsBlock alts={perk.alts} />
         </>
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
 export const BuildPerksBlock = ({ perks }: BuildPerksBlockProps) => {
   return (
