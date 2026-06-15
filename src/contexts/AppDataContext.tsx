@@ -6,6 +6,7 @@ import { useCustomProfiles } from "@hooks/profiles/useCustomProfiles";
 import { useBuildsJSON } from "@hooks/queries/useBuildsJSON"
 import { useScrapeJSON } from "@hooks/queries/useScrapeJSON";
 import { createContext, useContext, type ReactNode } from "react"
+import { Loader } from "@components/shared/Loader";
 
 interface AppDataContextType {
   builds: BuildsData,
@@ -39,7 +40,7 @@ export const AppDataProvider = ({ children }: AppDataProviderProps) => {
   const { data: scrape, isLoading: scrapeLoading } = useScrapeJSON();
 
   const isLoading = buildsLoading || scrapeLoading
-  if (isLoading || !builds || !scrape) return null
+  if (isLoading || !builds || !scrape) return <Loader />
 
   const profiles = useCustomProfiles({ builds, scrape });
 

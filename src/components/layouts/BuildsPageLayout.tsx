@@ -17,7 +17,7 @@ export const BuildsPageLayout = ({ children }: BuildsPageLayoutProps) => {
       <Navigation />
       <WebsiteBanner />
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
-      <div className="max-w-211 2xl:max-w-400 my-32 grid grid-cols-[minmax(0,250px)_minmax(25%,1fr)] 2xl:grid-cols-[minmax(0,250px)_minmax(25%,1fr)_40px_minmax(0,250px)_minmax(25%,1fr)] gap-y-24 px-16 mx-auto">
+      <div className="max-w-211 2xl:max-w-400 my-24 sm:my-32 grid grid-cols-1 2xl:grid-cols-[minmax(0,250px)_minmax(25%,1fr)_40px_minmax(0,250px)_minmax(25%,1fr)] gap-y-24 px-4 sm:px-16 mx-auto">
         {children(searchQuery)}
       </div>
     </section>

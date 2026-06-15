@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 
 function RootPage() {
   return (
-    <section className="flex justify-center h-screen p-8 [view-transition-name:front-page]">
+    <section className="h-full flex items-center justify-center p-8 [view-transition-name:front-page]">
       <div className="flex max-w-full flex-col center">
         <WebsiteBanner />
         <LastUpdated />

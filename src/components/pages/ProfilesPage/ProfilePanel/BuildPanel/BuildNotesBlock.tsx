@@ -5,7 +5,7 @@ interface BuildNotesBlockProps {
 export const BuildNotesBlock = ({ notes }: BuildNotesBlockProps) => {
   return (
     <div className='h-36 overflow-y-auto scrollbar-thin scrollbar-thumb-otz'>
-      <ol className='flex flex-col gap-1 list-decimal text-sm text-otz py-2'>
+      <ol className='flex flex-col gap-1 list-decimal text-xs sm:text-sm text-otz py-2'>
         {
           notes.length != 0
             ? notes.map((note) => (

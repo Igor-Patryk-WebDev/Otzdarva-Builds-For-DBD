@@ -7,12 +7,13 @@ export const ChangeRolePageButton = () => {
   return (
     <Link
       to={isOnKillersPage ? "/survivors" : "/killers"}
+      onClick={() => window.scrollTo(0, 0)}
       viewTransition={{
         types: ({ fromLocation }) =>
           fromLocation?.href == "/killers" ? ["slide-left"] : ["slide-right"],
       }}
     >
-      <Button className="bg-otz px-6 py-1 rounded-lg">SWAP</Button>
+      <Button className="bg-otz hover:bg-[hsl(from_var(--color-otz)_h_s_40%)] active:scale-95 px-4 py-1 rounded-md">SWAP</Button>
     </Link>
   );
 };

@@ -28,7 +28,7 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
   return (
     <Link
       to={`/${lowercaseRole}`}
-      className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block px-4 py-4 h-64 overflow-clip relative w-1/2 hover:w-2/3 transition-all`}
+      className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block p-2 sm:p-4 sm:h-64 h-32 overflow-clip relative sm:w-1/2 sm:hover:w-2/3 sm:transition-all`}
       viewTransition={{
         types: () => (role === "Killers" ? ["slide-right"] : ["slide-left"]),
       }}
@@ -36,9 +36,9 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
       <img
         src={images[lowercaseRole]}
         alt={`${role} role icon`}
-        className="absolute top-16 right-1/2 translate-x-1/2 h-64"
+        className="absolute top-10 right-1/2 translate-x-1/2 h-32 sm:h-64"
       />
-      <h3 className="text-center uppercase font-bold text-2xl">
+      <h3 className="text-center uppercase font-bold text-xl sm:text-2xl">
         {lowercaseRole}
       </h3>
     </Link >

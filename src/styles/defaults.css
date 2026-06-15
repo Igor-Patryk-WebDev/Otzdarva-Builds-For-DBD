@@ -16,10 +16,16 @@
   scrollbar-width: none;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 img {
   display: block;
   max-width: 100%;
-  color-interpolation-filters: sRGB;
+  /* color-interpolation-filters: sRGB; */
 }
 
 textarea {
@@ -89,7 +95,16 @@ html:active-view-transition-type(slide-right) {
   }
 }
 
-.link {
+.descLink {
   color: hsl(347, 66%, 49%);
   text-decoration: underline;
+}
+
+.descList {
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.descList .descList {
+  list-style-type: circle;
 }

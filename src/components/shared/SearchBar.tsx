@@ -6,11 +6,11 @@ interface SearchBarProps {
 
 export const SearchBar = ({ value, onChange, placeholder = 'Search for character...' }: SearchBarProps) => {
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center mt-4 sm:mt-8">
       <div className="relative group">
         {/* Search icon */}
         <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none transition-colors group-focus-within:text-otz"
+          className="absolute left-3 top-1/2 -translate-y-1/2 size-3 sm:size-4 text-neutral-400 pointer-events-none transition-colors group-focus-within:text-otz"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -28,7 +28,7 @@ export const SearchBar = ({ value, onChange, placeholder = 'Search for character
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="pl-9 pr-8 py-2 w-72 rounded-lg bg-neutral-800 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-otz focus:ring-1 focus:ring-otz transition-all"
+          className="text-sm sm:text-base pl-9 pr-8 py-2 w-72 rounded-md bg-neutral-800 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-otz focus:ring-1 focus:ring-otz transition-all"
         />
 
         {/* Clear button */}

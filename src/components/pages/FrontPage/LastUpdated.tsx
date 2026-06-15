@@ -5,7 +5,7 @@ export const LastUpdated = () => {
   const formatedDate = new Date((scrape.other.scrapeRequestUNIX) * 1000).toLocaleDateString()
 
   return (
-    <p className="mb-8">
+    <p className="mb-4 text-sm sm:text-base sm:mb-8">
       Last updated: {formatedDate}
     </p>
   )

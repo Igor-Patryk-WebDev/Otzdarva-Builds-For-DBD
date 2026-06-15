@@ -6,7 +6,7 @@ type ButtonProps = {
 
 export const Button = ({ children, className, ...rest }: ButtonProps) => {
   return (
-    <button className={`cursor-pointer ${className}`} {...rest}>
+    <button className={`cursor-pointer transition-all active:scale-95 ${className}`} {...rest}>
       {children}
     </button>
   );

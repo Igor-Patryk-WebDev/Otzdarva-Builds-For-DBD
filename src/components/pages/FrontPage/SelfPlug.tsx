@@ -8,7 +8,7 @@ const style = {
 export const SelfPlug = () => {
   return (
     <div className="flex flex-col absolute bottom-8">
-      <p className={style.color}>
+      <p className={`${style.color} text-sm sm:text-base`}>
         Website provided by Patryk and Igor
         <div className="flex gap-4 center">
           <Link to="/" target="_blank" className={style.hover}>

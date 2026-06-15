@@ -1,7 +1,7 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 const RootLayout = () => (
-  <main>
+  <main className="h-full">
     <Outlet />
   </main>
 );
