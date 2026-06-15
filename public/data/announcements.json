@@ -1,0 +1,18 @@
+{
+  "alerts": [
+    {
+      "id": "uuid",
+      "title": "Test",
+      "desc": "Testowy alert",
+      "threatLevel": 2,
+      "expiresAt": null
+    },
+    {
+      "id": "uuid",
+      "title": "Test2",
+      "desc": "Testowy alert2",
+      "threatLevel": 0,
+      "expiresAt": null
+    }
+  ]
+}

@@ -3,6 +3,9 @@ import type { Dispatch, SetStateAction } from "react";
 
 import { Button } from "@components/shared/Button";
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { AnnouncementPortal } from "./Announcements/AnnouncementPortal";
 
 type AdminNavigationProps = {
   setRole: Dispatch<SetStateAction<DbdRole>>;
@@ -13,15 +16,22 @@ export const AdminNavigation = ({
   setRole,
   onSearch,
 }: AdminNavigationProps) => {
+  const [showPortal, setShowPortal] = useState(false);
+
+  if (showPortal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+
   return (
     <div className="flex gap-8 my-4">
-      <Button color="grey">
+      <Button>
         <Link to="/" target="_blank">
           Main Page
         </Link>
       </Button>
       <Button
-        color="otz"
         onClick={() => {
           setRole("Killers");
         }}
@@ -29,15 +39,21 @@ export const AdminNavigation = ({
         Killers
       </Button>
       <Button
-        color="otz"
         onClick={() => {
           setRole("Survivors");
         }}
       >
         Survivors
       </Button>
+      <Button onClick={() => setShowPortal(true)} className="relative">
+        Announcement
+      </Button>
+      {showPortal &&
+        createPortal(
+          <AnnouncementPortal onClose={() => setShowPortal(false)} />,
+          document.body,
+        )}
       <Button
-        color="otz"
         onClick={async () => {
           await fetch("/api/logout.php", { method: "POST" });
         }}
