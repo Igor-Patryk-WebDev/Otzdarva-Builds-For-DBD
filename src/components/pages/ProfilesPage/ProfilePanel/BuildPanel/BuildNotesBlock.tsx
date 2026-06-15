@@ -9,7 +9,7 @@ export const BuildNotesBlock = ({ notes }: BuildNotesBlockProps) => {
         {
           notes.length != 0
             ? notes.map((note) => (
-              <li className='ml-6 marker:font-bold'><p className='text-neutral-300'>{note}</p></li>
+              <li key={note} className='ml-6 marker:font-bold'><p className='text-neutral-300'>{note}</p></li>
             ))
             : <p className='text-neutral-300'>Notes not included, sorry!</p>
         }

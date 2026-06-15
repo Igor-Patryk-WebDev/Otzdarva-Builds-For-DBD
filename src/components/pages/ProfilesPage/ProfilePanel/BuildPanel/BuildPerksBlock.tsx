@@ -72,7 +72,7 @@ const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
         <div className="pb-4">
           {alts.map((alt) => {
             return (
-              <Perk perk={alt} />
+              <Perk key={alt.name} perk={alt} />
             )
           })}
         </div>

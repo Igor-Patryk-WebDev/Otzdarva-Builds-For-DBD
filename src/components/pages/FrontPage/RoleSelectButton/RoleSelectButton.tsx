@@ -33,10 +33,11 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
         types: () => (role === "Killers" ? ["slide-right"] : ["slide-left"]),
       }}
     >
+      <p className={`absolute hidden sm:block text-neutral-600 ${role === "Survivors" && "right-4"}`}>{role === "Killers" ? "Q" : "E"}</p>
       <img
         src={images[lowercaseRole]}
         alt={`${role} role icon`}
-        className="absolute top-10 right-1/2 translate-x-1/2 h-32 sm:h-64"
+        className="absolute top-10 sm:top-16 right-1/2 translate-x-1/2 h-32 sm:h-64"
       />
       <h3 className="text-center uppercase font-bold text-xl sm:text-2xl">
         {lowercaseRole}

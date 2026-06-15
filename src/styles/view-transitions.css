@@ -1,0 +1,47 @@
+html:active-view-transition-type(to-killers) {
+  &::view-transition-old(front-page) {
+    animation: 300ms ease-in-out both slide-out-left;
+  }
+
+  &::view-transition-new(profiles-layout) {
+    animation: 300ms ease-in-out both slide-in-left;
+  }
+
+  &::view-transition-new(profiles-page) {
+    animation: 300ms ease-in-out both slide-in-left;
+  }
+}
+
+html:active-view-transition-type(to-survivors) {
+  &::view-transition-old(front-page) {
+    animation: 300ms ease-in-out both slide-out-right;
+  }
+
+  &::view-transition-new(profiles-layout) {
+    animation: 300ms ease-in-out both slide-in-right;
+  }
+
+  &::view-transition-new(profiles-page) {
+    animation: 300ms ease-in-out both slide-in-right;
+  }
+}
+
+html:active-view-transition-type(killers-to-survivors) {
+  &::view-transition-old(profiles-page) {
+    animation: 300ms ease-in-out both slide-out-right;
+  }
+
+  &::view-transition-new(profiles-page) {
+    animation: 300ms ease-in-out both slide-in-right;
+  }
+}
+
+html:active-view-transition-type(survivors-to-killers) {
+  &::view-transition-old(profiles-page) {
+    animation: 300ms ease-in-out both slide-out-left;
+  }
+
+  &::view-transition-new(profiles-page) {
+    animation: 300ms ease-in-out both slide-in-left;
+  }
+}

@@ -2,6 +2,7 @@ import { Button } from "@components/shared/Button";
 import { DecoratedHeading } from "@components/shared/DecoratedHeading";
 import { IconSVG } from "@components/shared/IconSVG";
 import { useCloseBuildsPortal, useBuildsPortalContent } from "@contexts/BuildsPortalContext"
+import { useHotkey } from "@tanstack/react-hotkeys";
 import type { ReactNode } from "react";
 
 interface BuildsListProps {
@@ -13,6 +14,8 @@ interface BuildsListProps {
 export const BuildsList = ({ name, children }: BuildsListProps) => {
   const closePortal = useCloseBuildsPortal();
   const { setBuildsPortalContent } = useBuildsPortalContent();
+
+  useHotkey("Escape", () => closePortal());
 
   return (
     <div className='absolute w-full max-w-400 max-h-full px-4 sm:px-8 pt-8 bottom-0 right-1/2 translate-x-1/2 z-1000 bg-[hsl(220_5%_8%)] border border-neutral-800 rounded-tl-2xl rounded-tr-2xl'>
