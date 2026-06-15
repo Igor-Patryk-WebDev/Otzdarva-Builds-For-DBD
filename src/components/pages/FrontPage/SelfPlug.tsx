@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 const style = {
   hover: "hover:text-[hsl(220,5%,33%)] transition-colors",
   color: "text-[hsl(220,5%,23%)]",
@@ -11,13 +9,13 @@ export const SelfPlug = () => {
       <div className={`${style.color} text-sm sm:text-base`}>
         Created by Patryk & Igor
         <div className="flex gap-4 center">
-          <Link
-            to="https://github.com/Igor-Patryk-WebDev"
+          <a
+            href="https://github.com/Igor-Patryk-WebDev"
             target="_blank"
             className={style.hover}
           >
             GitHub
-          </Link>
+          </a>
           <a
             href="mailto:33patryk.jarosz@gmail.com"
             target="_blank"

@@ -30,7 +30,7 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
       to={`/${lowercaseRole}`}
       className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block p-2 sm:p-4 sm:h-64 h-32 overflow-clip relative sm:w-1/2 sm:hover:w-2/3 sm:transition-all`}
       viewTransition={{
-        types: () => (role === "Killers" ? ["slide-right"] : ["slide-left"]),
+        types: () => (role === "Killers" ? ["to-killers"] : ["to-survivors"]),
       }}
     >
       <p className={`absolute hidden sm:block text-neutral-600 ${role === "Survivors" && "right-4"}`}>{role === "Killers" ? "Q" : "E"}</p>
