@@ -1,12 +1,12 @@
 {
     "alerts": [
         {
-            "id": "86ec97d822e8c895",
-            "title": "10M Bloobpoits code!",
-            "desc": "XXX XXX XXX",
+            "id": "ac81e905fb0fe19a",
+            "title": "10M code!",
+            "desc": "DBD10BIRTHDAY\nReedem in shop",
             "threatLevel": 0,
-            "expiresAt": 672,
-            "createdAt": "2026-06-16T12:21:34+00:00"
+            "expiresAt": 2678400,
+            "createdAt": "2026-06-16T14:50:23+00:00"
         }
     ],
     "threatLevelsStyles": [

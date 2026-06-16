@@ -24,12 +24,6 @@ export default defineConfig({
     watch: {
       ignored: ["**/.env", "**/.env**"],
     },
-    proxy: {
-      "/api": {
-        target: "http://localhost:8000",
-        changeOrigin: true,
-      },
-    },
   },
   base: "/",
 });
