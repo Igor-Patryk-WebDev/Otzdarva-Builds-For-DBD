@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $envPath = __DIR__ . '/../.env';
-if (!file_exists($envPath)) $envPath = __DIR__ . '/../.ENV';
 $env = parse_ini_file($envPath);
 
 if (!$env) {

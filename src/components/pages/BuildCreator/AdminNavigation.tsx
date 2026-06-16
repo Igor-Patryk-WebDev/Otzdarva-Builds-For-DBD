@@ -65,6 +65,13 @@ export const AdminNavigation = ({
       >
         <Link to="/login">Log Out</Link>
       </Button>
+      <Button onClick={async () => {
+        const res = await fetch("/api/request_scrape.php", { method: "POST" });
+        const data = await res.json();
+        if (!data.success) console.log(data.error);
+      }}>
+        Scrape Wiki
+      </Button>
       <div className="relative flex-1">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4"
