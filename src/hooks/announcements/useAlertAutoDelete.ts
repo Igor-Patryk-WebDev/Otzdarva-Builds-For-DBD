@@ -14,8 +14,7 @@ export const useAlertAutoDelete = () => {
       const expired = data.alerts.filter((alert) => {
         if (!alert.expiresAt) return false;
         const expiresAt =
-          new Date(alert.createdAt).getTime() +
-          alert.expiresAt * 60 * 60 * 1000;
+          new Date(alert.createdAt).getTime() + alert.expiresAt * 1000;
         return expiresAt <= Date.now();
       });
 
