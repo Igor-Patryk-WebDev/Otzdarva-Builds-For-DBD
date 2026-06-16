@@ -7,14 +7,6 @@
             "threatLevel": 0,
             "expiresAt": 672,
             "createdAt": "2026-06-16T12:21:34+00:00"
-        },
-        {
-            "id": "39fad696ef0c5cd5",
-            "title": "cukiernik",
-            "desc": "to pedal",
-            "threatLevel": 3,
-            "expiresAt": 1,
-            "createdAt": "2026-06-16T13:00:12+00:00"
         }
     ],
     "threatLevelsStyles": [
