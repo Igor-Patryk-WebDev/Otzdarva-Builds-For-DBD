@@ -7,7 +7,7 @@ import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
 import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
 import { Button } from "@components/shared/Button";
 import { useHotkey } from "@tanstack/react-hotkeys";
-
+import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { createPortal } from "react-dom";
@@ -31,6 +31,8 @@ function RootPage() {
   useHotkey("Escape", () => setShowPortal(false));
 
   // useHotkeySequence(["S", "E", "C", "R", "E", "T"], () => console.log("hi"), { timeout: 1000 })
+
+  useAlertAutoDelete();
 
   return (
     <section
