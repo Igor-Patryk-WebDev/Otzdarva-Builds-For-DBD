@@ -1,18 +1,26 @@
 {
-  "alerts": [
-    {
-      "id": "uuid",
-      "title": "Test",
-      "desc": "Testowy alert",
-      "threatLevel": 2,
-      "expiresAt": null
-    },
-    {
-      "id": "uuid",
-      "title": "Test2",
-      "desc": "Testowy alert2",
-      "threatLevel": 0,
-      "expiresAt": null
-    }
-  ]
+    "alerts": [
+        {
+            "id": "86ec97d822e8c895",
+            "title": "10M Bloobpoits code!",
+            "desc": "XXX XXX XXX",
+            "threatLevel": 0,
+            "expiresAt": 672,
+            "createdAt": "2026-06-16T12:21:34+00:00"
+        },
+        {
+            "id": "39fad696ef0c5cd5",
+            "title": "cukiernik",
+            "desc": "to pedal",
+            "threatLevel": 3,
+            "expiresAt": 1,
+            "createdAt": "2026-06-16T13:00:12+00:00"
+        }
+    ],
+    "threatLevelsStyles": [
+        "bg-blue-500",
+        "bg-green-400",
+        "bg-amber-400",
+        "bg-red-500"
+    ]
 }
