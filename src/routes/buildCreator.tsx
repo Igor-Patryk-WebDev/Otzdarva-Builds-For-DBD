@@ -30,11 +30,11 @@ function BuildCreatorPage() {
       <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] justify-items-center gap-y-24 gap-x-8 py-16">
         {query.length > 0
           ? filtered.map((character) => (
-              <CharacterBuildsBlock character={character} />
-            ))
+            <CharacterBuildsBlock character={character} />
+          ))
           : profiles[lowercaseRole].map((character) => (
-              <CharacterBuildsBlock character={character} />
-            ))}
+            <CharacterBuildsBlock character={character} />
+          ))}
       </div>
       <EditorPortalWrapper />
     </section>
