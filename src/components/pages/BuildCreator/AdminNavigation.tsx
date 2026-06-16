@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { AnnouncementPortal } from "./Announcements/AnnouncementPortal";
+import { useHotkey } from "@tanstack/react-hotkeys";
 
 type AdminNavigationProps = {
   setRole: Dispatch<SetStateAction<DbdRole>>;
@@ -17,6 +18,10 @@ export const AdminNavigation = ({
   onSearch,
 }: AdminNavigationProps) => {
   const [showPortal, setShowPortal] = useState(false);
+
+  useHotkey("Escape", () => {
+    setShowPortal(false);
+  });
 
   if (showPortal) {
     document.body.style.overflow = "hidden";
