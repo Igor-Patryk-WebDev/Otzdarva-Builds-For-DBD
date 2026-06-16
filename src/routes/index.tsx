@@ -1,6 +1,7 @@
 import { RoleSelectWrapper } from "@components/pages/FrontPage";
 import { WebsiteBanner } from "@components/pages/FrontPage";
 import { LastUpdated } from "@components/pages/FrontPage";
+import { ReportBugButton } from "@components/pages/FrontPage/ReportBugButton";
 import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
 import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
 import { useHotkey, /*useHotkeySequence*/ } from "@tanstack/react-hotkeys";
@@ -30,6 +31,9 @@ function RootPage() {
         <RoleSelectWrapper />
         <SocialWrapper />
         <SelfPlug />
+        <div className="absolute bottom-4 right-4 hidden sm:block">
+          <ReportBugButton />
+        </div>
       </div>
     </section>
   );
