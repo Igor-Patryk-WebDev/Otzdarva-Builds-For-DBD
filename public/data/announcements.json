@@ -10,9 +10,8 @@
         }
     ],
     "threatLevelsStyles": [
-        "bg-blue-500",
-        "bg-green-400",
-        "bg-amber-400",
-        "bg-red-500"
+        "border-otz",
+        "border-yellow-400",
+        "border-red-500"
     ]
 }

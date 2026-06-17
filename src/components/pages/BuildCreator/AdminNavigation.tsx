@@ -30,48 +30,47 @@ export const AdminNavigation = ({
   }
 
   return (
-    <div className="flex gap-8 my-4">
-      <Button>
-        <Link to="/" target="_blank">
-          Main Page
-        </Link>
-      </Button>
+    <div className="flex gap-4 my-4 border-b border-b-neutral-800 pb-8 mb-8">
+      <div className="flex gap-2">
+        <Button
+          className="bg-otz px-3 rounded-md"
+          onClick={() => {
+            setRole("Killers");
+          }}
+        >
+          Killers
+        </Button>
+        <Button
+          className="bg-otz px-3 rounded-md"
+          onClick={() => {
+            setRole("Survivors");
+          }}
+        >
+          Survivors
+        </Button>
+      </div>
       <Button
-        onClick={() => {
-          setRole("Killers");
-        }}
-      >
-        Killers
-      </Button>
-      <Button
-        onClick={() => {
-          setRole("Survivors");
-        }}
-      >
-        Survivors
-      </Button>
-      <Button onClick={() => setShowPortal(true)} className="relative">
+        className="bg-otz px-3 rounded-md"
+        onClick={() => setShowPortal(true)}>
         Announcement
       </Button>
-      {showPortal &&
-        createPortal(
-          <AnnouncementPortal onClose={() => setShowPortal(false)} />,
-          document.body,
-        )}
-      <Button
-        onClick={async () => {
-          await fetch("/api/logout.php", { method: "POST" });
-        }}
-      >
-        <Link to="/login">Log Out</Link>
-      </Button>
-      <Button onClick={async () => {
-        const res = await fetch("/api/request_scrape.php", { method: "POST" });
-        const data = await res.json();
-        if (!data.success) console.log(data.error);
-      }}>
-        Scrape Wiki
-      </Button>
+      <div className="flex gap-2">
+        <Button
+          className="bg-otz px-3 rounded-md"
+        >
+          <Link to="/" target="_blank">
+            Main Page
+          </Link>
+        </Button>
+        <Button
+          className="border-2 border-otz px-3 rounded-md"
+          onClick={async () => {
+            await fetch("/api/logout.php", { method: "POST" });
+          }}
+        >
+          <Link to="/login">Log Out</Link>
+        </Button>
+      </div>
       <div className="relative flex-1">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4"
@@ -94,6 +93,20 @@ export const AdminNavigation = ({
           className="w-full bg-neutral-800 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-white placeholder:text-neutral-600 focus:outline-none focus:border-otz text-sm"
         />
       </div>
+      {showPortal &&
+        createPortal(
+          <AnnouncementPortal onClose={() => setShowPortal(false)} />,
+          document.body,
+        )}
+      <Button
+        className="bg-otz px-3 rounded-md"
+        onClick={async () => {
+          const res = await fetch("/api/request_scrape.php", { method: "POST" });
+          const data = await res.json();
+          if (!data.success) console.log(data.error);
+        }}>
+        Scrape Wiki
+      </Button>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button } from "@components/shared/Button";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
+import { DecoratedHeading } from "@components/shared/DecoratedHeading";
+import { IconSVG } from "@components/shared/IconSVG";
 
 type Props = {
   onClose: () => void;
@@ -70,114 +72,120 @@ export const AnnouncementPortal = ({ onClose }: Props) => {
     >
       {/* Panel dodawania */}
       <div
-        className="flex flex-col gap-2 bg-neutral-900 h-90 p-8"
+        className="flex flex-col gap-2 bg-neutral-900 border border-neutral-800 rounded-md p-8"
         onClick={(e) => e.stopPropagation()}
       >
-        <h1 className="text-2xl text-center">Add an Announcement</h1>
-        <input
-          className="w-full bg-neutral-700 border border-white/10 rounded-lg pl-4 pr-4 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm"
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          className="w-full bg-neutral-700 border border-white/10 rounded-lg pl-4 pr-4 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-        />
+        <DecoratedHeading text="Announcements" className="text-2xl" />
+        <label className="text-sm">
+          Title
+          <input
+            className="w-full bg-neutral-700 border border-white/10 rounded-lg pl-4 pr-4 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:outline-otz text-sm"
+            type="text"
+            placeholder="Huge announcement..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <label className="text-sm">
+          Description
+          <textarea
+            placeholder="Description"
+            className="w-full bg-neutral-700 border-none outline-none rounded-lg pl-4 pr-4 py-2 text-white placeholder:text-neutral-500 focus:border-otz text-sm"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+          />
+        </label>
         <div className="flex gap-4">
           {/* Lewa kolumna */}
           <div className="flex flex-col gap-2 w-1/2">
-            <select
-              className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white focus:outline-none focus:border-otz text-sm"
-              value={threatLevel}
-              onChange={(e) => setThreatLevel(Number(e.target.value))}
-            >
-              <option value={0}>0 - No threat</option>
-              <option value={1}>1 - Minor</option>
-              <option value={2}>2 - Medium</option>
-              <option value={3}>3 - Critical</option>
-            </select>
-            <p className="text-sm text-neutral-400">Auto Delete (optional)</p>
-            <div className="flex gap-2">
-              <div className="flex flex-col items-center gap-1">
-                <input
-                  type="number"
-                  min={0}
-                  value={days || ""}
-                  className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
-                  placeholder="0"
-                  onChange={(e) => setDays(Number(e.target.value) || 0)}
-                />
-                <span className="text-xs text-neutral-500">D</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <input
-                  type="number"
-                  min={0}
-                  max={23}
-                  value={hours || ""}
-                  className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
-                  placeholder="0"
-                  onChange={(e) => setHours(Number(e.target.value) || 0)}
-                />
-                <span className="text-xs text-neutral-500">H</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <input
-                  type="number"
-                  min={0}
-                  max={59}
-                  value={minutes || ""}
-                  className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
-                  placeholder="0"
-                  onChange={(e) => setMinutes(Number(e.target.value) || 0)}
-                />
-                <span className="text-xs text-neutral-500">M</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <input
-                  type="number"
-                  min={0}
-                  max={59}
-                  value={seconds || ""}
-                  className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
-                  placeholder="0"
-                  onChange={(e) => setSeconds(Number(e.target.value) || 0)}
-                />
-                <span className="text-xs text-neutral-500">S</span>
+            <label className="text-sm">
+              Announcement type
+              <select
+                className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white focus:outline-none focus:border-otz text-sm"
+                value={threatLevel}
+                onChange={(e) => setThreatLevel(Number(e.target.value))}
+              >
+                <option value={0}>Information</option>
+                <option value={1}>Notice</option>
+                <option value={2}>Alert</option>
+              </select>
+            </label>
+            <div>
+              <p className="text-sm">Auto Delete (optional)</p>
+              <div className="flex gap-2">
+                <label className="flex flex-col items-center gap-1">
+                  <input
+                    type="number"
+                    min={0}
+                    value={days || ""}
+                    className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
+                    placeholder="0"
+                    onChange={(e) => setDays(Number(e.target.value) || 0)}
+                  />
+                  <span className="text-xs text-neutral-500">D</span>
+                </label>
+                <label className="flex flex-col items-center gap-1">
+                  <input
+                    type="number"
+                    min={0}
+                    max={23}
+                    value={hours || ""}
+                    className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
+                    placeholder="0"
+                    onChange={(e) => setHours(Number(e.target.value) || 0)}
+                  />
+                  <span className="text-xs text-neutral-500">H</span>
+                </label>
+                <label className="flex flex-col items-center gap-1">
+                  <input
+                    type="number"
+                    min={0}
+                    max={59}
+                    value={minutes || ""}
+                    className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
+                    placeholder="0"
+                    onChange={(e) => setMinutes(Number(e.target.value) || 0)}
+                  />
+                  <span className="text-xs text-neutral-500">M</span>
+                </label>
+                <label className="flex flex-col items-center gap-1">
+                  <input
+                    type="number"
+                    min={0}
+                    max={59}
+                    value={seconds || ""}
+                    className="w-full bg-neutral-700 border border-white/10 rounded-lg px-2 py-2 text-white placeholder:text-neutral-500 focus:outline-none focus:border-otz text-sm text-center"
+                    placeholder="0"
+                    onChange={(e) => setSeconds(Number(e.target.value) || 0)}
+                  />
+                  <span className="text-xs text-neutral-500">S</span>
+                </label>
               </div>
             </div>
           </div>
           {/* Prawa kolumna - threat levels */}
           <div className="flex flex-col gap-1">
-            <h4 className="font-bold">Threat Levels</h4>
-            <p>
-              <span className="text-blue-500">0</span> - No threat, just a
-              message
+            <p className="text-neutral-50">Types of announcements:</p>
+            <p className="text-neutral-400">
+              <span className="text-neutral-50">Information</span> - Just an information
             </p>
-            <p>
-              <span className="text-green-400">1</span> - Minor Threat
+            <p className="text-neutral-400">
+              <span className="text-neutral-50">Notice</span> - Notice about a known issue
             </p>
-            <p>
-              <span className="text-yellow-300">2</span> - Medium Threat
-            </p>
-            <p>
-              <span className="text-red-500">3</span> - Critical Threat
+            <p className="text-neutral-400">
+              <span className="text-neutral-50">Alert</span> - Critical error found
             </p>
           </div>
         </div>
         <div className="flex gap-2">
-          <Button onClick={addAlert} className="bg-otz rounded-lg w-full">
+          <Button onClick={addAlert} className="bg-otz rounded-md w-full">
             Add
           </Button>
           <Button
             onClick={onClose}
-            className="bg-neutral-600 rounded-lg w-fit px-4"
+            className="bg-neutral-600 rounded-md"
           >
-            X
+            <IconSVG icon="Close" />
           </Button>
         </div>
       </div>
@@ -191,8 +199,8 @@ export const AnnouncementPortal = ({ onClose }: Props) => {
         {data?.alerts.map((alert) => {
           const timeLeft = alert.expiresAt
             ? new Date(alert.createdAt).getTime() +
-              alert.expiresAt * 1000 -
-              Date.now()
+            alert.expiresAt * 1000 -
+            Date.now()
             : null;
           const formatted =
             timeLeft && timeLeft > 0
@@ -208,20 +216,20 @@ export const AnnouncementPortal = ({ onClose }: Props) => {
           return (
             <div
               key={alert.id}
-              className={`${data.threatLevelsStyles[alert.threatLevel.toString()]} w-full rounded-lg p-3 flex justify-between items-start`}
+              className={`bg-neutral-800 border ${data.threatLevelsStyles[alert.threatLevel.toString()]} w-full rounded-lg p-3 flex justify-between items-start relative`}
             >
               <div className="w-full">
-                <h3 className="font-bold text-xl">{alert.title}</h3>
-                <p>{alert.desc}</p>
-                <p className="text-neutral-600 text-right">
+                <h3 className="font-bold text-lg">{alert.title}</h3>
+                <p className="text-xs">{alert.desc}</p>
+                <p className="text-neutral-600 text-sm text-right">
                   {formatted ?? "No expiry"}
                 </p>
               </div>
               <button
                 onClick={() => deleteAlert(alert.id)}
-                className="text-neutral-600 hover:text-white ml-2"
+                className="absolute top-2 right-2 text-neutral-600 hover:text-white"
               >
-                X
+                <IconSVG icon="Close" size={1} />
               </button>
             </div>
           );

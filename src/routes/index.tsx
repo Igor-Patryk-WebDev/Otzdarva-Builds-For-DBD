@@ -11,6 +11,7 @@ import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { IconSVG } from "@components/shared/IconSVG";
 
 export const Route = createFileRoute("/")({
   component: RootPage,
@@ -47,7 +48,7 @@ function RootPage() {
           className="p-2 rounded-lg absolute top-4 right-4"
           onClick={() => setShowPortal(true)}
         >
-          🔔
+          <IconSVG icon="Bell" className="hover:text-amber-300" />
         </Button>
         {showPortal &&
           createPortal(

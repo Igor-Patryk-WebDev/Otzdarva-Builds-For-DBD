@@ -89,7 +89,7 @@ function LoginPage() {
             <Button
               type="submit"
               color="otz"
-              className="w-full py-3 font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed mt-2 rounded-lg"
+              className="bg-otz w-full py-3 font-semibold disabled:opacity-50 disabled:cursor-not-allowed mt-2 rounded-lg"
             >
               {isPending ? "Logging in..." : "Log In"}
             </Button>
