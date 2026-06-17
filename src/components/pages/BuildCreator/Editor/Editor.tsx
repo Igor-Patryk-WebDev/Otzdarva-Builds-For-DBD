@@ -24,6 +24,8 @@ interface EditorProps {
   build?: Build;
 }
 
+// TODO: Refactor this funny block of code
+
 // ─── Small shared primitives ──────────────────────────────────────────────────
 
 const CloseButton = ({ ...rest }: ComponentPropsWithoutRef<"button">) => (
