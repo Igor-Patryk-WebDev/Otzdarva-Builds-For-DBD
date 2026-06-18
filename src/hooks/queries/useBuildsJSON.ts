@@ -8,6 +8,7 @@ export const useBuildsJSON = () => {
     queryFn: async () => {
       const res = await fetch('/data/builds.json');
       return res.json();
-    }
+    },
+    gcTime: 0
   })
 }

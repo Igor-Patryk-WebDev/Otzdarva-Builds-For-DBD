@@ -8,5 +8,6 @@ export const useAnnouncementsJSON = () => {
       const res = await fetch("/data/announcements.json");
       return res.json();
     },
+    gcTime: 0
   });
 };

@@ -9,5 +9,6 @@ export const useScrapeJSON = () => {
       const res = await fetch("/data/scrape.json");
       return res.json();
     },
+    gcTime: 0
   });
 };
