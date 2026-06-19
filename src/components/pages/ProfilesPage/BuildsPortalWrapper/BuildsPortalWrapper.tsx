@@ -21,7 +21,7 @@ export const BuildsPortalWrapper = ({ parent }: BuildsPortalWrapperProps) => {
   const { buildsPortalContent } = useBuildsPortalContent();
 
   return createPortal(
-    <div className={`fixed h-full inset-0 transition-transform duration-300 ease-in-out ${!buildsPortalState && "translate-y-full"} z-100000`}>
+    <div className={`fixed h-dvh inset-0 transition-transform duration-300 ease-in-out ${!buildsPortalState && "translate-y-full"} z-100000`}>
       {buildsPortalContent}
     </div>,
     parent ?? document.body

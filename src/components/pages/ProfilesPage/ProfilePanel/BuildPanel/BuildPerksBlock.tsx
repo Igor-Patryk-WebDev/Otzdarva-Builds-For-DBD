@@ -1,5 +1,5 @@
 import type { ProfileAlt, ProfilePerk } from "@appTypes/Profiles";
-import { useState, type ComponentPropsWithoutRef } from "react";
+import { useState, useRef, useEffect, type ComponentPropsWithoutRef } from "react";
 
 interface BuildPerksBlockProps {
   perks: ProfilePerk[];
@@ -52,7 +52,7 @@ type PerkDetailsProps = ComponentPropsWithoutRef<"div"> & {
 const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
   return (
     <div
-      className={`fixed top-1/2 right-0 -translate-y-1/2 sm:translate-y-0 shadow-2xl shadow-black z-10000 w-full sm:w-150 bg-black ${visible ? "block" : "hidden"} sm:custom-anchor`}
+      className={`fixed top-1/2 right-0 -translate-y-1/2 lg:translate-y-0 shadow-2xl shadow-black z-10000 w-full lg:w-150 bg-black ${visible ? "block" : "hidden"} lg:custom-anchor`}
       {...rest}
     >
       <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killers-filter before:-z-1'>
@@ -60,14 +60,14 @@ const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
         <p className='text-sm sm:text-base font-extralight italic py-2'>{perk.obtainment}</p>
       </div>
       <div className='bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-xs sm:text-sm' dangerouslySetInnerHTML={{ __html: perk.description ?? "" }} />
-      <p className="absolute block sm:hidden my-1 top-full right-1/2 translate-x-1/2 text-center">Click away to close</p>
+      <p className="absolute block lg:hidden my-1 top-full right-1/2 translate-x-1/2 text-center">Click away to close</p>
     </div>
   );
 };
 
-const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
+const AltsBlock = ({ alts, expanded }: { alts: ProfileAlt[]; expanded: boolean }) => {
   return (
-    <div className="absolute w-full top-full z-4 grid grid-rows-[0fr] opacity-0 group-hover/showAlts:grid-rows-[1fr] group-hover/showAlts:opacity-100 transition-all">
+    <div className={`absolute w-full top-full z-4 grid transition-all ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 group-hover/showAlts:grid-rows-[1fr] group-hover/showAlts:opacity-100"}`}>
       <div className='overflow-hidden shadow-md shadow-black rounded-bl-lg rounded-br-lg bg-neutral-900 border border-t-0 border-neutral-800 min-h-0'>
         <div className="pb-4">
           {alts.map((alt) => {
@@ -82,17 +82,38 @@ const AltsBlock = ({ alts }: { alts: ProfileAlt[] }) => {
 };
 
 const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
+  const [altsExpanded, setAltsExpanded] = useState(false);
+  const blockRef = useRef<HTMLDivElement>(null);
+
+  // Close alts when tapping outside on touch devices
+  useEffect(() => {
+    if (!altsExpanded) return;
+    const handler = (e: PointerEvent) => {
+      if (blockRef.current && !blockRef.current.contains(e.target as Node)) {
+        setAltsExpanded(false);
+      }
+    };
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
+  }, [altsExpanded]);
+
   return (
-    <div className="relative grid grid-cols-[minmax(0,98px)] group/showAlts">
+    <div ref={blockRef} className="relative grid grid-cols-[minmax(0,98px)] group/showAlts">
       <Perk perk={perk} />
       {perk.alts.length > 0 && (
         <>
-          <div className="absolute bg-[url(/images/perk-background-red.png)] flex items-center justify-center bg-contain text-sm rounded-sm rotate-3 pointer-events-none top-0 right-0 translate-x-1/4 aspect-square w-8 group-hover/showAlts:opacity-0 transition-all">
+          <div
+            className={`absolute bg-[url(/images/perk-background-red.png)] flex items-center justify-center bg-contain text-sm rounded-sm rotate-3 top-0 right-0 translate-x-1/4 aspect-square w-8 cursor-pointer transition-all ${altsExpanded ? "opacity-0 pointer-events-none" : "group-hover/showAlts:opacity-0"}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setAltsExpanded((prev) => !prev);
+            }}
+          >
             <p className="w-full text-center">
               {`+${perk.alts.length}`}
             </p>
           </div>
-          <AltsBlock alts={perk.alts} />
+          <AltsBlock alts={perk.alts} expanded={altsExpanded} />
         </>
       )}
     </div>
