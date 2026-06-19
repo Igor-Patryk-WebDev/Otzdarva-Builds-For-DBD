@@ -6,7 +6,7 @@ export const useBuildsJSON = () => {
   return useQuery<BuildsData>({
     queryKey: ['builds'],
     queryFn: async () => {
-      const res = await fetch('/data/builds.json');
+      const res = await fetch('/data/builds.json', { cache: "no-store" });
       return res.json();
     },
     gcTime: 0

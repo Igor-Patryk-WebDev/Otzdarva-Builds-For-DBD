@@ -5,7 +5,7 @@ export const useAnnouncementsJSON = () => {
   return useQuery<Announcements>({
     queryKey: ["announcements"],
     queryFn: async () => {
-      const res = await fetch("/data/announcements.json");
+      const res = await fetch("/data/announcements.json", { cache: "no-store" });
       return res.json();
     },
     gcTime: 0
