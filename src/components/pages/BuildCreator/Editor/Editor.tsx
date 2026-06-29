@@ -3,19 +3,19 @@ import type { Build } from "@appTypes/Builds";
 import type { Perk } from "@appTypes/Scrape";
 
 import { type ComponentPropsWithoutRef, useState } from "react";
-import { useCloseEditorPortal } from "@contexts/EditorPortalContext";
-import { useScrape } from "@contexts/AppDataContext";
+import { useBuildEditorPortalState } from "@contexts/BuildEditor/BuildEditorPortalContext";
 import { useQueryClient } from "@tanstack/react-query";
+import { useScrape } from "@contexts/AppDataContext";
 import { Button } from "@components/shared/Button";
 import {
-  EditorProvider,
-  useEditorAlts,
-  useEditorBuildName,
-  useEditorError,
-  useEditorNotes,
-  useEditorPerkBrowser,
-  useEditorSlots,
-} from "@contexts/EditorContext";
+  BuildEditorProvider,
+  useBuildEditorAlts,
+  useBuildEditorBuildName,
+  useBuildEditorError,
+  useBuildEditorNotes,
+  useBuildEditorPerkBrowser,
+  useBuildEditorSlots,
+} from "@contexts/BuildEditor/BuildEditorContext";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -43,7 +43,7 @@ const EditorHeading = ({ name }: { name: string }) => (
 // ─── BuildNameBlock ───────────────────────────────────────────────────────────
 
 const BuildNameBlock = () => {
-  const { buildName, setBuildName } = useEditorBuildName();
+  const { buildName, setBuildName } = useBuildEditorBuildName();
 
   return (
     <div className="flex flex-col gap-1">
@@ -69,8 +69,8 @@ interface PerkSlotProps {
 
 const PerkSlot = ({ index }: PerkSlotProps) => {
   const { perkSlots, setPerkSlots, selectedSlot, setSelectedSlot } =
-    useEditorSlots();
-  const { alts, altPanelSlot, setAltPanelSlot } = useEditorAlts();
+    useBuildEditorSlots();
+  const { alts, altPanelSlot, setAltPanelSlot } = useBuildEditorAlts();
 
   const perk = perkSlots[index];
   const isAltPanel = altPanelSlot === index;
@@ -102,13 +102,12 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
     <div className="flex-1 flex flex-col gap-1">
       <button
         onClick={handleSlotClick}
-        className={`aspect-square relative w-full ${
-          isAltPanel
-            ? "ring-2 ring-blue-500 rounded-lg"
-            : isSelected
-              ? "ring-2 ring-otz bg-neutral-600 transition-colors rounded-lg"
-              : "border-neutral-600 hover:border-neutral-400"
-        }`}
+        className={`aspect-square relative w-full ${isAltPanel
+          ? "ring-2 ring-blue-500 rounded-lg"
+          : isSelected
+            ? "ring-2 ring-otz bg-neutral-600 transition-colors rounded-lg"
+            : "border-neutral-600 hover:border-neutral-400"
+          }`}
       >
         {perk ? (
           <>
@@ -142,11 +141,10 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
       {isSelected && perk && (
         <button
           onClick={handleToggleAltPanel}
-          className={`w-full text-xs rounded-md py-0.5 transition ${
-            isAltPanel
-              ? "bg-blue-600 text-white"
-              : "bg-neutral-700 text-neutral-300 hover:bg-blue-600/60 hover:text-white"
-          }`}
+          className={`w-full text-xs rounded-md py-0.5 transition ${isAltPanel
+            ? "bg-blue-600 text-white"
+            : "bg-neutral-700 text-neutral-300 hover:bg-blue-600/60 hover:text-white"
+            }`}
         >
           {isAltPanel ? "← Back" : "+ Alts"}
         </button>
@@ -158,8 +156,8 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
 // ─── AltsPanel ────────────────────────────────────────────────────────────────
 
 const AltsPanel = () => {
-  const { perkSlots } = useEditorSlots();
-  const { alts, setAlts, altPanelSlot } = useEditorAlts();
+  const { perkSlots } = useBuildEditorSlots();
+  const { alts, setAlts, altPanelSlot } = useBuildEditorAlts();
 
   if (altPanelSlot === null || !perkSlots[altPanelSlot]) return null;
 
@@ -219,7 +217,7 @@ const PerkSlotsBlock = () => (
 );
 
 const NotesBlock = () => {
-  const { notes, setNotes, notesCount, setNotesCount } = useEditorNotes();
+  const { notes, setNotes, notesCount, setNotesCount } = useBuildEditorNotes();
 
   const handleAddNote = () => setNotesCount((prev) => Math.min(prev + 1, 8));
   const handleRemoveNote = () => setNotesCount((prev) => Math.max(prev - 1, 1));
@@ -279,9 +277,9 @@ interface PerkBrowserBlockProps {
 }
 
 const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
-  const { perkQuery, setPerkQuery } = useEditorPerkBrowser();
-  const { selectedSlot, setPerkSlots, perkSlots } = useEditorSlots();
-  const { altPanelSlot, setAlts, alts } = useEditorAlts();
+  const { perkQuery, setPerkQuery } = useBuildEditorPerkBrowser();
+  const { selectedSlot, setPerkSlots, perkSlots } = useBuildEditorSlots();
+  const { altPanelSlot, setAlts, alts } = useBuildEditorAlts();
 
   const filtered = perks.filter((perk) =>
     perk.name.toLowerCase().includes(perkQuery.toLowerCase()),
@@ -380,22 +378,20 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
                 key={perk.name}
                 onClick={() => handlePerkSelect(perk)}
                 title={blocked ? "Already used" : perk.name}
-                className={`cursor-pointer transition ${
-                  blocked
-                    ? "opacity-30 cursor-not-allowed"
-                    : canSelect
-                      ? "hover:scale-105"
-                      : "opacity-50 cursor-not-allowed"
-                }`}
+                className={`cursor-pointer transition ${blocked
+                  ? "opacity-30 cursor-not-allowed"
+                  : canSelect
+                    ? "hover:scale-105"
+                    : "opacity-50 cursor-not-allowed"
+                  }`}
               >
                 <img
                   src={perk.iconUrl}
                   alt={perk.name}
-                  className={`w-full aspect-square object-cover rounded-lg transition ${
-                    !blocked && canSelect
-                      ? "hover:ring-1 hover:ring-otz hover:bg-neutral-700"
-                      : ""
-                  }`}
+                  className={`w-full aspect-square object-cover rounded-lg transition ${!blocked && canSelect
+                    ? "hover:ring-1 hover:ring-otz hover:bg-neutral-700"
+                    : ""
+                    }`}
                 />
                 <p className="text-center text-xs text-neutral-400 truncate mt-1">
                   {perk.name}
@@ -418,15 +414,15 @@ interface EditorInnerProps {
 }
 
 const EditorInner = ({ character, build }: EditorInnerProps) => {
-  const closeEditorPortal = useCloseEditorPortal();
-  const { error, setError } = useEditorError();
+  const { closeBuildEditorPortal } = useBuildEditorPortalState();
+  const { error, setError } = useBuildEditorError();
   const scrape = useScrape();
   const queryClient = useQueryClient();
 
-  const { buildName } = useEditorBuildName();
-  const { perkSlots } = useEditorSlots();
-  const { alts } = useEditorAlts();
-  const { notes } = useEditorNotes();
+  const { buildName } = useBuildEditorBuildName();
+  const { perkSlots } = useBuildEditorSlots();
+  const { alts } = useBuildEditorAlts();
+  const { notes, notesCount } = useBuildEditorNotes();
 
   const perks = scrape[character.role].perks;
 
@@ -443,29 +439,33 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
       .map((slot, i) =>
         slot
           ? {
-              name: slot.name,
-              alts: alts[i].map((a) => ({ name: a.name })),
-            }
+            name: slot.name,
+            alts: alts[i].map((a) => ({ name: a.name })),
+          }
           : null,
       )
       .filter(Boolean);
 
     const isEdit = !!build;
     const endpoint = isEdit ? "/api/update_build.php" : "/api/save_build.php";
+
+    // Only include visible note slots; drop any empty trailing entries
+    const notesPayload = notes.slice(0, notesCount).filter((n) => n.trim() !== "");
+
     const body = isEdit
       ? {
-          characterName: character.name,
-          oldBuildName: build!.name,
-          buildName: buildName.trim(),
-          perks: perksPayload,
-          notes,
-        }
+        characterName: character.name,
+        oldBuildName: build!.name,
+        buildName: buildName.trim(),
+        perks: perksPayload,
+        notes: notesPayload,
+      }
       : {
-          characterName: character.name,
-          buildName: buildName.trim(),
-          perks: perksPayload,
-          notes,
-        };
+        characterName: character.name,
+        buildName: buildName.trim(),
+        perks: perksPayload,
+        notes: notesPayload,
+      };
 
     setIsSaving(true);
     setError(null);
@@ -485,7 +485,7 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
       }
 
       await queryClient.invalidateQueries({ queryKey: ["builds"] });
-      closeEditorPortal();
+      closeBuildEditorPortal();
     } catch {
       setError("Network error. Please try again.");
     } finally {
@@ -496,7 +496,7 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
   return (
     <div className="fixed inset-0 z-10000000 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="relative bg-neutral-900 w-[calc(100%-4rem)] h-[calc(100%-4rem)] p-6 rounded-xl flex flex-col gap-4 border border-white/10">
-        <CloseButton onClick={() => closeEditorPortal()} />
+        <CloseButton onClick={() => closeBuildEditorPortal()} />
 
         <div className="flex flex-1 gap-4 overflow-hidden">
           {/* Left panel */}
@@ -548,25 +548,25 @@ export const Editor = ({ character, build }: EditorProps) => {
 
   const initialAlts: Perk[][] = build
     ? build.perks.slice(0, 4).map((slot) =>
-        slot.alts.map((a) => {
-          const scraped = perkMap.get(a.name);
-          return {
-            name: a.name,
-            iconUrl: scraped?.iconUrl ?? "",
-            description: scraped?.description ?? "",
-            obtainment: scraped?.obtainment ?? "",
-          };
-        }),
-      )
+      slot.alts.map((a) => {
+        const scraped = perkMap.get(a.name);
+        return {
+          name: a.name,
+          iconUrl: scraped?.iconUrl ?? "",
+          description: scraped?.description ?? "",
+          obtainment: scraped?.obtainment ?? "",
+        };
+      }),
+    )
     : [[], [], [], []];
 
   // Pad to always have exactly 4 rows
   while (initialAlts.length < 4) initialAlts.push([]);
 
   return (
-    <EditorProvider initialBuild={build} initialAlts={initialAlts}>
+    <BuildEditorProvider initialBuild={build} initialAlts={initialAlts}>
       <EditorInner character={character} build={build} />
-    </EditorProvider>
+    </BuildEditorProvider>
   );
 };
 

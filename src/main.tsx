@@ -1,16 +1,16 @@
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 import "./styles/index.css";
 
 // Import the generated route tree
-import { routeTree } from "./routeTree.gen";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { ProfileBuildsPortalProvider } from "@contexts/ProfileBuildsPortalContext";
+import { BuildEditorPortalProvider } from "@contexts/BuildEditor";
 import { AppDataProvider } from "@contexts/AppDataContext";
-import { BuildsPortalProvider } from "@contexts/BuildsPortalContext";
-import { BuildsPortalWrapper } from "@components/pages/ProfilesPage/BuildsPortalWrapper";
-import { EditorPortalProvider } from "@contexts/EditorPortalContext";
+import { routeTree } from "./routeTree.gen";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -31,14 +31,13 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <AppDataProvider>
-        <BuildsPortalProvider>
-          <EditorPortalProvider>
+        <ProfileBuildsPortalProvider>
+          <BuildEditorPortalProvider>
             <StrictMode>
               <RouterProvider router={router} />
-              <BuildsPortalWrapper />
             </StrictMode>
-          </EditorPortalProvider>
-        </BuildsPortalProvider>
+          </BuildEditorPortalProvider>
+        </ProfileBuildsPortalProvider>
       </AppDataProvider>
     </QueryClientProvider>,
   );

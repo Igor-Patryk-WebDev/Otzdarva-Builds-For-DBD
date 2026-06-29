@@ -1,14 +1,14 @@
-import type { ProfileData } from '@appTypes/Profiles';
+import type { ProfileData, ProfilesData } from '@appTypes/Profiles';
 
-import { useOpenBuildsPortal, useBuildsPortalContent, useBuildsPortalState } from '@contexts/BuildsPortalContext';
+import { useProfileBuildsPortalState, useProfileBuildsPortalContent } from '@contexts/ProfileBuildsPortalContext';
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
+import { ProfileBuildsWrapper } from './ProfileBuildsWrapper';
 import { BuildsNotExistPanel } from './BuildsNotExistPanel';
 import { useGenericBuild } from '@hooks/builds/useGenericBuild';
 import { ProfileHeader } from './ProfileHeader';
 import { BuildPanel } from './BuildPanel';
-import { BuildsList } from './BuildsList';
 
-interface ProfilePanelProps {
+type ProfilePanelProps = {
   profile: ProfileData
 }
 
@@ -18,9 +18,8 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   const builds = profile.builds
   const role = profile.role
 
-  const portalState = useBuildsPortalState();
-  const openPortal = useOpenBuildsPortal();
-  const { setBuildsPortalContent } = useBuildsPortalContent();
+  const { profileBuildsPortalState, openProfileBuildsPortal } = useProfileBuildsPortalState();
+  const { setProfileBuildsPortalContent } = useProfileBuildsPortalContent();
 
   const { build } = useGenericBuild(builds);
 
@@ -29,14 +28,18 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   return (
     <div className='relative grid w-full grid-cols-1 sm:grid-cols-subgrid sm:col-span-2 2xl:even:col-start-4'>
       <ProfileHeader name={name} buildsCount={buildsCount} onClick={() => {
-        !portalState && setBuildsPortalContent(
-          <BuildsList name={name}>
-            {builds && builds.map((b) => (
-              <BuildPanel key={b.name} build={b} />
-            ))}
-          </BuildsList>
-        );
-        !portalState && openPortal();
+        !profileBuildsPortalState && setProfileBuildsPortalContent(() => (profiles: ProfilesData) => {
+          const latestProfile = profiles[role].find((p) => p.name === name) ?? profile;
+          const latestBuilds = latestProfile.builds;
+          return (
+            <ProfileBuildsWrapper name={name}>
+              {latestBuilds && latestBuilds.map((b) => (
+                <BuildPanel key={b.name} build={b} />
+              ))}
+            </ProfileBuildsWrapper>
+          );
+        });
+        !profileBuildsPortalState && openProfileBuildsPortal();
       }}>
       </ProfileHeader>
       <CharacterPortraitBlock name={name} portraitUrl={portrait} role={role} />

@@ -1,17 +1,17 @@
-import { RoleSelectWrapper } from "@components/pages/FrontPage";
-import { WebsiteBanner } from "@components/pages/FrontPage";
-import { LastUpdated } from "@components/pages/FrontPage";
-import { AnnouncementsPortal } from "@components/pages/FrontPage/Announcements/AnnouncementsPortal";
-import { ReportBugButton } from "@components/pages/FrontPage/ReportBugButton";
-import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
-import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
-import { Button } from "@components/shared/Button";
-import { useHotkey } from "@tanstack/react-hotkeys";
-import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { AnnouncementsPortal } from "@components/pages/FrontPage/Announcements/AnnouncementsPortal";
+import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
+import { RoleSelectWrapper } from "@components/pages/FrontPage";
+import { ReportBugButton } from "@components/pages/FrontPage/ReportBugButton";
+import { WebsiteBanner } from "@components/pages/FrontPage";
+import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
 import { createPortal } from "react-dom";
+import { LastUpdated } from "@components/pages/FrontPage";
+import { useHotkey } from "@tanstack/react-hotkeys";
+import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
+import { useState } from "react";
 import { IconSVG } from "@components/shared/IconSVG";
+import { Button } from "@components/shared/Button";
 
 export const Route = createFileRoute("/")({
   component: RootPage,
@@ -58,7 +58,7 @@ function RootPage() {
         <SocialWrapper />
 
         <SelfPlug />
-        <div className="absolute bottom-4 right-4 hidden sm:block">
+        <div className="absolute bottom-8 right-4">
           <ReportBugButton />
         </div>
       </div>

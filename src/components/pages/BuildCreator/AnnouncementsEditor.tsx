@@ -1,17 +1,17 @@
 import type { Announcements } from "@appTypes/Announcements";
+
+import { useAnnouncementsPortalState } from "@contexts/AnnouncementsPortalContext";
 import { useAnnouncementsJSON } from "@hooks/queries/useAnnouncementsJSON";
-import { useState } from "react";
-import { Button } from "@components/shared/Button";
-import { useQueryClient } from "@tanstack/react-query";
 import { useAlertAutoDelete } from "@hooks/announcements/useAlertAutoDelete";
 import { DecoratedHeading } from "@components/shared/DecoratedHeading";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { IconSVG } from "@components/shared/IconSVG";
+import { Button } from "@components/shared/Button";
 
-type Props = {
-  onClose: () => void;
-};
+export const AnnouncementsEditor = () => {
+  const { closeAnnouncementsPortal } = useAnnouncementsPortalState();
 
-export const AnnouncementPortal = ({ onClose }: Props) => {
   const { data } = useAnnouncementsJSON();
   const queryClient = useQueryClient();
   const [title, setTitle] = useState("");
@@ -68,7 +68,7 @@ export const AnnouncementPortal = ({ onClose }: Props) => {
   return (
     <div
       className="flex center fixed inset-0 bg-black/50 z-10000"
-      onClick={onClose}
+      onClick={closeAnnouncementsPortal}
     >
       {/* Panel dodawania */}
       <div
@@ -182,7 +182,7 @@ export const AnnouncementPortal = ({ onClose }: Props) => {
             Add
           </Button>
           <Button
-            onClick={onClose}
+            onClick={closeAnnouncementsPortal}
             className="bg-neutral-600 rounded-md"
           >
             <IconSVG icon="Close" />

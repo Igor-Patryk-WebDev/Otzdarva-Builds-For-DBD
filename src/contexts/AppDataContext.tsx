@@ -2,10 +2,10 @@ import type { BuildsData } from "@appTypes/Builds";
 import type { ProfilesData } from "@appTypes/Profiles";
 import type { ScrapeData } from "@appTypes/Scrape";
 
+import { createContext, useContext, type ReactNode } from "react"
 import { useCustomProfiles } from "@hooks/profiles/useCustomProfiles";
 import { useBuildsJSON } from "@hooks/queries/useBuildsJSON"
 import { useScrapeJSON } from "@hooks/queries/useScrapeJSON";
-import { createContext, useContext, type ReactNode } from "react"
 import { Loader } from "@components/shared/Loader";
 
 interface AppDataContextType {

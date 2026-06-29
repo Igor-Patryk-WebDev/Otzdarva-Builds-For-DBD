@@ -1,28 +1,28 @@
-import { Button } from "@components/shared/Button";
-import { DecoratedHeading } from "@components/shared/DecoratedHeading";
-import { IconSVG } from "@components/shared/IconSVG";
-import { useCloseBuildsPortal, useBuildsPortalContent } from "@contexts/BuildsPortalContext"
-import { useHotkey } from "@tanstack/react-hotkeys";
 import type { ReactNode } from "react";
 
+import { useProfileBuildsPortalState, useProfileBuildsPortalContent } from '@contexts/ProfileBuildsPortalContext';
+import { DecoratedHeading } from "@components/shared/DecoratedHeading";
+import { useHotkey } from "@tanstack/react-hotkeys";
+import { IconSVG } from "@components/shared/IconSVG";
+import { Button } from "@components/shared/Button";
+
 interface BuildsListProps {
-  // builds: ProfileBuild[] | undefined
   name: string
   children: ReactNode
 }
 
-export const BuildsList = ({ name, children }: BuildsListProps) => {
-  const closePortal = useCloseBuildsPortal();
-  const { setBuildsPortalContent } = useBuildsPortalContent();
+export const ProfileBuildsWrapper = ({ name, children }: BuildsListProps) => {
+  const { closeProfileBuildsPortal } = useProfileBuildsPortalState();
+  const { setProfileBuildsPortalContent } = useProfileBuildsPortalContent();
 
-  useHotkey("Escape", () => closePortal());
+  useHotkey("Escape", () => closeProfileBuildsPortal());
 
   return (
     <div className='absolute w-full max-w-400 max-h-full px-4 sm:px-8 pt-8 bottom-0 right-1/2 translate-x-1/2 z-1000 bg-[hsl(220_5%_8%)] border border-neutral-800 rounded-tl-2xl rounded-tr-2xl'>
       <Button className='absolute top-4 right-4 bg-otz hover:bg-[hsl(from_var(--color-otz)_h_s_40%)] size-6 sm:size-8 rounded-sm flex items-center justify-center' onClick={() => {
-        closePortal();
+        closeProfileBuildsPortal();
         setTimeout(() => {
-          setBuildsPortalContent(null)
+          setProfileBuildsPortalContent(null);
         }, 300);
       }}>
         <IconSVG icon="Close" size={1.5} />

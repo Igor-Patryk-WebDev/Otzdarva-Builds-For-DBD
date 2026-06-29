@@ -28,7 +28,7 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
   return (
     <Link
       to={`/${lowercaseRole}`}
-      className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block p-2 sm:p-4 sm:h-64 h-32 overflow-clip relative sm:w-1/2 sm:hover:w-2/3 sm:transition-all`}
+      className={`${styles[lowercaseRole].link} border-2 bg-linear-to-t ${styles[lowercaseRole].gradient} to-neutral-900 rounded-md block active:scale-97 p-2 sm:p-4 sm:h-64 h-32 overflow-clip relative sm:w-1/2 sm:hover:w-2/3 transition-all`}
       viewTransition={{
         types: () => (role === "Killers" ? ["to-killers"] : ["to-survivors"]),
       }}

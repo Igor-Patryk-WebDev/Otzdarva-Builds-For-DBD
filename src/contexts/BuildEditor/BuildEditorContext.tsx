@@ -10,7 +10,7 @@ import {
   type SetStateAction,
 } from "react";
 
-interface EditorContextValue {
+interface BuildEditorContextValue {
   buildName: string;
   setBuildName: Dispatch<SetStateAction<string>>;
 
@@ -47,38 +47,38 @@ interface EditorProviderProps {
   initialAlts?: Perk[][];
 }
 
-const EditorContext = createContext<EditorContextValue>(undefined!);
+const BuildEditorContext = createContext<BuildEditorContextValue>(undefined!);
 
-export const useEditorBuildName = () => {
-  const { buildName, setBuildName } = useContext(EditorContext);
+export const useBuildEditorBuildName = () => {
+  const { buildName, setBuildName } = useContext(BuildEditorContext);
   return { buildName, setBuildName };
 };
 
-export const useEditorSlots = () => {
+export const useBuildEditorSlots = () => {
   const { selectedSlot, setSelectedSlot, perkSlots, setPerkSlots } =
-    useContext(EditorContext);
+    useContext(BuildEditorContext);
   return { selectedSlot, setSelectedSlot, perkSlots, setPerkSlots };
 };
 
-export const useEditorAlts = () => {
+export const useBuildEditorAlts = () => {
   const { alts, setAlts, altPanelSlot, setAltPanelSlot } =
-    useContext(EditorContext);
+    useContext(BuildEditorContext);
   return { alts, setAlts, altPanelSlot, setAltPanelSlot };
 };
 
-export const useEditorNotes = () => {
+export const useBuildEditorNotes = () => {
   const { notes, setNotes, notesCount, setNotesCount } =
-    useContext(EditorContext);
+    useContext(BuildEditorContext);
   return { notes, setNotes, notesCount, setNotesCount };
 };
 
-export const useEditorPerkBrowser = () => {
-  const { perkQuery, setPerkQuery } = useContext(EditorContext);
+export const useBuildEditorPerkBrowser = () => {
+  const { perkQuery, setPerkQuery } = useContext(BuildEditorContext);
   return { perkQuery, setPerkQuery };
 };
 
-export const useEditorError = () => {
-  const { error, setError } = useContext(EditorContext);
+export const useBuildEditorError = () => {
+  const { error, setError } = useContext(BuildEditorContext);
   return { error, setError };
 };
 
@@ -98,7 +98,7 @@ function buildToSlots(build: Build): (ProfilePerk | null)[] {
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
-export const EditorProvider = ({ children, initialBuild, initialAlts }: EditorProviderProps) => {
+export const BuildEditorProvider = ({ children, initialBuild, initialAlts }: EditorProviderProps) => {
   const [buildName, setBuildName] = useState(initialBuild?.name ?? "");
 
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
@@ -111,7 +111,9 @@ export const EditorProvider = ({ children, initialBuild, initialAlts }: EditorPr
   );
   const [altPanelSlot, setAltPanelSlot] = useState<number | null>(null);
 
-  const [notesCount, setNotesCount] = useState(4);
+  const [notesCount, setNotesCount] = useState(
+    initialBuild?.notes?.length ? Math.max(1, Math.min(initialBuild.notes.length, 8)) : 4
+  );
   const [notes, setNotes] = useState<string[]>(
     initialBuild?.notes ?? []
   );
@@ -121,7 +123,7 @@ export const EditorProvider = ({ children, initialBuild, initialAlts }: EditorPr
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <EditorContext
+    <BuildEditorContext
       value={{
         buildName,
         setBuildName,
@@ -144,6 +146,6 @@ export const EditorProvider = ({ children, initialBuild, initialAlts }: EditorPr
       }}
     >
       {children}
-    </EditorContext>
+    </BuildEditorContext>
   );
 };

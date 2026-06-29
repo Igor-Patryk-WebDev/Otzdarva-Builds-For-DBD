@@ -1,14 +1,15 @@
-import type { ProfileData } from "@appTypes/Profiles";
+import type { ProfileData, ProfilesData } from "@appTypes/Profiles";
 
-import { useBuildsPortalContent, useBuildsPortalState, useOpenBuildsPortal } from "@contexts/BuildsPortalContext";
+import { useProfileBuildsPortalState, useProfileBuildsPortalContent } from "@contexts/ProfileBuildsPortalContext";
 import { CharacterPortraitBlock } from "../ProfilesPage/ProfilePanel/CharacterPortraitBlock";
 import { DeleteBuildButton } from "./DeleteBuildButton";
 import { DecoratedHeading } from "@components/shared/DecoratedHeading";
 import { EditBuildButton } from "./EditBuildButton";
 import { AddBuildButton } from "./AddBuildButton";
 import { BuildPanel } from "../ProfilesPage/ProfilePanel/BuildPanel";
-import { BuildsList } from "../ProfilesPage/ProfilePanel/BuildsList";
+import { ProfileBuildsWrapper } from "../ProfilesPage/ProfilePanel/ProfileBuildsWrapper";
 import { Button } from "@components/shared/Button";
+import { IconSVG } from "@components/shared/IconSVG";
 
 interface Props {
   character: ProfileData;
@@ -16,10 +17,10 @@ interface Props {
 
 const PortalContentBlock = ({ character }: Props) => {
   return (
-    <BuildsList name={character.name}>
+    <ProfileBuildsWrapper name={character.name}>
       {character.builds &&
         character.builds?.map((build) => (
-          <div>
+          <div key={build.name}>
             <BuildPanel build={build} />
             <div className="grid grid-cols-2 gap-2 mt-2">
               <DeleteBuildButton character={character} build={build} />
@@ -29,27 +30,30 @@ const PortalContentBlock = ({ character }: Props) => {
         ))
       }
       <AddBuildButton character={character} />
-    </BuildsList>
+    </ProfileBuildsWrapper>
   )
 }
 
 const CustomProfileHeading = ({ character }: Props) => {
   const buildsCount = character.builds?.length ?? 0
 
-  const buildsPortalState = useBuildsPortalState();
-  const openBuildsPortal = useOpenBuildsPortal();
-  const { setBuildsPortalContent } = useBuildsPortalContent();
+  const { profileBuildsPortalState, openProfileBuildsPortal } = useProfileBuildsPortalState();
+  const { setProfileBuildsPortalContent } = useProfileBuildsPortalContent();
 
   return (
     <div className='absolute bottom-[calc(100%+10px)] w-full'>
       <DecoratedHeading text={character.name} gap={2} />
       <div className='flex gap-2 center'>
         <p className='text-center text-neutral-500 text-sm [text-decoration_underline]'>Builds: {buildsCount}</p>
-        <Button className='text-center text-sm rounded-sm bg-otz px-2' onClick={() => {
-          !buildsPortalState && setBuildsPortalContent(<PortalContentBlock character={character} />);
-          !buildsPortalState && openBuildsPortal();
+        <Button className='text-center flex items-center gap-1 text-sm rounded-sm bg-otz px-2' onClick={() => {
+          !profileBuildsPortalState && setProfileBuildsPortalContent(() => (profiles: ProfilesData) => {
+            const latestCharacter = profiles[character.role].find((c) => c.name === character.name) ?? character;
+            return <PortalContentBlock character={latestCharacter} />;
+          });
+          !profileBuildsPortalState && openProfileBuildsPortal();
         }}>
           SHOW
+          <IconSVG icon="Menu" size={1} />
         </Button>
       </div>
     </div>
