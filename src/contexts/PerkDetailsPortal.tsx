@@ -1,4 +1,4 @@
-import { usePerkDetailsPortalContent, usePerkDetailsPortalState } from "./PerkDetailsPortalContext"
+import { usePerkDetailsPortalContent } from "./PerkDetailsPortalContext"
 import { createPortal } from "react-dom"
 
 type PerkDetailsPortalProps = {
