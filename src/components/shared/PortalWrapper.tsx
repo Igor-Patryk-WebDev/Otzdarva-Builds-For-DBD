@@ -9,7 +9,7 @@ type PortalWrapperProps = {
 
 export const PortalWrapper = ({ children, portalState, parent }: PortalWrapperProps) => {
   return createPortal(
-    <div className={`fixed h-full inset-0 transition-transform duration-300 ease-in-out ${!portalState && "translate-y-full"} z-00000`}>
+    <div className={`fixed h-full inset-0 transition-transform duration-300 ease-in-out ${!portalState && "translate-y-full"} z-100000`}>
       {children}
     </div>,
     parent ?? document.body
