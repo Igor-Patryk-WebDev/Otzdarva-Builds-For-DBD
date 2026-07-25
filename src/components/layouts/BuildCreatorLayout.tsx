@@ -1,24 +1,33 @@
-import type { Dispatch, ReactNode, SetStateAction } from "react"
-import type { DbdRole } from "@appTypes/profiles.types"
+import type { Dispatch, ReactNode, SetStateAction } from "react";
+import type { DbdRole } from "@appTypes/profiles.types";
 
-import { AnnouncementsPortalProvider } from "@contexts/AnnouncementsPortalContext"
-import { AnnouncementsPortal } from "@components/pages/BuildsEditorPage/AnnouncementsPortal"
-import { ProfileBuildsPortal } from "@components/pages/ProfilesPage/ProfileBuildsPortal"
-import { AdminNavigation } from "@components/pages/BuildsEditorPage/AdminNavigation"
-import { EditorPortal } from "@components/pages/BuildsEditorPage/EditorPortal"
+import { AnnouncementsPortalProvider } from "@contexts/AnnouncementsPortalContext";
+import { AnnouncementsPortal } from "@components/pages/BuildsEditorPage/AnnouncementsPortal";
+import { ProfileBuildsPortal } from "@components/pages/ProfilesPage/ProfileBuildsPortal";
+import { AdminNavigation } from "@components/pages/BuildsEditorPage/AdminNavigation";
+import { EditorPortal } from "@components/pages/BuildsEditorPage/EditorPortal";
 
 type BuildCreatorLayoutProps = {
-  children: ReactNode
+  children: ReactNode;
   setRole: Dispatch<SetStateAction<DbdRole>>;
-  searchQuery: string
-  setSearchQuery: Dispatch<SetStateAction<string>>
-}
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+};
 
-export const BuildCreatorLayout = ({ children, setRole, searchQuery, setSearchQuery }: BuildCreatorLayoutProps) => {
+export const BuildCreatorLayout = ({
+  children,
+  setRole,
+  searchQuery,
+  setSearchQuery,
+}: BuildCreatorLayoutProps) => {
   return (
-    <section className="px-32 py-16">
+    <section className="px-4 md:px-32 py-2 md:py-16">
       <AnnouncementsPortalProvider>
-        <AdminNavigation setRole={setRole} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <AdminNavigation
+          setRole={setRole}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
         <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] justify-items-center gap-y-24 gap-x-8 py-16">
           {children}
         </div>
@@ -27,5 +36,5 @@ export const BuildCreatorLayout = ({ children, setRole, searchQuery, setSearchQu
         <AnnouncementsPortal />
       </AnnouncementsPortalProvider>
     </section>
-  )
-}
+  );
+};

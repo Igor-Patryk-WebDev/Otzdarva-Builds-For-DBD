@@ -11,12 +11,16 @@ import { useHotkey } from "@tanstack/react-hotkeys";
 import { Button } from "@components/shared/Button";
 
 type AdminNavigationProps = {
-  setRole: Dispatch<SetStateAction<DbdRole>>
-  searchQuery: string
-  setSearchQuery: Dispatch<SetStateAction<string>>
+  setRole: Dispatch<SetStateAction<DbdRole>>;
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 };
 
-export const AdminNavigation = ({ setRole, searchQuery, setSearchQuery }: AdminNavigationProps) => {
+export const AdminNavigation = ({
+  setRole,
+  searchQuery,
+  setSearchQuery,
+}: AdminNavigationProps) => {
   const { closeAnnouncementsPortal } = useAnnouncementsPortalState();
 
   useHotkey("Escape", () => {
@@ -24,7 +28,7 @@ export const AdminNavigation = ({ setRole, searchQuery, setSearchQuery }: AdminN
   });
 
   return (
-    <div className="flex gap-4 my-4 border-b border-b-neutral-800 pb-8 mb-8">
+    <div className="flex flex-col md:flex-row gap-4 my-4 border-b border-b-neutral-800 pb-8 mb-8">
       <RoleSwitcherButtons setRole={setRole} />
       <AnnouncementsButton />
       <OtherButtons />
@@ -34,10 +38,13 @@ export const AdminNavigation = ({ setRole, searchQuery, setSearchQuery }: AdminN
       <Button
         className="bg-otz px-3 rounded-md"
         onClick={async () => {
-          const res = await fetch("/api/request_scrape.php", { method: "POST" });
+          const res = await fetch("/api/request_scrape.php", {
+            method: "POST",
+          });
           const data = await res.json();
           if (!data.success) console.log(data.error);
-        }}>
+        }}
+      >
         Scrape Wiki
       </Button>
     </div>

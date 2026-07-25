@@ -67,9 +67,10 @@ export const AnnouncementsEditor = () => {
 
   return (
     <div
-      className="flex center fixed inset-0 bg-black/50 z-10000"
+      className="flex items-center justify-center fixed inset-0 bg-black/50 z-10000 p-4 overflow-y-auto"
       onClick={closeAnnouncementsPortal}
     >
+      <div className="flex flex-col md:flex-row gap-4 items-start my-auto">
       {/* Panel dodawania */}
       <div
         className="flex flex-col gap-2 bg-neutral-900 border border-neutral-800 rounded-md p-8"
@@ -192,7 +193,7 @@ export const AnnouncementsEditor = () => {
 
       {/* Panel podglądu */}
       <div
-        className="flex flex-col gap-2 bg-neutral-900 w-120 h-90 overflow-auto p-8"
+        className="flex flex-col gap-2 bg-neutral-900 w-full md:w-120 md:h-90 overflow-auto p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-center">PREVIEW</h2>
@@ -234,6 +235,7 @@ export const AnnouncementsEditor = () => {
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

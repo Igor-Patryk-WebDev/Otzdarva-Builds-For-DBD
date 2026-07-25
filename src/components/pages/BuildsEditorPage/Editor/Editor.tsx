@@ -102,12 +102,13 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
     <div className="flex-1 flex flex-col gap-1">
       <button
         onClick={handleSlotClick}
-        className={`aspect-square relative w-full ${isAltPanel
-          ? "ring-2 ring-blue-500 rounded-lg"
-          : isSelected
-            ? "ring-2 ring-otz bg-neutral-600 transition-colors rounded-lg"
-            : "border-neutral-600 hover:border-neutral-400"
-          }`}
+        className={`aspect-square relative w-full ${
+          isAltPanel
+            ? "ring-2 ring-blue-500 rounded-lg"
+            : isSelected
+              ? "ring-2 ring-otz bg-neutral-600 transition-colors rounded-lg"
+              : "border-neutral-600 hover:border-neutral-400"
+        }`}
       >
         {perk ? (
           <>
@@ -141,10 +142,11 @@ const PerkSlot = ({ index }: PerkSlotProps) => {
       {isSelected && perk && (
         <button
           onClick={handleToggleAltPanel}
-          className={`w-full text-xs rounded-md py-0.5 transition ${isAltPanel
-            ? "bg-blue-600 text-white"
-            : "bg-neutral-700 text-neutral-300 hover:bg-blue-600/60 hover:text-white"
-            }`}
+          className={`w-full text-xs rounded-md py-0.5 transition ${
+            isAltPanel
+              ? "bg-blue-600 text-white"
+              : "bg-neutral-700 text-neutral-300 hover:bg-blue-600/60 hover:text-white"
+          }`}
         >
           {isAltPanel ? "← Back" : "+ Alts"}
         </button>
@@ -378,20 +380,22 @@ const PerkBrowserBlock = ({ perks }: PerkBrowserBlockProps) => {
                 key={perk.name}
                 onClick={() => handlePerkSelect(perk)}
                 title={blocked ? "Already used" : perk.name}
-                className={`cursor-pointer transition ${blocked
-                  ? "opacity-30 cursor-not-allowed"
-                  : canSelect
-                    ? "hover:scale-105"
-                    : "opacity-50 cursor-not-allowed"
-                  }`}
+                className={`cursor-pointer transition ${
+                  blocked
+                    ? "opacity-30 cursor-not-allowed"
+                    : canSelect
+                      ? "hover:scale-105"
+                      : "opacity-50 cursor-not-allowed"
+                }`}
               >
                 <img
                   src={perk.iconUrl}
                   alt={perk.name}
-                  className={`w-full aspect-square object-cover rounded-lg transition ${!blocked && canSelect
-                    ? "hover:ring-1 hover:ring-otz hover:bg-neutral-700"
-                    : ""
-                    }`}
+                  className={`w-full aspect-square object-cover rounded-lg transition ${
+                    !blocked && canSelect
+                      ? "hover:ring-1 hover:ring-otz hover:bg-neutral-700"
+                      : ""
+                  }`}
                 />
                 <p className="text-center text-xs text-neutral-400 truncate mt-1">
                   {perk.name}
@@ -439,9 +443,9 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
       .map((slot, i) =>
         slot
           ? {
-            name: slot.name,
-            alts: alts[i].map((a) => ({ name: a.name })),
-          }
+              name: slot.name,
+              alts: alts[i].map((a) => ({ name: a.name })),
+            }
           : null,
       )
       .filter(Boolean);
@@ -450,22 +454,24 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
     const endpoint = isEdit ? "/api/update_build.php" : "/api/save_build.php";
 
     // Only include visible note slots; drop any empty trailing entries
-    const notesPayload = notes.slice(0, notesCount).filter((n) => n.trim() !== "");
+    const notesPayload = notes
+      .slice(0, notesCount)
+      .filter((n) => n.trim() !== "");
 
     const body = isEdit
       ? {
-        characterName: character.name,
-        oldBuildName: build!.name,
-        buildName: buildName.trim(),
-        perks: perksPayload,
-        notes: notesPayload,
-      }
+          characterName: character.name,
+          oldBuildName: build!.name,
+          buildName: buildName.trim(),
+          perks: perksPayload,
+          notes: notesPayload,
+        }
       : {
-        characterName: character.name,
-        buildName: buildName.trim(),
-        perks: perksPayload,
-        notes: notesPayload,
-      };
+          characterName: character.name,
+          buildName: buildName.trim(),
+          perks: perksPayload,
+          notes: notesPayload,
+        };
 
     setIsSaving(true);
     setError(null);
@@ -498,26 +504,22 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
       <div className="relative bg-neutral-900 w-[calc(100%-4rem)] h-[calc(100%-4rem)] p-6 rounded-xl flex flex-col gap-4 border border-white/10">
         <CloseButton onClick={() => closeBuildEditorPortal()} />
 
-        <div className="flex flex-1 gap-4 overflow-hidden">
+        <div className="flex flex-col md:flex-row md:flex-1 gap-4 md:overflow-hidden overflow-y-auto">
           {/* Left panel */}
-          <div className="flex flex-col gap-4 w-1/2 overflow-y-auto pr-2">
+          <div className="flex flex-col gap-4 md:w-1/2 md:overflow-y-auto pr-2">
             <EditorHeading name={character.name} />
             <BuildNameBlock />
             <PerkSlotsBlock />
+            {/* Perk browser – visible only on mobile, between slots and notes */}
+            <div className="md:hidden h-80 flex flex-col overflow-hidden rounded-lg">
+              <PerkBrowserBlock perks={perks} />
+            </div>
             <NotesBlock />
           </div>
 
-          {/* Right panel */}
-          <div className="flex flex-col w-1/2 gap-4 overflow-hidden">
+          {/* Right panel – desktop only */}
+          <div className="hidden md:flex flex-col md:w-1/2 gap-4 overflow-hidden">
             <PerkBrowserBlock perks={perks} />
-            <div className="flex flex-col flex-1 bg-neutral-800 rounded-lg border border-white/10 overflow-hidden">
-              <div className="flex items-center justify-center p-4 border-b border-white/10">
-                <h2 className="font-bold text-lg text-white">Live Preview</h2>
-              </div>
-              <div className="flex-1 flex items-center justify-center text-neutral-500 text-sm">
-                Preview will appear here
-              </div>
-            </div>
           </div>
         </div>
 
@@ -548,16 +550,16 @@ export const Editor = ({ character, build }: EditorProps) => {
 
   const initialAlts: Perk[][] = build
     ? build.perks.slice(0, 4).map((slot) =>
-      slot.alts.map((a) => {
-        const scraped = perkMap.get(a.name);
-        return {
-          name: a.name,
-          iconUrl: scraped?.iconUrl ?? "",
-          description: scraped?.description ?? "",
-          obtainment: scraped?.obtainment ?? "",
-        };
-      }),
-    )
+        slot.alts.map((a) => {
+          const scraped = perkMap.get(a.name);
+          return {
+            name: a.name,
+            iconUrl: scraped?.iconUrl ?? "",
+            description: scraped?.description ?? "",
+            obtainment: scraped?.obtainment ?? "",
+          };
+        }),
+      )
     : [[], [], [], []];
 
   // Pad to always have exactly 4 rows
