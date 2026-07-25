@@ -1,23 +1,16 @@
 import { Button } from "@components/shared/Button";
 import { Link, useNavigate } from "@tanstack/react-router";
 
-type OtherButtonsProps = {}
+type OtherButtonsProps = {};
 
-export const OtherButtons = ({ }: OtherButtonsProps) => {
+export const OtherButtons = ({}: OtherButtonsProps) => {
   const navigate = useNavigate();
 
   return (
     <div className="flex gap-2">
-      <Button
-        preset="otz"
-        className="px-3 rounded-md"
-      >
-        <p>Main Page</p>
-        <Link
-          to="/"
-          target="_blank"
-        >
-
+      <Button preset="otz" className="px-3 rounded-md">
+        <Link to="/" target="_blank">
+          Main Page
         </Link>
       </Button>
       <Button
@@ -30,5 +23,5 @@ export const OtherButtons = ({ }: OtherButtonsProps) => {
         Log Out
       </Button>
     </div>
-  )
-}
+  );
+};

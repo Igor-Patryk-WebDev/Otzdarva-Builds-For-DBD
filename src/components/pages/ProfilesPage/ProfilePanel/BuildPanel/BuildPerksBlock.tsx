@@ -18,6 +18,7 @@ const Perk = ({
   const [pinned, setPinned] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [detailsHovered, setDetailsHovered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const visible = pinned && (hovered || detailsHovered);
 
@@ -47,10 +48,17 @@ const Perk = ({
         if (!detailsHovered) setPinned(false);
       }}
     >
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center z-1">
+          <div className="size-12 sm:size-14 bg-neutral-800 animate-pulse rounded-full" />
+        </div>
+      )}
       <img
-        className={`bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%] hover:drop-shadow hover:drop-shadow-otz ${visible && "drop-shadow drop-shadow-otz"}`}
+        className={`bg-[url(/images/perk-background-red.png)] bg-cover aspect-square p-[3%] hover:drop-shadow hover:drop-shadow-otz ${visible && "drop-shadow drop-shadow-otz"} ${!isLoaded ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
         src={perk.iconUrl}
         alt={perk.name + " perk icon"}
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
       />
       <PerkDetails
         perk={perk}
@@ -96,8 +104,12 @@ const PerkDetails = ({ perk, visible, onClose, ...rest }: PerkDetailsProps) => {
         {...rest}
       >
         <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killers-filter before:-z-1'>
-          <h3 className="text-xl sm:text-2xl font-bold border-b-2 py-2">{perk.name}</h3>
-          <p className="text-sm sm:text-base font-extralight italic py-2">{perk.obtainment}</p>
+          <h3 className="text-xl sm:text-2xl font-bold border-b-2 py-2">
+            {perk.name}
+          </h3>
+          <p className="text-sm sm:text-base font-extralight italic py-2">
+            {perk.obtainment}
+          </p>
         </div>
         <div
           className="bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-xs sm:text-sm"
@@ -111,11 +123,18 @@ const PerkDetails = ({ perk, visible, onClose, ...rest }: PerkDetailsProps) => {
   );
 };
 
-const AltsBlock = ({ alts, expanded }: { alts: ProfileAlt[]; expanded: boolean }) => {
+const AltsBlock = ({
+  alts,
+  expanded,
+}: {
+  alts: ProfileAlt[];
+  expanded: boolean;
+}) => {
   return (
     <div
-      className={`absolute w-full top-full z-4 grid transition-all ${expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        } group-hover/showAlts:grid-rows-[1fr] group-hover/showAlts:opacity-100`}
+      className={`absolute w-full top-full z-4 grid transition-all ${
+        expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+      } group-hover/showAlts:grid-rows-[1fr] group-hover/showAlts:opacity-100`}
     >
       <div className="overflow-hidden shadow-md shadow-black rounded-bl-lg rounded-br-lg bg-neutral-900 border border-t-0 border-neutral-800 min-h-0">
         <div className="pb-4">
@@ -152,8 +171,9 @@ const PerkBlock = ({ perk }: { perk: ProfilePerk }) => {
       {hasAlts && (
         <>
           <div
-            className={`absolute bg-[url(/images/perk-background-red.png)] flex items-center justify-center bg-contain text-sm rounded-sm rotate-3 pointer-events-none top-0 right-0 translate-x-1/4 aspect-square w-8 transition-all ${altsExpanded ? "opacity-0" : "opacity-100"
-              } group-hover/showAlts:opacity-0`}
+            className={`absolute bg-[url(/images/perk-background-red.png)] flex items-center justify-center bg-contain text-sm rounded-sm rotate-3 pointer-events-none top-0 right-0 translate-x-1/4 aspect-square w-8 transition-all ${
+              altsExpanded ? "opacity-0" : "opacity-100"
+            } group-hover/showAlts:opacity-0`}
           >
             <p className="w-full text-center">{`+${perk.alts.length}`}</p>
           </div>
@@ -168,7 +188,11 @@ export const BuildPerksBlock = ({ perks }: BuildPerksBlockProps) => {
   return (
     <div className="flex gap-2 border-y border-neutral-800 py-2">
       {perks.map((perk) =>
-        perk.iconUrl ? <PerkBlock perk={perk} key={perk.name} /> : <p>Oops...</p>
+        perk.iconUrl ? (
+          <PerkBlock perk={perk} key={perk.name} />
+        ) : (
+          <p>Oops...</p>
+        ),
       )}
     </div>
   );

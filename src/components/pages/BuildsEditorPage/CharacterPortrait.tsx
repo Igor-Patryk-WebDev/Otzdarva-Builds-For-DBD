@@ -19,16 +19,19 @@ export function CharacterPortrait({ character }: Props) {
         <img
           src="/images/CharPortrait_bg.webp"
           alt="bg"
+          loading="lazy"
           className="absolute inset-0 w-full h-full z-0"
         />
         <img
           src="/images/CharPortrait_roleBG.webp"
           alt="role bg"
+          loading="lazy"
           className={`absolute inset-0 w-full h-full ${styles[character.role].filter} z-1`}
         />
         <img
           src={character.portraitUrl ?? "/images/Unknown_Character.webp"}
           alt={character.name}
+          loading="lazy"
           className="absolute inset-0 w-full h-full z-2"
         />
       </div>

@@ -9,25 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SurvivorsRouteImport } from './routes/survivors'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as KillersRouteImport } from './routes/killers'
-import { Route as BuildsEditorRouteImport } from './routes/builds-editor'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuildsEditorRouteImport } from './routes/builds-editor'
+import { Route as KillersRouteImport } from './routes/killers'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SurvivorsRouteImport } from './routes/survivors'
 
-const SurvivorsRoute = SurvivorsRouteImport.update({
-  id: '/survivors',
-  path: '/survivors',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KillersRoute = KillersRouteImport.update({
-  id: '/killers',
-  path: '/killers',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuildsEditorRoute = BuildsEditorRouteImport.update({
@@ -35,9 +25,19 @@ const BuildsEditorRoute = BuildsEditorRouteImport.update({
   path: '/builds-editor',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const KillersRoute = KillersRouteImport.update({
+  id: '/killers',
+  path: '/killers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurvivorsRoute = SurvivorsRouteImport.update({
+  id: '/survivors',
+  path: '/survivors',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -81,25 +81,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/survivors': {
-      id: '/survivors'
-      path: '/survivors'
-      fullPath: '/survivors'
-      preLoaderRoute: typeof SurvivorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/killers': {
-      id: '/killers'
-      path: '/killers'
-      fullPath: '/killers'
-      preLoaderRoute: typeof KillersRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/builds-editor': {
@@ -109,11 +95,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuildsEditorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/killers': {
+      id: '/killers'
+      path: '/killers'
+      fullPath: '/killers'
+      preLoaderRoute: typeof KillersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/survivors': {
+      id: '/survivors'
+      path: '/survivors'
+      fullPath: '/survivors'
+      preLoaderRoute: typeof SurvivorsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
