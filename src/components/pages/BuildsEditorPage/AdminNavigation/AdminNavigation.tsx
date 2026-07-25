@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { DbdRole } from "@appTypes/DbdRole";
+import type { DbdRole } from "@appTypes/profiles.types";
 
 import { useAnnouncementsPortalState } from "@contexts/AnnouncementsPortalContext";
 import { AnnouncementsButton } from "./AnnouncementsButton";

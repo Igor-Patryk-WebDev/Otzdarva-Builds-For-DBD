@@ -1,7 +1,7 @@
-import type { ProfileData } from "@appTypes/Profiles";
-import type { Build } from "@appTypes/Builds";
+import type { ProfileData } from "@appTypes/profiles.types";
+import type { Build } from "@appTypes/builds.types";
 
-import { useBuildEditorPortalState, useBuildEditorPortalContent } from "@contexts/BuildEditor/BuildEditorPortalContext";
+import { useBuildEditorPortalActions, useBuildEditorPortalState } from "@hooks/stores/useBuildEditorPortalStore";
 import { Button } from "@components/shared/Button";
 import { Editor } from "./Editor/Editor";
 
@@ -11,8 +11,8 @@ type EditBuildButtonProps = {
 };
 
 export const EditBuildButton = ({ character, build }: EditBuildButtonProps) => {
-  const { buildEditorPortalState, openBuildEditorPortal } = useBuildEditorPortalState();
-  const { setBuildEditorPortalContent } = useBuildEditorPortalContent();
+  const buildEditorPortalState = useBuildEditorPortalState();
+  const { setBuildEditorPortalContent, openBuildEditorPortal } = useBuildEditorPortalActions();
 
   return (
     <Button className="bg-otz py-2 rounded-md" onClick={() => {

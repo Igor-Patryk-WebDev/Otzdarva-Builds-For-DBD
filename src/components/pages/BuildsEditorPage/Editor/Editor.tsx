@@ -1,9 +1,8 @@
-import type { ProfileData } from "@appTypes/Profiles";
-import type { Build } from "@appTypes/Builds";
-import type { Perk } from "@appTypes/Scrape";
+import type { ProfileData } from "@appTypes/profiles.types";
+import type { Build } from "@appTypes/builds.types";
+import type { Perk } from "@appTypes/scrape.types";
 
 import { type ComponentPropsWithoutRef, useState } from "react";
-import { useBuildEditorPortalState } from "@contexts/BuildEditor/BuildEditorPortalContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { useScrape } from "@contexts/AppDataContext";
 import { Button } from "@components/shared/Button";
@@ -16,6 +15,7 @@ import {
   useBuildEditorPerkBrowser,
   useBuildEditorSlots,
 } from "@contexts/BuildEditor/BuildEditorContext";
+import { useBuildEditorPortalActions } from "@hooks/stores/useBuildEditorPortalStore";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -414,7 +414,7 @@ interface EditorInnerProps {
 }
 
 const EditorInner = ({ character, build }: EditorInnerProps) => {
-  const { closeBuildEditorPortal } = useBuildEditorPortalState();
+  const { closeBuildEditorPortal } = useBuildEditorPortalActions();
   const { error, setError } = useBuildEditorError();
   const scrape = useScrape();
   const queryClient = useQueryClient();

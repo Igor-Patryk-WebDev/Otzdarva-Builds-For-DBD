@@ -1,4 +1,4 @@
-import type { Announcements } from "@appTypes/Announcements";
+import type { AnnouncementsData } from "@appTypes/announcements.types";
 
 import { useAnnouncementsPortalState } from "@contexts/AnnouncementsPortalContext";
 import { useAnnouncementsJSON } from "@hooks/queries/useAnnouncementsJSON";
@@ -34,7 +34,7 @@ export const AnnouncementsEditor = () => {
     });
     const json = await res.json();
     if (json.success) {
-      queryClient.setQueryData<Announcements>(["announcements"], (prev) =>
+      queryClient.setQueryData<AnnouncementsData>(["announcements"], (prev) =>
         prev ? { ...prev, alerts: [...prev.alerts, json.alert] } : prev,
       );
       setTitle("");
@@ -55,7 +55,7 @@ export const AnnouncementsEditor = () => {
     });
     const json = await res.json();
     if (json.success) {
-      queryClient.setQueryData<Announcements>(["announcements"], (prev) =>
+      queryClient.setQueryData<AnnouncementsData>(["announcements"], (prev) =>
         prev
           ? { ...prev, alerts: prev.alerts.filter((a) => a.id !== id) }
           : prev,
@@ -216,7 +216,7 @@ export const AnnouncementsEditor = () => {
           return (
             <div
               key={alert.id}
-              className={`bg-neutral-800 border ${data.threatLevelsStyles[alert.threatLevel.toString()]} w-full rounded-lg p-3 flex justify-between items-start relative`}
+              className={`bg-neutral-800 border ${data.threatLevelsStyles[alert.threatLevel]} w-full rounded-lg p-3 flex justify-between items-start relative`}
             >
               <div className="w-full">
                 <h3 className="font-bold text-lg">{alert.title}</h3>

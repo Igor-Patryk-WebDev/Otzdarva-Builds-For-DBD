@@ -1,4 +1,4 @@
-import type { ProfileAlt, ProfilePerk } from "@appTypes/Profiles";
+import type { ProfileAlt, ProfilePerk } from "@appTypes/profiles.types";
 import { useEffect, useState, type ComponentPropsWithoutRef } from "react";
 
 interface BuildPerksBlockProps {
@@ -55,6 +55,11 @@ const Perk = ({
       <PerkDetails
         perk={perk}
         visible={visible}
+        onClose={() => {
+          setHovered(false);
+          setPinned(false);
+          setDetailsHovered(false);
+        }}
         onMouseEnter={() => setDetailsHovered(true)}
         onMouseLeave={() => {
           setDetailsHovered(false);
@@ -68,26 +73,41 @@ const Perk = ({
 type PerkDetailsProps = ComponentPropsWithoutRef<"div"> & {
   perk: Omit<ProfilePerk, "alts">;
   visible: boolean;
+  onClose?: () => void;
 };
 
-const PerkDetails = ({ perk, visible, ...rest }: PerkDetailsProps) => {
+const PerkDetails = ({ perk, visible, onClose, ...rest }: PerkDetailsProps) => {
   return (
-    <div
-      className={`fixed top-1/2 right-0 -translate-y-1/2 sm:translate-y-0 shadow-2xl shadow-black z-10000 w-full sm:w-150 bg-black ${visible ? "block" : "hidden"} sm:custom-anchor`}
-      {...rest}
-    >
-      <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killers-filter before:-z-1'>
-        <h3 className="text-xl sm:text-2xl font-bold border-b-2 py-2">{perk.name}</h3>
-        <p className="text-sm sm:text-base font-extralight italic py-2">{perk.obtainment}</p>
-      </div>
+    <>
+      {/* Mobile backdrop overlay */}
       <div
-        className="bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-xs sm:text-sm"
-        dangerouslySetInnerHTML={{ __html: perk.description ?? "" }}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-xs z-9999 sm:hidden ${
+          visible ? "block" : "hidden"
+        }`}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose?.();
+        }}
       />
-      <p className="absolute block sm:hidden my-1 top-full right-1/2 translate-x-1/2 text-center">
-        Click away to close
-      </p>
-    </div>
+      <div
+        className={`fixed top-1/2 right-0 -translate-y-1/2 sm:translate-y-0 shadow-2xl shadow-black z-10000 w-full sm:w-150 bg-black ${
+          visible ? "block" : "hidden"
+        } sm:custom-anchor`}
+        {...rest}
+      >
+        <div className='relative overflow-clip px-4 before:content-[""] before:absolute before:w-full before:h-full before:inset-0 before:bg-[url(/images/CharPortrait_roleBG.webp)] before:bg-size-[150%] before:bg-no-repeat before:bg-position-[center_50%] before:killers-filter before:-z-1'>
+          <h3 className="text-xl sm:text-2xl font-bold border-b-2 py-2">{perk.name}</h3>
+          <p className="text-sm sm:text-base font-extralight italic py-2">{perk.obtainment}</p>
+        </div>
+        <div
+          className="bg-neutral-900 border border-t-0 border-neutral-800 p-4 text-xs sm:text-sm"
+          dangerouslySetInnerHTML={{ __html: perk.description ?? "" }}
+        />
+        <p className="absolute block sm:hidden my-1 top-full right-1/2 translate-x-1/2 text-center text-xs text-neutral-400">
+          Click away to close
+        </p>
+      </div>
+    </>
   );
 };
 

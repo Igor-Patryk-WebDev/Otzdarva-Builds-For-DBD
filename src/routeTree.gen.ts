@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SurvivorsRouteImport } from './routes/survivors'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as KillersRouteImport } from './routes/killers'
-import { Route as BuildCreatorRouteImport } from './routes/buildCreator'
+import { Route as BuildsEditorRouteImport } from './routes/builds-editor'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SurvivorsRoute = SurvivorsRouteImport.update({
@@ -30,9 +30,9 @@ const KillersRoute = KillersRouteImport.update({
   path: '/killers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BuildCreatorRoute = BuildCreatorRouteImport.update({
-  id: '/buildCreator',
-  path: '/buildCreator',
+const BuildsEditorRoute = BuildsEditorRouteImport.update({
+  id: '/builds-editor',
+  path: '/builds-editor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,14 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/buildCreator': typeof BuildCreatorRoute
+  '/builds-editor': typeof BuildsEditorRoute
   '/killers': typeof KillersRoute
   '/login': typeof LoginRoute
   '/survivors': typeof SurvivorsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/buildCreator': typeof BuildCreatorRoute
+  '/builds-editor': typeof BuildsEditorRoute
   '/killers': typeof KillersRoute
   '/login': typeof LoginRoute
   '/survivors': typeof SurvivorsRoute
@@ -58,22 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/buildCreator': typeof BuildCreatorRoute
+  '/builds-editor': typeof BuildsEditorRoute
   '/killers': typeof KillersRoute
   '/login': typeof LoginRoute
   '/survivors': typeof SurvivorsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/buildCreator' | '/killers' | '/login' | '/survivors'
+  fullPaths: '/' | '/builds-editor' | '/killers' | '/login' | '/survivors'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/buildCreator' | '/killers' | '/login' | '/survivors'
-  id: '__root__' | '/' | '/buildCreator' | '/killers' | '/login' | '/survivors'
+  to: '/' | '/builds-editor' | '/killers' | '/login' | '/survivors'
+  id: '__root__' | '/' | '/builds-editor' | '/killers' | '/login' | '/survivors'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BuildCreatorRoute: typeof BuildCreatorRoute
+  BuildsEditorRoute: typeof BuildsEditorRoute
   KillersRoute: typeof KillersRoute
   LoginRoute: typeof LoginRoute
   SurvivorsRoute: typeof SurvivorsRoute
@@ -102,11 +102,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KillersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/buildCreator': {
-      id: '/buildCreator'
-      path: '/buildCreator'
-      fullPath: '/buildCreator'
-      preLoaderRoute: typeof BuildCreatorRouteImport
+    '/builds-editor': {
+      id: '/builds-editor'
+      path: '/builds-editor'
+      fullPath: '/builds-editor'
+      preLoaderRoute: typeof BuildsEditorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -121,7 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BuildCreatorRoute: BuildCreatorRoute,
+  BuildsEditorRoute: BuildsEditorRoute,
   KillersRoute: KillersRoute,
   LoginRoute: LoginRoute,
   SurvivorsRoute: SurvivorsRoute,

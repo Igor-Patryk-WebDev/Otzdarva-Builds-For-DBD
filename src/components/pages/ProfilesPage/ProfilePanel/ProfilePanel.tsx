@@ -1,12 +1,12 @@
-import type { ProfileData, ProfilesData } from '@appTypes/Profiles';
+import type { ProfileData, ProfilesData } from '@appTypes/profiles.types';
 
-import { useProfileBuildsPortalState, useProfileBuildsPortalContent } from '@contexts/ProfileBuildsPortalContext';
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
 import { ProfileBuildsWrapper } from './ProfileBuildsWrapper';
 import { BuildsNotExistPanel } from './BuildsNotExistPanel';
 import { useGenericBuild } from '@hooks/builds/useGenericBuild';
 import { ProfileHeader } from './ProfileHeader';
 import { BuildPanel } from './BuildPanel';
+import { useProfileBuildsPortalActions, useProfileBuildsPortalState } from '@hooks/stores/useProfileBuildsPortalStore';
 
 type ProfilePanelProps = {
   profile: ProfileData
@@ -18,8 +18,9 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   const builds = profile.builds
   const role = profile.role
 
-  const { profileBuildsPortalState, openProfileBuildsPortal } = useProfileBuildsPortalState();
-  const { setProfileBuildsPortalContent } = useProfileBuildsPortalContent();
+  const profileBuildsPortalState = useProfileBuildsPortalState()
+
+  const { setProfileBuildsPortalContent, openProfileBuildsPortal } = useProfileBuildsPortalActions();
 
   const { build } = useGenericBuild(builds);
 
@@ -28,7 +29,7 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
   return (
     <div className='relative grid w-full grid-cols-1 sm:grid-cols-subgrid sm:col-span-2 2xl:even:col-start-4'>
       <ProfileHeader name={name} buildsCount={buildsCount} onClick={() => {
-        !profileBuildsPortalState && setProfileBuildsPortalContent(() => (profiles: ProfilesData) => {
+        !profileBuildsPortalState && setProfileBuildsPortalContent((profiles: ProfilesData) => {
           const latestProfile = profiles[role].find((p) => p.name === name) ?? profile;
           const latestBuilds = latestProfile.builds;
           return (

@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { Announcements } from "@appTypes/Announcements";
+import type { AnnouncementsData } from "@appTypes/announcements.types";
 
 export const useAlertAutoDelete = () => {
   const queryClient = useQueryClient();
-  const savedCallback = useRef(() => {});
+  const savedCallback = useRef(() => { });
 
   useEffect(() => {
     savedCallback.current = async () => {
-      const data = queryClient.getQueryData<Announcements>(["announcements"]);
+      const data = queryClient.getQueryData<AnnouncementsData>(["announcements"]);
       if (!data) return;
 
       const expired = data.alerts.filter((alert) => {
@@ -26,12 +26,12 @@ export const useAlertAutoDelete = () => {
         });
         const json = await res.json();
         if (json.success) {
-          queryClient.setQueryData<Announcements>(["announcements"], (prev) =>
+          queryClient.setQueryData<AnnouncementsData>(["announcements"], (prev) =>
             prev
               ? {
-                  ...prev,
-                  alerts: prev.alerts.filter((a) => a.id !== alert.id),
-                }
+                ...prev,
+                alerts: prev.alerts.filter((a) => a.id !== alert.id),
+              }
               : prev,
           );
         }

@@ -1,7 +1,6 @@
-import type { BuildsData } from "@appTypes/Builds";
-import type { DbdRole } from "@appTypes/DbdRole";
-import type { ProfilesData } from "@appTypes/Profiles";
-import type { ScrapeData } from "@appTypes/Scrape";
+import type { ProfilesData, DbdRole } from "@appTypes/profiles.types";
+import type { BuildsData } from "@appTypes/builds.types";
+import type { ScrapeData } from "@appTypes/scrape.types";
 
 interface UseCustomProfiles {
   builds: BuildsData,

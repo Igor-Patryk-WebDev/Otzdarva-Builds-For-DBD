@@ -1,5 +1,6 @@
-import type { ScrapeData } from "@appTypes/Scrape";
+import type { ScrapeData } from "@appTypes/scrape.types";
 
+import { scrapeSchema } from "@schemas/scrape.schema";
 import { useQuery } from "@tanstack/react-query";
 
 export const useScrapeJSON = () => {
@@ -7,8 +8,7 @@ export const useScrapeJSON = () => {
     queryKey: ["wikiScrape"],
     queryFn: async () => {
       const res = await fetch("/data/scrape.json", { cache: "no-store" });
-      return res.json();
-    },
-    gcTime: 0
+      return scrapeSchema.parse(await res.json());
+    }
   });
 };

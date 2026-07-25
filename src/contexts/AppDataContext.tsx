@@ -1,6 +1,6 @@
-import type { BuildsData } from "@appTypes/Builds";
-import type { ProfilesData } from "@appTypes/Profiles";
-import type { ScrapeData } from "@appTypes/Scrape";
+import type { BuildsData } from "@appTypes/builds.types";
+import type { ProfilesData } from "@appTypes/profiles.types";
+import type { ScrapeData } from "@appTypes/scrape.types";
 
 import { createContext, useContext, type ReactNode } from "react"
 import { useCustomProfiles } from "@hooks/profiles/useCustomProfiles";
@@ -36,11 +36,15 @@ export const useProfiles = () => {
 }
 
 export const AppDataProvider = ({ children }: AppDataProviderProps) => {
-  const { data: builds, isLoading: buildsLoading } = useBuildsJSON();
-  const { data: scrape, isLoading: scrapeLoading } = useScrapeJSON();
+  const { data: builds, isLoading: buildsLoading, error: buildsError } = useBuildsJSON();
+  const { data: scrape, isLoading: scrapeLoading, error: scrapeError } = useScrapeJSON();
+
+  if (buildsError) console.error(buildsError)
+  if (scrapeError) console.error(scrapeError)
 
   const isLoading = buildsLoading || scrapeLoading
   if (isLoading || !builds || !scrape) return <Loader />
+
 
   const profiles = useCustomProfiles({ builds, scrape });
 

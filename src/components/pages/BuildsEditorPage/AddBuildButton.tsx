@@ -1,17 +1,17 @@
-import type { ProfileData } from "@appTypes/Profiles";
+import type { ProfileData } from "@appTypes/profiles.types";
 
-import { useBuildEditorPortalState, useBuildEditorPortalContent } from "@contexts/BuildEditor/BuildEditorPortalContext";
 import { IconSVG } from "@components/shared/IconSVG";
 import { Button } from "@components/shared/Button";
 import { Editor } from "./Editor/Editor";
+import { useBuildEditorPortalActions, useBuildEditorPortalState } from "@hooks/stores/useBuildEditorPortalStore";
 
 type AddBuildButtonProps = {
   character: ProfileData;
 };
 
 export const AddBuildButton = ({ character }: AddBuildButtonProps) => {
-  const { buildEditorPortalState, openBuildEditorPortal } = useBuildEditorPortalState();
-  const { setBuildEditorPortalContent } = useBuildEditorPortalContent();
+  const buildEditorPortalState = useBuildEditorPortalState();
+  const { setBuildEditorPortalContent, openBuildEditorPortal } = useBuildEditorPortalActions();
 
   return (
     <Button className="border-2 border-dashed border-otz rounded-md h-77.5" onClick={() => {

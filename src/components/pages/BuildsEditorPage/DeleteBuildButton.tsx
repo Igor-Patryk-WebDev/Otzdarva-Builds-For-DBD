@@ -1,5 +1,5 @@
-import type { ProfileData } from "@appTypes/Profiles";
-import type { Build } from "@appTypes/Builds";
+import type { ProfileData } from "@appTypes/profiles.types";
+import type { Build } from "@appTypes/builds.types";
 
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";

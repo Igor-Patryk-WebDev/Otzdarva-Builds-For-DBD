@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useProfileBuildsPortalState } from '@contexts/ProfileBuildsPortalContext';
+import { useProfileBuildsPortalState } from '@hooks/stores/useProfileBuildsPortalStore';
 import { ProfilesPageLayout } from '@components/layouts/ProfilesPageLayout';
 import { ProfilesWrapper } from '@components/pages/ProfilesPage/ProfilesWrapper';
 import { useHotkey } from '@tanstack/react-hotkeys';
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/survivors')({
 
 function SurvivorsPage() {
   const navigate = useNavigate();
-  const { profileBuildsPortalState } = useProfileBuildsPortalState();
+  const profileBuildsPortalState = useProfileBuildsPortalState();
 
   useHotkey("Q", () => navigate({ to: "/killers", viewTransition: { types: ["survivors-to-killers"] } }), { enabled: !profileBuildsPortalState });
   useHotkey("Escape", () => navigate({ to: "/", viewTransition: { types: ["slide-right"] } }), { enabled: !profileBuildsPortalState });

@@ -1,6 +1,6 @@
-import type { ProfilePerk } from "@appTypes/Profiles";
-import type { Perk } from "@appTypes/Scrape";
-import type { Build } from "@appTypes/Builds";
+import type { ProfilePerk } from "@appTypes/profiles.types";
+import type { Perk } from "@appTypes/scrape.types";
+import type { Build } from "@appTypes/builds.types";
 import {
   createContext,
   useContext,

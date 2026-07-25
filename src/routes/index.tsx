@@ -5,7 +5,6 @@ import { RoleSelectWrapper } from "@components/pages/FrontPage";
 import { ReportBugButton } from "@components/pages/FrontPage/ReportBugButton";
 import { WebsiteBanner } from "@components/pages/FrontPage";
 import { SocialWrapper } from "@components/pages/FrontPage/SocialWrapper";
-import { createPortal } from "react-dom";
 import { LastUpdated } from "@components/pages/FrontPage";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { SelfPlug } from "@components/pages/FrontPage/SelfPlug";
@@ -20,7 +19,7 @@ export const Route = createFileRoute("/")({
 function RootPage() {
   const navigate = useNavigate();
 
-  const [showPortal, setShowPortal] = useState(false);
+  const [announcementsPortalState, setAnnouncementsPortalState] = useState(false);
 
   useHotkey("Q", () =>
     navigate({ to: "/killers", viewTransition: { types: ["to-killers"] } }),
@@ -28,8 +27,8 @@ function RootPage() {
   useHotkey("E", () =>
     navigate({ to: "/survivors", viewTransition: { types: ["to-survivors"] } }),
   );
-  useHotkey("N", () => setShowPortal(true));
-  useHotkey("Escape", () => setShowPortal(false));
+  useHotkey("N", () => setAnnouncementsPortalState(true));
+  useHotkey("Escape", () => setAnnouncementsPortalState(false));
 
   // useHotkeySequence(["S", "E", "C", "R", "E", "T"], () => console.log("hi"), { timeout: 1000 })
 
@@ -46,17 +45,12 @@ function RootPage() {
         <RoleSelectWrapper />
         <Button
           className="p-2 rounded-lg absolute top-4 right-4"
-          onClick={() => setShowPortal(true)}
+          onClick={() => setAnnouncementsPortalState((prev) => !prev)}
         >
           <IconSVG icon="Bell" className="hover:text-amber-300" />
         </Button>
-        {showPortal &&
-          createPortal(
-            <AnnouncementsPortal onClose={() => setShowPortal(false)} />,
-            document.body,
-          )}
+        {announcementsPortalState && <AnnouncementsPortal />}
         <SocialWrapper />
-
         <SelfPlug />
         <div className="absolute bottom-8 right-4">
           <ReportBugButton />

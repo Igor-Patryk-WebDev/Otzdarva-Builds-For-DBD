@@ -27,7 +27,7 @@ function LoginPage() {
       if (!res.ok) throw new Error("Invalid credentials");
       return res.json();
     },
-    onSuccess: () => router.navigate({ to: "/buildCreator" }),
+    onSuccess: () => router.navigate({ to: "/builds-editor" }),
   });
 
   const handleSubmit = (e: React.FormEvent) => {

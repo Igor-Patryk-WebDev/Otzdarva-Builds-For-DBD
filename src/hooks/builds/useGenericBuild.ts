@@ -1,4 +1,4 @@
-import type { ProfileBuild } from "@appTypes/Profiles"
+import type { ProfileBuild } from "@appTypes/profiles.types"
 
 export const useGenericBuild = (builds: ProfileBuild[] | undefined) => {
   if (!builds || builds.length === 0) return { build: null };

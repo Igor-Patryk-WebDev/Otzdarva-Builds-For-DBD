@@ -1,4 +1,4 @@
-import type { ProfileData } from "@appTypes/Profiles";
+import type { ProfileData } from "@appTypes/profiles.types";
 
 interface Props {
   character: ProfileData;

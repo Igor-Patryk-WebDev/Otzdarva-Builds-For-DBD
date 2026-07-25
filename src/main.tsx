@@ -7,8 +7,6 @@ import "./styles/index.css";
 // Import the generated route tree
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { ProfileBuildsPortalProvider } from "@contexts/ProfileBuildsPortalContext";
-import { BuildEditorPortalProvider } from "@contexts/BuildEditor";
 import { AppDataProvider } from "@contexts/AppDataContext";
 import { routeTree } from "./routeTree.gen";
 
@@ -31,13 +29,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <AppDataProvider>
-        <ProfileBuildsPortalProvider>
-          <BuildEditorPortalProvider>
-            <StrictMode>
-              <RouterProvider router={router} />
-            </StrictMode>
-          </BuildEditorPortalProvider>
-        </ProfileBuildsPortalProvider>
+        <StrictMode>
+          <RouterProvider router={router} />
+        </StrictMode>
       </AppDataProvider>
     </QueryClientProvider>,
   );

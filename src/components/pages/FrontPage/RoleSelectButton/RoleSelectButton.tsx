@@ -1,4 +1,4 @@
-import type { DbdRole } from "@appTypes/DbdRole";
+import type { DbdRole } from "@appTypes/profiles.types";
 
 import { Link } from "@tanstack/react-router";
 

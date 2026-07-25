@@ -1,12 +1,12 @@
-import type { DbdRole } from "@appTypes/DbdRole";
+import type { DbdRole } from "@appTypes/profiles.types";
 
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { CharacterBuildsBlock } from "@components/pages/BuildCreator/CharacterBuildsBlock";
+import { CharacterBuildsBlock } from "@components/pages/BuildsEditorPage/CharacterBuildsBlock";
 import { BuildCreatorLayout } from "@components/layouts/BuildCreatorLayout";
 import { useProfiles } from "@contexts/AppDataContext";
 import { useState } from "react";
 
-export const Route = createFileRoute("/buildCreator")({
+export const Route = createFileRoute("/builds-editor")({
   beforeLoad: async () => {
     const res = await fetch("/api/session.php");
     if (!res.ok) throw redirect({ to: "/login" });

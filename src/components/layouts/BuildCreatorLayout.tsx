@@ -1,11 +1,11 @@
 import type { Dispatch, ReactNode, SetStateAction } from "react"
-import type { DbdRole } from "@appTypes/DbdRole"
+import type { DbdRole } from "@appTypes/profiles.types"
 
 import { AnnouncementsPortalProvider } from "@contexts/AnnouncementsPortalContext"
-import { AnnouncementsPortal } from "@components/pages/BuildCreator/AnnouncementsPortal"
+import { AnnouncementsPortal } from "@components/pages/BuildsEditorPage/AnnouncementsPortal"
 import { ProfileBuildsPortal } from "@components/pages/ProfilesPage/ProfileBuildsPortal"
-import { AdminNavigation } from "@components/pages/BuildCreator/AdminNavigation"
-import { EditorPortal } from "@components/pages/BuildCreator/EditorPortal"
+import { AdminNavigation } from "@components/pages/BuildsEditorPage/AdminNavigation"
+import { EditorPortal } from "@components/pages/BuildsEditorPage/EditorPortal"
 
 type BuildCreatorLayoutProps = {
   children: ReactNode

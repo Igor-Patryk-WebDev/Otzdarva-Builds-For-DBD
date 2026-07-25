@@ -1,19 +1,19 @@
 import type { ReactNode } from "react";
 
-import { useProfileBuildsPortalState, useProfileBuildsPortalContent } from '@contexts/ProfileBuildsPortalContext';
 import { DecoratedHeading } from "@components/shared/DecoratedHeading";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { IconSVG } from "@components/shared/IconSVG";
 import { Button } from "@components/shared/Button";
+import { useProfileBuildsPortalActions } from "@hooks/stores/useProfileBuildsPortalStore";
 
 interface BuildsListProps {
   name: string
   children: ReactNode
+  headerActions?: ReactNode
 }
 
-export const ProfileBuildsWrapper = ({ name, children }: BuildsListProps) => {
-  const { closeProfileBuildsPortal } = useProfileBuildsPortalState();
-  const { setProfileBuildsPortalContent } = useProfileBuildsPortalContent();
+export const ProfileBuildsWrapper = ({ name, children, headerActions }: BuildsListProps) => {
+  const { closeProfileBuildsPortal, setProfileBuildsPortalContent } = useProfileBuildsPortalActions();
 
   useHotkey("Escape", () => closeProfileBuildsPortal());
 
@@ -22,14 +22,19 @@ export const ProfileBuildsWrapper = ({ name, children }: BuildsListProps) => {
       <Button className='absolute top-4 right-4 bg-otz hover:bg-[hsl(from_var(--color-otz)_h_s_40%)] size-6 sm:size-8 rounded-sm flex items-center justify-center' onClick={() => {
         closeProfileBuildsPortal();
         setTimeout(() => {
-          setProfileBuildsPortalContent(null);
+          setProfileBuildsPortalContent(() => null);
         }, 300);
       }}>
         <IconSVG icon="Close" size={1.5} />
       </Button>
       <DecoratedHeading text={name} gap={4} className="text-2xl sm:text-3xl" />
-      <div className='max-h-200 transition-all overflow-y-auto scrollbar-none scrollbar-thumb-otz mt-6'>
-        <div className='grid grid-cols-[minmax(0,466px)] mb-32 lg:grid-cols-[repeat(2,minmax(0,466px))] 2xl:grid-cols-[repeat(3,minmax(0,466px))] justify-center gap-10 mx-auto'>
+      {headerActions && (
+        <div className="flex justify-center mt-2">
+          {headerActions}
+        </div>
+      )}
+      <div className='max-h-200 transition-all overflow-y-auto scrollbar-none scrollbar-thumb-otz mt-6 pb-48'>
+        <div className='grid grid-cols-[minmax(0,466px)] lg:grid-cols-[repeat(2,minmax(0,466px))] 2xl:grid-cols-[repeat(3,minmax(0,466px))] justify-center gap-10 mx-auto'>
           {children}
         </div>
       </div>

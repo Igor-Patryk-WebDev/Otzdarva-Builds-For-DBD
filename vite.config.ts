@@ -17,6 +17,7 @@ export default defineConfig({
       "@contexts": path.resolve(__dirname, "./src/contexts"),
       "@components": path.resolve(__dirname, "./src/components"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@schemas": path.resolve(__dirname, "./src/schemas"),
       "@appTypes": path.resolve(__dirname, "./src/types"),
     },
   },
