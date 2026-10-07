@@ -1,7 +1,9 @@
 import type { ProfileBuild, ProfileData } from "@/types/profiles.types"
+import { useBuildsEditorPortalActions } from "@/hooks/stores/BuildsEditorStores/useBuildsEditorPortalStore"
+import { useEffect, useRef, useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { BuildPanel } from "@/components/BuildPanel"
 import { Icon } from "@/components/shared/Icon"
-import { useBuildsEditorPortalActions } from "@/hooks/stores/BuildsEditorStores/useBuildsEditorPortalStore"
 
 type EditableBuildPanelProps = {
   profile: ProfileData
@@ -13,8 +15,55 @@ type EditableBuildPanelProps = {
 }
 
 export const EditableBuildPanel = ({ profile, build, index, buildsCount, moveNext, movePrevious }: EditableBuildPanelProps) => {
-
+  const queryClient = useQueryClient();
   const { openBuildsEditorPortal } = useBuildsEditorPortalActions();
+
+  const [clicked, setClicked] = useState(false);
+  // const [isDeleting, setIsDeleting] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
+
+  const containerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) setClicked(false);
+    };
+
+    if (clicked) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [clicked])
+
+  const handleDelete = async () => {
+    // setIsDeleting(true);
+    // setError(null);
+
+    try {
+      const res = await fetch("/api/delete_build.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          characterName: profile.name,
+          buildName: build.name,
+        }),
+      });
+
+      // const json = await res.json();
+
+      if (!res.ok) {
+        // setError(json.error ?? "Delete failed.");
+        return;
+      }
+
+      await queryClient.invalidateQueries({ queryKey: ["builds"] });
+    } catch {
+      // setError("Network error. Please try again.");
+    } finally {
+      // setIsDeleting(false);
+    }
+  };
 
   return (
     <div>
@@ -40,12 +89,15 @@ export const EditableBuildPanel = ({ profile, build, index, buildsCount, moveNex
             <Icon icon="Edit" className="size-5 transition-transform duration-200 group-hover:scale-110 text-neutral-400 group-hover:text-otz" />
           </button>
           <button
+            ref={containerRef}
             className="flex items-center bg-neutral-900/40 hover:bg-neutral-900/80 border border-neutral-800 p-2 backdrop-blur-sm rounded-xl disabled:opacity-30 shadow-lg active:border-otz disabled:hover:bg-neutral-800 transition cursor-pointer group"
-            onClick={() => console.log("DELETE")}
+            onClick={() => {
+              clicked ? handleDelete() : setClicked(true);
+            }}
             title="Delete Button"
           >
             <div className={`grid grid-cols-1 px-2`}>
-              <span className="text-xs font-medium block text-nowrap">Delete</span>
+              <span className="text-xs font-medium block text-nowrap">{!clicked ? "Delete" : "Are you sure?"}</span>
             </div>
             <Icon icon="Delete" className="size-5 transition-transform duration-200 group-hover:scale-110 text-neutral-400 group-hover:text-otz" />
           </button>
