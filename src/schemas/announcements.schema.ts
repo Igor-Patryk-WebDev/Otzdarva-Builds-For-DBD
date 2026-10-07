@@ -10,6 +10,5 @@ export const alertSchema = z.object({
 })
 
 export const announcementsSchema = z.object({
-  alerts: z.array(alertSchema),
-  threatLevelsStyles: z.array(z.string())
+  alerts: z.array(alertSchema)
 })

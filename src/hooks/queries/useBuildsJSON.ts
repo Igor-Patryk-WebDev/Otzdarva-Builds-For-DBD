@@ -1,6 +1,6 @@
-import type { BuildsData } from '@appTypes/builds.types';
+import type { BuildsData } from '@/types/builds.types';
 
-import { buildsSchema } from '@schemas/builds.schema';
+import { buildsSchema } from '@/schemas/builds.schema';
 import { useQuery } from '@tanstack/react-query';
 
 export const useBuildsJSON = () => {

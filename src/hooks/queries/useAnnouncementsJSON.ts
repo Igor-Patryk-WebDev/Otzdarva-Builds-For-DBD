@@ -1,6 +1,6 @@
-import type { AnnouncementsData } from "@appTypes/announcements.types";
+import type { AnnouncementsData } from "@/types/announcements.types";
 
-import { announcementsSchema } from "@schemas/announcements.schema";
+import { announcementsSchema } from "@/schemas/announcements.schema";
 import { useQuery } from "@tanstack/react-query";
 
 export const useAnnouncementsJSON = () => {

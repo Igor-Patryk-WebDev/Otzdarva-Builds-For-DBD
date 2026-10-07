@@ -1,6 +1,6 @@
-import type { ScrapeData } from "@appTypes/scrape.types";
+import type { ScrapeData } from "@/types/scrape.types";
 
-import { scrapeSchema } from "@schemas/scrape.schema";
+import { scrapeSchema } from "@/schemas/scrape.schema";
 import { useQuery } from "@tanstack/react-query";
 
 export const useScrapeJSON = () => {

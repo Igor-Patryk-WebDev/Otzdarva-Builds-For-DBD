@@ -1,7 +1,7 @@
 import type { Alt, Build, Perk } from "./builds.types";
 import type { Character } from "./scrape.types";
 
-export type DbdRole = Capitalize<keyof ProfilesData>
+export type DbdRole = keyof ProfilesData & {}
 
 export type ProfileAlt = Alt & {
   iconUrl: string | undefined;
@@ -29,3 +29,5 @@ export type ProfilesData = {
   killers: ProfileData[];
   survivors: ProfileData[];
 }
+
+export type Role = keyof ProfileData

@@ -1,23 +1,16 @@
-interface SearchBarProps {
+import type { ComponentPropsWithoutRef } from "react";
+import { Icon } from "./Icon";
+
+type SearchBarProps = {
   value: string;
   onSearch: (value: string) => void;
   placeholder?: string;
-}
+} & ComponentPropsWithoutRef<"div">
 
-export const SearchBar = ({ value, onSearch, placeholder = 'Search for character...' }: SearchBarProps) => {
+export const SearchBar = ({ value, onSearch, placeholder = 'Search for character...', className }: SearchBarProps) => {
   return (
-    <div className="relative group">
-      <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 size-3 sm:size-4 text-neutral-400 pointer-events-none transition-colors group-focus-within:text-otz"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <circle cx="11" cy="11" r="8" />
-        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-      </svg>
+    <div className={`relative group ${className}`}>
+      <Icon icon="Search" className="absolute left-3 top-1/2 -translate-y-1/2 size-3 sm:size-4 text-neutral-400 pointer-events-none transition-colors group-focus-within:text-otz" />
 
       <input
         name="searchbar"
@@ -26,7 +19,7 @@ export const SearchBar = ({ value, onSearch, placeholder = 'Search for character
         value={value}
         onChange={(e) => onSearch(e.target.value)}
         placeholder={placeholder}
-        className="text-sm sm:text-base pl-9 pr-8 py-2 w-full rounded-md bg-neutral-800 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-otz focus:ring-1 focus:ring-otz transition-all"
+        className="text-xs sm:text-sm pl-9 pr-8 py-2 w-full rounded-xl bg-neutral-800 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-otz focus:ring-1 focus:ring-otz transition-all"
       />
 
       {value && (

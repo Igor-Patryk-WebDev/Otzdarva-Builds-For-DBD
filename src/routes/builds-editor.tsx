@@ -1,40 +1,30 @@
-import type { DbdRole } from "@appTypes/profiles.types";
-
+import { useBuildsEditorPageDisplayMode } from "@/hooks/stores/BuildsEditorStores/useBuildsEditorPageStore";
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { CharacterBuildsBlock } from "@components/pages/BuildsEditorPage/CharacterBuildsBlock";
-import { BuildCreatorLayout } from "@components/layouts/BuildCreatorLayout";
-import { useProfiles } from "@contexts/AppDataContext";
-import { useState } from "react";
+import { CategorizedBuildsWrapper } from "@/pages/BuildsEditorPage/components/DisplayModes/CategorizedBuildsWrapper";
+import { CharacterPanelsWrapper } from "@/pages/BuildsEditorPage/components/DisplayModes/CharacterPanelsWrapper";
+import { BuildsEditorPageLayout } from "@/pages/BuildsEditorPage/layout/BuildsEditorPageLayout";
 
 export const Route = createFileRoute("/builds-editor")({
   beforeLoad: async () => {
     const res = await fetch("/api/session.php");
     if (!res.ok) throw redirect({ to: "/login" });
   },
-  component: BuildCreatorPage,
+  component: BuildsEditorPage,
 });
 
-function BuildCreatorPage() {
-  const profiles = useProfiles();
-
-  const [role, setRole] = useState<DbdRole>("Killers");
-  const lowercaseRole = role.toLowerCase() as Lowercase<DbdRole>;
-
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filtered = profiles[lowercaseRole].filter((profile) =>
-    profile.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+function BuildsEditorPage() {
+  const displayMode = useBuildsEditorPageDisplayMode();
 
   return (
-    <BuildCreatorLayout setRole={setRole} searchQuery={searchQuery} setSearchQuery={setSearchQuery} >
-      {searchQuery.length > 0
-        ? filtered.map((character) => (
-          <CharacterBuildsBlock key={character.name} character={character} />
-        ))
-        : profiles[lowercaseRole].map((character) => (
-          <CharacterBuildsBlock key={character.name} character={character} />
-        ))}
-    </BuildCreatorLayout>
+    <BuildsEditorPageLayout>
+      {(searchQuery, perkQuery) => {
+        switch (displayMode) {
+          case "characterPanels":
+            return <CharacterPanelsWrapper searchQuery={searchQuery} />
+          case "categorizedBuilds":
+            return <CategorizedBuildsWrapper searchQuery={searchQuery} perkQuery={perkQuery} />
+        }
+      }}
+    </BuildsEditorPageLayout>
   );
 }

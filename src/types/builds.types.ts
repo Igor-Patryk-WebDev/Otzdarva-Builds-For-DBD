@@ -5,7 +5,7 @@ import type {
   buildsSchema,
   perkSchema,
   roleSchema
-} from "@schemas/builds.schema";
+} from "@/schemas/builds.schema";
 
 export type Alt = z.infer<typeof altPerkSchema>
 

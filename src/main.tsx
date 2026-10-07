@@ -7,7 +7,7 @@ import "./styles/index.css";
 // Import the generated route tree
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { AppDataProvider } from "@contexts/AppDataContext";
+import { AppDataProvider } from "@/contexts/AppDataContext";
 import { routeTree } from "./routeTree.gen";
 
 // Create a new router instance

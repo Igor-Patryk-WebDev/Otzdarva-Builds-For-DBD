@@ -1,4 +1,4 @@
-# Otzdarva Builds For Dead by Daylight
+![Banner](ReadmeBanner.png)
 
 A comprehensive library of **Dead by Daylight builds** created and recommended by Otzdarva.
 

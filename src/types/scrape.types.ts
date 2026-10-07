@@ -5,7 +5,7 @@ import type {
   scrapeMetaSchema,
   perkSchema,
   roleSchema
-} from "@schemas/scrape.schema";
+} from "@/schemas/scrape.schema";
 
 export type OtherData = z.infer<typeof scrapeMetaSchema>
 

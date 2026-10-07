@@ -1,17 +1,16 @@
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 type ButtonProps = {
-  children: ReactNode | string;
   preset?: "otz"
 } & ComponentPropsWithoutRef<"button">;
 
-const presets = {
-  otz: "bg-otz hover:bg-otz-darker"
-}
+// const presets = {
+//   default: "bg-otz hover:bg-otz-darker"
+// }
 
 export const Button = ({ children, preset, className, ...rest }: ButtonProps) => {
   return (
-    <button className={`cursor-pointer transition-all active:scale-95 ${preset && presets[preset]} ${className}`} {...rest}>
+    <button className={`cursor-pointer`} {...rest}>
       {children}
     </button>
   );

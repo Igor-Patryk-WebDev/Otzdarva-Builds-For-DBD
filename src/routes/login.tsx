@@ -1,7 +1,7 @@
-import { Button } from "@components/shared/Button";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { Button } from "@/components/shared/Button";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,

@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import babelPlugin from "@rolldown/plugin-babel";
 import path from "path";
 
 export default defineConfig({
@@ -9,19 +10,22 @@ export default defineConfig({
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     react(),
     tailwindcss(),
+    babelPlugin({
+      presets: [reactCompilerPreset()],
+    }),
   ],
   resolve: {
     alias: {
-      "@public": path.resolve(__dirname, "./public"),
-      "@hooks": path.resolve(__dirname, "./src/hooks"),
-      "@contexts": path.resolve(__dirname, "./src/contexts"),
-      "@components": path.resolve(__dirname, "./src/components"),
-      "@utils": path.resolve(__dirname, "./src/utils"),
-      "@schemas": path.resolve(__dirname, "./src/schemas"),
-      "@appTypes": path.resolve(__dirname, "./src/types"),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   server: {
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:5173",
+    //     changeOrigin: true
+    //   }
+    // },
     watch: {
       ignored: ["**/.env", "**/.env**"],
     },

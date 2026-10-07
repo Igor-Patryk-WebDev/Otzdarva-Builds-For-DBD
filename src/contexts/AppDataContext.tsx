@@ -1,20 +1,20 @@
-import type { BuildsData } from "@appTypes/builds.types";
-import type { ProfilesData } from "@appTypes/profiles.types";
-import type { ScrapeData } from "@appTypes/scrape.types";
+import type { BuildsData } from "@/types/builds.types";
+import type { ProfilesData } from "@/types/profiles.types";
+import type { ScrapeData } from "@/types/scrape.types";
 
 import { createContext, useContext, type ReactNode } from "react"
-import { useCustomProfiles } from "@hooks/profiles/useCustomProfiles";
-import { useBuildsJSON } from "@hooks/queries/useBuildsJSON"
-import { useScrapeJSON } from "@hooks/queries/useScrapeJSON";
-import { Loader } from "@components/shared/Loader";
+import { useCustomProfiles } from "@/hooks/profiles/useCustomProfiles";
+import { useBuildsJSON } from "@/hooks/queries/useBuildsJSON"
+import { useScrapeJSON } from "@/hooks/queries/useScrapeJSON";
+import { Loader } from "@/components/shared/Loader";
 
-interface AppDataContextType {
+type AppDataContextType = {
   builds: BuildsData,
   scrape: ScrapeData
   profiles: ProfilesData
 }
 
-interface AppDataProviderProps {
+type AppDataProviderProps = {
   children: ReactNode
 }
 

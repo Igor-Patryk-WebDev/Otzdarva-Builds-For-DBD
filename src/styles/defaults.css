@@ -6,7 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   /* background-color: hsl(220, 5%, 10%); */
-  background-color: hsl(220, 5%, 6%);
+  background-color: var(--color-almost-black);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,9 +30,6 @@ img {
 
 textarea {
   resize: none;
-  border-radius: 6px;
-  border-color: hsl(347, 66%, 49%);
-  border-width: 1px;
 }
 
 .descLink {

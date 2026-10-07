@@ -1,8 +1,8 @@
-import type { ProfilesData, DbdRole } from "@appTypes/profiles.types";
-import type { BuildsData } from "@appTypes/builds.types";
-import type { ScrapeData } from "@appTypes/scrape.types";
+import type { ProfilesData, DbdRole } from "@/types/profiles.types";
+import type { BuildsData } from "@/types/builds.types";
+import type { ScrapeData } from "@/types/scrape.types";
 
-interface UseCustomProfiles {
+type UseCustomProfiles = {
   builds: BuildsData,
   scrape: ScrapeData
 }
@@ -10,29 +10,28 @@ interface UseCustomProfiles {
 export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
 
   const handleCustomProfile = (role: DbdRole) => {
-    const lowercaseRole = role.toLowerCase() as Lowercase<DbdRole>;
 
     const findPerk = (target: string) => {
-      return scrape[lowercaseRole].perks.find((p) => p.name === target)?.iconUrl
+      return scrape[role].perks.find((p) => p.name === target)?.iconUrl
     }
 
     return (
-      scrape[lowercaseRole].profiles.map((profile) => ({
+      scrape[role].profiles.map((profile) => ({
         name: profile.name,
-        role: lowercaseRole,
+        role: role,
         portraitUrl: profile.portraitUrl,
-        builds: builds[lowercaseRole]?.find((p) => p.name === profile.name)?.builds?.map((build) => ({
+        builds: builds[role]?.find((p) => p.name === profile.name)?.builds?.map((build) => ({
           name: build.name,
           perks: build.perks.map((perk) => ({
             name: perk.name,
             iconUrl: findPerk(perk.name) ?? undefined,
-            description: scrape[lowercaseRole]?.perks.find((p) => p.name === perk.name)?.description,
-            obtainment: scrape[lowercaseRole]?.perks.find((p) => p.name === perk.name)?.obtainment,
+            description: scrape[role]?.perks.find((p) => p.name === perk.name)?.description,
+            obtainment: scrape[role]?.perks.find((p) => p.name === perk.name)?.obtainment,
             alts: perk.alts.map((alt) => ({
               name: alt.name,
               iconUrl: findPerk(alt.name) ?? undefined,
-              description: scrape[lowercaseRole]?.perks.find((p) => p.name === alt.name)?.description,
-              obtainment: scrape[lowercaseRole]?.perks.find((p) => p.name === alt.name)?.obtainment,
+              description: scrape[role]?.perks.find((p) => p.name === alt.name)?.description,
+              obtainment: scrape[role]?.perks.find((p) => p.name === alt.name)?.obtainment,
             }))
           })),
           notes: build.notes
@@ -42,8 +41,8 @@ export const useCustomProfiles = ({ builds, scrape }: UseCustomProfiles) => {
   }
 
   const profiles: ProfilesData = {
-    killers: handleCustomProfile("Killers"),
-    survivors: handleCustomProfile("Survivors")
+    killers: handleCustomProfile("killers"),
+    survivors: handleCustomProfile("survivors")
   }
 
   return profiles

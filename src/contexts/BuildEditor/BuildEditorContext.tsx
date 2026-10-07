@@ -1,6 +1,6 @@
-import type { ProfilePerk } from "@appTypes/profiles.types";
-import type { Perk } from "@appTypes/scrape.types";
-import type { Build } from "@appTypes/builds.types";
+import type { ProfilePerk } from "@/types/profiles.types";
+import type { Perk } from "@/types/scrape.types";
+import type { Build } from "@/types/builds.types";
 import {
   createContext,
   useContext,
@@ -10,7 +10,7 @@ import {
   type SetStateAction,
 } from "react";
 
-interface BuildEditorContextValue {
+type BuildEditorContextValue = {
   buildName: string;
   setBuildName: Dispatch<SetStateAction<string>>;
 

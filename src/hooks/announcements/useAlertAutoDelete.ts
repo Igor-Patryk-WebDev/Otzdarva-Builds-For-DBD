@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { AnnouncementsData } from "@appTypes/announcements.types";
+import type { AnnouncementsData } from "@/types/announcements.types";
 
 export const useAlertAutoDelete = () => {
   const queryClient = useQueryClient();
