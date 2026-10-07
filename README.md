@@ -1,10 +1,10 @@
-![Banner](ReadmeBanner.png)
+![Banner](/readmeassets/ReadmeBanner.png)
 
 A comprehensive library of **Dead by Daylight builds** created and recommended by Otzdarva.
 
 The platform allows players to **browse curated killer and survivor builds**, discover different playstyles, and **explore perk combinations** based on Otzdarva's recommendations. All builds are organized using **up-to-date game data** and presented through a modern, user-friendly interface.
 
-**Website Link:** https://otzdarva-builds.com/
+[![Website](/readmeassets/Website.svg)](https://otzdarva-builds.com/) [![Website](/readmeassets/ReportIssue.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/issues) [![Website](/readmeassets/GiveIdea.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/discussions/categories/ideas) [![Website](/readmeassets/Wiki.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/wiki)
 
 ## Version 2.0
 
