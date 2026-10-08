@@ -4,13 +4,11 @@ A comprehensive library of **Dead by Daylight builds** created and recommended b
 
 The platform allows players to **browse curated killer and survivor builds**, discover different playstyles, and **explore perk combinations** based on Otzdarva's recommendations. All builds are organized using **up-to-date game data** and presented through a modern, user-friendly interface.
 
-[![Website](/readmeassets/Website.svg)](https://otzdarva-builds.com/) [![Website](/readmeassets/ReportIssue.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/issues) [![Website](/readmeassets/GiveIdea.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/discussions/categories/ideas) [![Website](/readmeassets/Wiki.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/wiki)
+[![Website](/readmeassets/Website.svg)](https://otzdarva-builds.com/) [![Changelog](/readmeassets/Changelog.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD-Dev/blob/main/CHANGELOG.md) [![Report issue](/readmeassets/ReportIssue.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/issues) [![Give an idea!](/readmeassets/GiveIdea.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/discussions/categories/ideas) [![Wiki](/readmeassets/Wiki.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD/wiki) [![Security Guide](/readmeassets/Security.svg)](https://github.com/Igor-Patryk-WebDev/Otzdarva-Builds-For-DBD-Dev/blob/main/SECURITY.md)
 
-## Version 2.0
+## Version 3.0
 
-Version 2.0 is a **complete rewrite** of our original project.
-
-The application has been rebuilt from the ground up using a **modern web development stack** to a fully TypeScript-based architecture, featuring a redesigned user interface, **improved performance, enhanced maintainability, and a significantly better user experience**.
+Version 3.0 introduces a **completely redesigned layout across the entire application, improvements to previously underdeveloped systems, enhanced performance, and a significantly improved mobile experience.**
 
 ## Overview
 
@@ -45,6 +43,7 @@ Potential future improvements include:
 - User accounts and personalisation
 - Favorite builds and collections
 - Community-driven features
+- Accessibility settings
 
 ## Disclaimer
 
