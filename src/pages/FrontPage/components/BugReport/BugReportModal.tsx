@@ -9,7 +9,7 @@ type BugReportModalProps = {
 export const BugReportModal = ({ isOpen, setIsOpen }: BugReportModalProps) => {
   const [copied, setCopied] = useState(false);
 
-  const email = "huelleigor1@outlook.com";
+  const email = "patrykigor.webdev@gmail.com";
 
   const handleCopy = async () => {
     try {
@@ -62,7 +62,7 @@ export const BugReportModal = ({ isOpen, setIsOpen }: BugReportModalProps) => {
         Or send us an email
       </p>
       <div className="bg-neutral-950/85 border border-neutral-800/80 rounded-lg p-2.5 font-mono text-xs select-all text-neutral-300 flex items-center justify-between">
-        <span>huelleigor1@outlook.com</span>
+        <span>{email}</span>
       </div>
       <div className="flex flex-col gap-2 mt-1">
         <button
@@ -78,7 +78,7 @@ export const BugReportModal = ({ isOpen, setIsOpen }: BugReportModalProps) => {
         </button>
 
         <a
-          href={`mailto:huelleigor1@outlook.com?subject=Otzdarva Builds Bug Report`}
+          href={`mailto:${email}?subject=Otzdarva Builds Bug Report`}
           className="w-full flex items-center justify-center gap-2 bg-otz hover:bg-otz-darker text-white py-2 px-3 rounded-lg text-xs font-semibold transition-colors cursor-pointer text-center"
         >
           <Icon icon="Mail" className="size-5" />

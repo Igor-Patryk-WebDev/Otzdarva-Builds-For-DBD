@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import type { IconName } from "@/utils/IconsData";
 
 import {
@@ -7,7 +7,6 @@ import {
 } from "@/hooks/stores/BuildsEditorStores/useBuildsEditorPageStore";
 import { useNotificationsManagerPortalActions } from "@/hooks/stores/BuildsEditorStores/useNotificationsManagerPortalStore";
 import { useActionsSidebarPortalActions } from "@/hooks/stores/BuildsEditorStores/useActionsSidebarPortalStore";
-// import { ScrapeWikiButton } from "./ScrapeWikiButton";
 import { useScrape } from "@/contexts/AppDataContext";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Icon } from "@/components/shared/Icon";
@@ -20,6 +19,83 @@ type ActionsSidebarButtonProps = {
   onClick?: () => void
   disableSidebarClosing?: boolean
 } & ComponentPropsWithoutRef<"button">
+
+const ActionsSidebarScrapeWikiButton = ({ title, subtext, icon, isActive }: ActionsSidebarButtonProps) => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleScrape = async () => {
+    if (status === "loading") return;
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/request_scrape.php", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+      } else {
+        console.error(data.error);
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    } finally {
+      setTimeout(() => {
+        setStatus("idle");
+      }, 2000);
+    }
+  };
+
+  return (
+    <button
+      className={`w-full flex items-center border-neutral-800 text-neutral-400 hover:text-neutral-200 justify-between p-2 rounded-xl border bg-neutral-950/40 hover:bg-neutral-950/80 text-sm font-medium transition-all group cursor-pointer active:border-otz ${isActive && "border-otz"}`}
+      onClick={handleScrape}
+      disabled={status === "loading"}
+    >
+      <div className="flex items-center gap-3">
+        <div className="p-3 rounded-lg bg-black/30">
+          {status === "loading" ? (
+            <div className="size-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          ) : status === "success" ? (
+            <Icon icon="Check" className="text-emerald-400 size-5" />
+          ) : status === "error" ? (
+            <Icon icon="Alert" className="text-amber-400 size-5" />
+          ) : (
+            <Icon icon={icon} className={`text-neutral-200 group-hover:text-otz ${isActive && "text-otz"} size-5`} />
+          )}
+        </div>
+        <div className="flex flex-col text-left">
+          <span className="font-semibold text-white">
+            {status === "loading"
+              ? "Scraping..."
+              : status === "success"
+                ? "Update is on the way"
+                : status === "error"
+                  ? "Scrape Failed"
+                  : title
+            }
+          </span>
+          <span className="text-xs text-white/70">
+            {status === "loading"
+              ? "Give it a minute or two"
+              : status === "success"
+                ? "Give it a minute or two"
+                : status === "error"
+                  ? "Scraper had a problem"
+                  : subtext
+            }
+          </span>
+        </div>
+      </div>
+      <Icon
+        icon="ArrowRight"
+        className="text-neutral-200 group-hover:text-otz group-hover:translate-x-0.5 transition-[translate,color] size-6"
+      />
+    </button>
+  )
+}
 
 const ActionsSidebarButton = ({ title, subtext, icon, isActive, onClick, disableSidebarClosing }: ActionsSidebarButtonProps) => {
   const { closeActionsSidebarPortal } = useActionsSidebarPortalActions();
@@ -133,13 +209,11 @@ export const ActionsSidebar = () => {
             /// Other
             </span>
             <div className="flex flex-col gap-2">
-              <ActionsSidebarButton
+              <ActionsSidebarScrapeWikiButton
                 title="Wiki Scrape"
                 subtext="Fetch latest characters & perks"
                 icon="Copy"
-                disableSidebarClosing
               />
-              {/* <ScrapeWikiButton /> */}
             </div>
           </div>
         </div>

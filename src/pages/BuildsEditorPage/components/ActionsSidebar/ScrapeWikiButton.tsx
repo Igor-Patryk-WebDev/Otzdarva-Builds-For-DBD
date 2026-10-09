@@ -59,7 +59,8 @@ export const ScrapeWikiButton = () => {
                 ? "Scrape Triggered"
                 : status === "error"
                   ? "Scrape Failed"
-                  : "Scrape Wiki"}
+                  : "Scrape Wiki"
+            }
           </span>
           <span className="text-xs text-white/70">
             {status === "loading"
