@@ -28,7 +28,7 @@ export const ProfilesPageLayout = ({ children }: ProfilesPageLayoutProps) => {
       </div>
       <div
         className="py-24 sm:py-32"
-        style={{ viewTransitionName: "profiles-page" }}
+      // style={{ viewTransitionName: "profiles-page" }}
       >
         <div className="grid auto-rows-min grid-cols-[minmax(0,max-content)] 2xl:grid-cols-[repeat(2,minmax(0,max-content))] justify-center gap-x-10 gap-y-24 sm:gap-y-32 ">
           {children(searchQuery)}

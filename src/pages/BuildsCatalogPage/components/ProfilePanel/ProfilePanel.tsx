@@ -1,4 +1,5 @@
 import type { ProfileData } from '@/types/profiles.types';
+import { memo } from 'react';
 
 import { CharacterPortraitBlock } from './CharacterPortraitBlock';
 import { BuildsNotExistPanel } from './BuildsNotExistPanel';
@@ -10,7 +11,7 @@ type ProfilePanelProps = {
   profile: ProfileData
 }
 
-export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
+export const ProfilePanel = memo(({ profile }: ProfilePanelProps) => {
   const { name, portraitUrl, builds, role } = profile
   const { build } = useGenericBuild(builds);
 
@@ -35,4 +36,6 @@ export const ProfilePanel = ({ profile }: ProfilePanelProps) => {
       }
     </div >
   )
-}
+})
+
+ProfilePanel.displayName = "ProfilePanel";

@@ -1,9 +1,6 @@
 import type { AnnouncementsData } from "@/types/announcements.types";
 
-import {
-  useNotificationsManagerPortalActions,
-  useNotificationsManagerPortalState
-} from "@/hooks/stores/BuildsEditorStores/useNotificationsManagerPortalStore";
+
 import { NotificationsManagerNotificationTypeButtons } from "./NotificationsManagerNotificationTypeButtons";
 import { NotificationsManagerNotificationTimerInputs } from "./NotificationsManagerNotificationTimerInputs";
 import { NotificationsManagerDescriptionTextarea } from "./NotificationsManagerDescriptionTextarea";
@@ -14,16 +11,12 @@ import { useAnnouncementsJSON } from "@/hooks/queries/useAnnouncementsJSON";
 import { useAlertAutoDelete } from "@/hooks/announcements/useAlertAutoDelete";
 import { NotificationPanel } from "@/components/NotificationPanel";
 import { useQueryClient } from "@tanstack/react-query";
-import { useHotkey } from "@tanstack/react-hotkeys";
 import { useState } from "react";
 import { Icon } from "@/components/shared/Icon";
 
 export const NotificationsManager = () => {
   const queryClient = useQueryClient();
   const { data } = useAnnouncementsJSON();
-
-  const isNotificationsEditorPortalOpen = useNotificationsManagerPortalState();
-  const { closeNotificationsManagerPortal } = useNotificationsManagerPortalActions();
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -35,12 +28,6 @@ export const NotificationsManager = () => {
   const [seconds, setSeconds] = useState(0);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useHotkey("Escape", () => {
-    if (isNotificationsEditorPortalOpen) {
-      closeNotificationsManagerPortal();
-    }
-  });
 
   const addAlert = async () => {
     if (!title.trim() || !desc.trim() || isSubmitting) return;

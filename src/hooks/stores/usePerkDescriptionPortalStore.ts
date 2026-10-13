@@ -11,7 +11,7 @@ type PerkDescriptionPortalStoreType = {
   }
 }
 
-const usePerkDescriptionPortalStore = create<PerkDescriptionPortalStoreType>((set) => ({
+export const usePerkDescriptionPortalStore = create<PerkDescriptionPortalStoreType>((set) => ({
   isOpen: false,
   selectedPerk: null,
   actions: {

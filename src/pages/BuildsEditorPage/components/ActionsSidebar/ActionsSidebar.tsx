@@ -8,7 +8,6 @@ import {
 import { useNotificationsManagerPortalActions } from "@/hooks/stores/BuildsEditorStores/useNotificationsManagerPortalStore";
 import { useActionsSidebarPortalActions } from "@/hooks/stores/BuildsEditorStores/useActionsSidebarPortalStore";
 import { useScrape } from "@/contexts/AppDataContext";
-import { useHotkey } from "@tanstack/react-hotkeys";
 import { Icon } from "@/components/shared/Icon";
 
 type ActionsSidebarButtonProps = {
@@ -138,8 +137,6 @@ export const ActionsSidebar = () => {
 
   const { openNotificationsManagerPortal } = useNotificationsManagerPortalActions();
   const { closeActionsSidebarPortal } = useActionsSidebarPortalActions();
-
-  useHotkey("Escape", () => closeActionsSidebarPortal());
 
   return (
     <aside

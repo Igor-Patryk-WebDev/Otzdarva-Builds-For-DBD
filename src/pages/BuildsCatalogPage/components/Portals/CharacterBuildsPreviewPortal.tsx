@@ -1,5 +1,4 @@
 import { useProfileBuildsPortalActions, useProfileBuildsPortalSelectedProfile, useProfileBuildsPortalState } from "@/hooks/stores/useCharacterBuildsPortalStore";
-// import { useGlobalAppActions, useIsTopMostModal } from "@hooks/stores/useGlobalAppStore";
 import { ProfileBuildsWrapper } from "../ProfilePanel/ProfileBuildsWrapper";
 import { DrawerPortalWrapper } from "@/components/DrawerPortalWrapper";
 import { useProfiles } from "@/contexts/AppDataContext";
@@ -20,19 +19,6 @@ export const ProfileBuildsPortal = ({ }: ProfileBuildsPortalProps) => {
 
   const currentProfile = profiles[selectedProfile.role]?.find((profile) => profile.name === selectedProfile.name);
   if (!currentProfile) return null
-
-  // const modalId = "profile-builds-modal";
-  // const isTopMost = useIsTopMostModal(modalId);
-
-  // useEffect(() => {
-  //   registerModal(modalId);
-  //   return () => removeModal(modalId);
-  // }, [modalId, registerModal, removeModal]);
-
-  // useHotkey("Escape", () => {
-  //   if (!isTopMost) return;
-
-  // })
 
   const buildsCount = currentProfile.builds?.length ?? 0
 

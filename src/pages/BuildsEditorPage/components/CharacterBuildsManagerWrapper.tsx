@@ -4,7 +4,6 @@ import { useCharacterBuildsEditorPortalActions } from "@/hooks/stores/BuildsEdit
 import { EditableBuildPanel } from "./EditableBuildPanel"
 import { AddBuildButton } from "./AddBuildButton"
 import { useQueryClient } from "@tanstack/react-query"
-import { useHotkey } from "@tanstack/react-hotkeys"
 import { useState } from "react"
 import { Icon } from "@/components/shared/Icon"
 
@@ -19,8 +18,6 @@ export const CharacterBuildsManagerWrapper = ({ profile, filteredBuilds }: Chara
 
   const [localBuilds, setLocalBuilds] = useState<ProfileBuild[] | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
-
-  useHotkey("Escape", () => closeCharacterBuildsEditorPortal());
 
   const buildsCount = profile.builds?.length ?? 0
 

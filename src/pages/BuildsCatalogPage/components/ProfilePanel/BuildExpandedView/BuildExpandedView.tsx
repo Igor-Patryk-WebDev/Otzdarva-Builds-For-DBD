@@ -15,9 +15,9 @@ export const BuildExpandedView = ({ build, profile }: BuildExpandedViewProps) =>
   const { name: profileName, portraitUrl, role } = profile;
 
   return (
-    <div className="relative w-full max-w-240 px-4 sm:px-16 pt-8 flex flex-col max-h-[calc(100dvh-2rem)]">
+    <div className="relative w-full max-w-240 pt-8 flex flex-col max-h-[calc(100dvh-2rem)]">
       <BuildExpandedViewHeading buildName={buildName} profileName={profileName} />
-      <div className="flex-1 overflow-y-auto min-h-0 scrollbar-none">
+      <div className="px-4 sm:px-16 flex-1 overflow-y-auto min-h-0 scrollbar-none">
         <div className="py-4 sm:py-8 grid lg:grid-cols-[300px_minmax(500px,1fr)] grid-cols-1 items-center">
           <div className="hidden lg:block">
             <CharacterPortraitBlock name={profileName} portraitUrl={portraitUrl} role={role} />

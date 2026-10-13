@@ -22,8 +22,14 @@ export const useGlobalAppStore = create<GlobalAppStoreType>((set) => ({
     enableWebsiteScrolling: () => set({ canWebsiteScroll: true }),
     disableWebsiteScrolling: () => set({ canWebsiteScroll: false }),
     setSelectedRole: (role) => set({ selectedRole: role }),
-    registerModal: (id) => set((state) => ({ activeModals: [...state.activeModals, id] })),
-    removeModal: (id) => set((state) => ({ activeModals: state.activeModals.filter((popupId) => popupId !== id) }))
+    registerModal: (id) =>
+      set((state) => ({
+        activeModals: state.activeModals.includes(id) ? state.activeModals : [...state.activeModals, id],
+      })),
+    removeModal: (id) =>
+      set((state) => ({
+        activeModals: state.activeModals.filter((popupId) => popupId !== id),
+      })),
   },
 }));
 
@@ -35,6 +41,12 @@ export const useSelectedRole = () =>
 
 export const useIsTopMostModal = (id: string) =>
   useGlobalAppStore((state) => state.activeModals[state.activeModals.length - 1] === id);
+
+export const useActiveModals = () =>
+  useGlobalAppStore((state) => state.activeModals);
+
+export const useHasActiveModals = () =>
+  useGlobalAppStore((state) => state.activeModals.length > 0);
 
 export const useGlobalAppActions = () =>
   useGlobalAppStore((state) => state.actions);

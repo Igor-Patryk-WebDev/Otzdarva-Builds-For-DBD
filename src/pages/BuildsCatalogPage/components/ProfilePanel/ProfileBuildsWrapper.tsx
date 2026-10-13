@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "react";
 
 import { useProfileBuildsPortalActions } from "@/hooks/stores/useCharacterBuildsPortalStore";
-import { useHotkey } from "@tanstack/react-hotkeys";
 import { Icon } from "@/components/shared/Icon";
 
 type ProfileBuildsWrapperProps = {
@@ -11,8 +10,6 @@ type ProfileBuildsWrapperProps = {
 
 export const ProfileBuildsWrapper = ({ children, name, buildsCount }: ProfileBuildsWrapperProps) => {
   const { closeProfileBuildsPortal } = useProfileBuildsPortalActions();
-
-  useHotkey("Escape", () => closeProfileBuildsPortal());
 
   return (
     <div className='relative px-4 sm:px-16 pt-8'>

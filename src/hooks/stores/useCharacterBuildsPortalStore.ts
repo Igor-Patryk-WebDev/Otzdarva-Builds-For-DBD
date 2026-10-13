@@ -16,7 +16,7 @@ type ProfileBuildsPortalStoreType = {
   }
 }
 
-const useProfileBuildsPortalStore = create<ProfileBuildsPortalStoreType>((set) => ({
+export const useProfileBuildsPortalStore = create<ProfileBuildsPortalStoreType>((set) => ({
   isOpen: false,
   selectedProfile: null,
   actions: {

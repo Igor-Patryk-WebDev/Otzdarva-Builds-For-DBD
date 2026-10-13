@@ -9,7 +9,7 @@ type BuildExpandedViewHeadingProps = {
 export const BuildExpandedViewHeading = ({ profileName, buildName }: BuildExpandedViewHeadingProps) => {
   const { closeBuildExtendedViewPortal } = useBuildExtendedViewPortalActions();
   return (
-    <div className="relative border-b border-neutral-800">
+    <div className="relative border-b border-neutral-800 mx-4 sm:mx-16">
       <button
         onClick={() => closeBuildExtendedViewPortal()}
         className={`absolute top-0 right-0 hidden xl:flex items-center p-2 rounded-xl border bg-neutral-900/40 hover:bg-neutral-900/80 backdrop-blur-sm transition-all duration-200 cursor-pointer shadow-lg active:border-otz group border-neutral-800 text-neutral-400 hover:text-neutral-200`}

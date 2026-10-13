@@ -1,7 +1,9 @@
-import { type ComponentPropsWithoutRef } from 'react';
+import { useEffect, useId, type ComponentPropsWithoutRef } from 'react';
 
 import { motion, AnimatePresence } from 'motion/react';
 import { createPortal } from 'react-dom';
+import { useHotkey } from '@tanstack/react-hotkeys';
+import { useGlobalAppActions, useIsTopMostModal, useGlobalAppStore } from '@/hooks/stores/useGlobalAppStore';
 
 type PortalPlacement = "bottom" | "left" | "right" | "top" | "center";
 
@@ -20,13 +22,42 @@ const PLACEMENT_STYLES: Record<PortalPlacement, string> = {
 }
 
 export const PortalWrapper = ({ children, portalState, closePortal, placement = 'center', className }: PortalWrapperProps) => {
+  const id = useId();
+  const { registerModal, removeModal } = useGlobalAppActions();
+  const isTopMost = useIsTopMostModal(id);
+  const isOpen = Boolean(portalState);
+
+  useEffect(() => {
+    if (isOpen) {
+      registerModal(id);
+      return () => {
+        removeModal(id);
+      };
+    }
+  }, [isOpen, id, registerModal, removeModal]);
+
+  const handleClose = () => {
+    removeModal(id);
+    closePortal();
+  };
+
+  useHotkey(
+    "Escape",
+    () => {
+      const activeModals = useGlobalAppStore.getState().activeModals;
+      if (activeModals[activeModals.length - 1] !== id) return;
+      handleClose();
+    },
+    { enabled: isOpen && isTopMost, conflictBehavior: "allow" }
+  );
+
   return createPortal(
     <AnimatePresence>
-      {portalState && (
+      {isOpen && (
         <div className='relative isolate z-10000'>
           <motion.div
             key="portal-wrapper-element-backdrop"
-            onClick={closePortal}
+            onClick={handleClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

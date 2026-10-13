@@ -3,13 +3,11 @@ import {
   type SetStateAction,
   useState
 } from "react";
-import { useNotificationsManagerPortalActions } from "@/hooks/stores/BuildsEditorStores/useNotificationsManagerPortalStore";
 import { useActionsSidebarPortalActions } from "@/hooks/stores/BuildsEditorStores/useActionsSidebarPortalStore";
 import { useBuildsEditorPageDisplayMode } from "@/hooks/stores/BuildsEditorStores/useBuildsEditorPageStore";
 import { RoleSwitcherButtons } from "./RoleSwitcherButtons";
 import { OtherButtons } from "./OtherButtons";
 import { SearchBar } from "@/components/shared/SearchBar";
-import { useHotkey } from "@tanstack/react-hotkeys";
 import { Icon } from "@/components/shared/Icon";
 
 type AdminNavigationProps = {
@@ -53,12 +51,9 @@ export const Navigation = ({
 }: AdminNavigationProps) => {
   const displayMode = useBuildsEditorPageDisplayMode();
 
-  const { closeNotificationsManagerPortal } = useNotificationsManagerPortalActions();
   const { openActionsSidebarPortal } = useActionsSidebarPortalActions();
 
   const [isOpen] = useState();
-
-  useHotkey("Escape", () => closeNotificationsManagerPortal());
 
   return (
     <div className="sticky top-0 isolate z-100 flex flex-col md:flex-row items-center gap-4 py-8 px-8 sm:px-16 border-b border-b-neutral-800 bg-almost-black">

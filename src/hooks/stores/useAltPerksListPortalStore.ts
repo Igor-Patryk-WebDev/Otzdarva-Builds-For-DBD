@@ -11,7 +11,7 @@ type AltPerksListPortalStoreType = {
   }
 }
 
-const useAltPerksListPortalStore = create<AltPerksListPortalStoreType>((set) => ({
+export const useAltPerksListPortalStore = create<AltPerksListPortalStoreType>((set) => ({
   isOpen: false,
   selectedPerk: null,
   actions: {

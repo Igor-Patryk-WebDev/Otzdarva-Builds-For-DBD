@@ -17,7 +17,7 @@ type BuildExtendedViewPortalStoreType = {
   }
 }
 
-const useBuildExtendedViewPortalStore = create<BuildExtendedViewPortalStoreType>((set) => ({
+export const useBuildExtendedViewPortalStore = create<BuildExtendedViewPortalStoreType>((set) => ({
   isOpen: false,
   selectedBuild: null,
   selectedProfile: null,

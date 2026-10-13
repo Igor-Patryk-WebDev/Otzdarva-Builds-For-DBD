@@ -6,7 +6,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useScrape } from "@/contexts/AppDataContext";
 // import { Button } from "@/components/shared/Button";
 import { DecoratedHeading } from "@/components/DecoratedHeading";
-import { useHotkey } from "@tanstack/react-hotkeys";
 import { Icon } from "@/components/shared/Icon";
 import {
   BuildEditorProvider,
@@ -477,8 +476,6 @@ const EditorInner = ({ character, build }: EditorInnerProps) => {
       setIsSaving(false);
     }
   };
-
-  useHotkey("Escape", () => closeBuildsEditorPortal());
 
   return (
     <div className="relative w-full max-w-400 max-h-[90vh] px-4 sm:px-8 pt-8 pb-8 bg-neutral-900 border border-neutral-800 rounded-tl-2xl rounded-tr-2xl flex flex-col gap-4">

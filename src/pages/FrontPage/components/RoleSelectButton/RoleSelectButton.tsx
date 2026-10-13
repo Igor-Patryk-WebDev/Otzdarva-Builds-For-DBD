@@ -9,8 +9,8 @@ type RoleSelectButtonProps = {
 
 export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
   const images = {
-    killers: "/images/killer-icon.png",
-    survivors: "/images/survivor-icon.png",
+    killers: "/images/killer-icon.webp",
+    survivors: "/images/survivor-icon.webp",
   };
 
   const styles = {
@@ -49,7 +49,7 @@ export const RoleSelectButton = ({ role }: RoleSelectButtonProps) => {
             <h3 className="text-center uppercase font-bold text-xl sm:text-2xl leading-1 mt-4 mb-2">
               {role}
             </h3>
-            <p className="text-center text-sm text-neutral-400">Search builds for {role}</p>
+            <p className="text-center text-sm text-neutral-400">Browse all {role.charAt(0).toUpperCase() + role.slice(1, -1)} builds</p>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import { useAltPerksListPortalActions, useAltPerksListPortalSelectedPerk, useAltPerksListPortalState } from "@/hooks/stores/useAltPerksListPortalStore";
-import { ModalPortalWrapper } from "./ModalPortalWrapper";
-import { PerkBlock } from "./PerkBlock";
-import { BuildExpandedViewMainPerkDetails } from "@/pages/BuildsCatalogPage/components/ProfilePanel/BuildExpandedView/BuildExpandedViewMainPerkDetails";
-import { useSelectedRole } from "@/hooks/stores/useGlobalAppStore";
 import { usePerkDescriptionPortalActions } from "@/hooks/stores/usePerkDescriptionPortalStore";
+import { BuildExpandedViewMainPerkDetails } from "@/pages/BuildsCatalogPage/components/ProfilePanel/BuildExpandedView/BuildExpandedViewMainPerkDetails";
+import { ModalPortalWrapper } from "./ModalPortalWrapper";
+import { useSelectedRole } from "@/hooks/stores/useGlobalAppStore";
+import { PerkBlock } from "./PerkBlock";
 
 type AltPerksListPortalProps = {}
 
